@@ -1,12 +1,33 @@
 <!DOCTYPE html>
 <html>
 <!-- test 1003-->
+
 <head>
     <title>zrq testing</title>
     <style type="text/css" scr="css/zrq.css"></style>
 </head>
 
+<script id="zrqTemplate" type="text/temaplte">
+    First Name:
+    <%=first_name%>
+        <br>Last Name:
+        <%=last_name%>
+</script>
+
 <body>
+    <form id="zrqForm" action="">
+        <!-- <form id="zrqForm" action="" method="get" accept-charset="utf-8"> -->
+        <label for="inpFirstName">First Name:</label>
+        <input id="inpFirstName" type="text">
+        <br>
+        <label for="inpLastName">Last Name:</label>
+        <input id="inpLastName" type="text">
+        <br>
+        <input type="submit" value="SubmitCena">
+        <button id="btnOk">btnOk</button>
+    </form>
+
+    <div id="container"></div>
     <script type="text/javascript" src="js/bower/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="js/bower/underscore/underscore.js"></script>
     <script type="text/javascript" src="js/bower/backbone/backbone.js"></script>
@@ -14,4 +35,3 @@
 </body>
 
 </html>
-

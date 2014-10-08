@@ -1,43 +1,78 @@
 (function() {
-
     window.App = {
-        Models: {},
+        Views: {},
         Collections: {},
-        Views: {}
+        Models: {}
     };
 
+    // Models ----------------------------------
     App.Models.zrq = Backbone.Model.extend({
         defaults: {
-            task_id: new Date().valueOf(),
-            prioridade: "0",
-            data: new Date(),
-            firt_name: "",
+            first_name: "",
             last_name: ""
         },
-
-        full_name: function() {
-            return this.get("firt_name") + " " + this.get("last_name");
-        },
-
-        validate: function(ats, options) {
-            if (ats.prioridade < 1 || ats.prioridade > 5) {
+        validate: function() {
+            if (!first_name || !last_name) {
                 return "erro do caralho";
             }
         }
+
     });
 
-    var zrqModel = new App.Models.zrq({
-        "firt_name": "Ricardo",
-        "last_name": "Quintas"
-            // "prioridade": "3"
+    // Collections ----------------------------------
+
+    // Views ----------------------------------
+    App.Views.zrqMain = Backbone.View.extend({
+        // template: _.template($("#zrqForm").html()),
+        el: "#zrqForm",
+        events: {
+            "submit": "btnClicked",
+            "click #btnOk": "btnClicked"
+        },
+        initialize: function() {
+            this.render();
+        },
+
+        render: function() {
+            this.el = "caralho";
+            return this;
+        },
+
+        btnClicked: function(e) {
+            e.preventDefault();
+            console.log("clicado caralho: " + e);
+        }
+    });
+
+    App.Views.zrq = Backbone.View.extend({
+
+        initialize: function() {
+            this.render();
+        },
+
+        template: _.template($("#zrqTemplate").html()),
+
+        render: function() {
+            this.el = this.template(this.model.toJSON());
+            return this;
+        }
     });
 
 
-    console.log(zrqModel.get("firt_name"));
-    console.log(zrqModel.full_name());
-    console.log(zrqModel.get("prioridade"));
-    zrqModel.set("prioridade", "3", {
-        validate: true
+    // ****************************************************
+    zrqModel = new App.Models.zrq({
+        first_name: "Ricardo",
+        last_name: "Quintas"
+
     });
-    console.log(zrqModel.get("prioridade"));
+
+    zrqMainView = new App.Views.zrqMain({});
+
+    zrqView = new App.Views.zrq({
+        model: zrqModel
+    });
+
+    $("#container").html(zrqView.render().el);
+
+    // console.log(zrqView.render().el);
 })();
