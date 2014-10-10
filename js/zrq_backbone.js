@@ -5,6 +5,8 @@
         Models: {}
     };
 
+    vent = _.extend({}, Backbone.Events);
+
     // Models ----------------------------------
     App.Models.zrq = Backbone.Model.extend({
 
@@ -18,16 +20,28 @@
 
     // Collections ----------------------------------
     App.Collections.zrq = Backbone.Collection.extend({
-        model: App.Models.zrq
+        model: App.Models.zrq,
+
+        initialize: function() {
+            vent.on(
+                "task:add", this.addOneMore, this
+            );
+        },
+
+        addOneMore: function(newOne) {
+            this.add(newOne);
+        }
     });
 
     // Views ----------------------------------
     App.Views.zrqForm = Backbone.View.extend({
         // template: _.template($("#zrqForm").html()),
         el: "#zrqForm",
+
         events: {
             "click #btnOk": "addMore"
         },
+
         initialize: function() {
             this.render();
         },
@@ -39,35 +53,46 @@
 
         addMore: function(e) {
             e.preventDefault();
-            console.log($("#inpFirstName").val());
-            console.log("clicado caralho: " + e);
+            var mod = new App.Models.zrq({
+                first_name: this.$el.find("#inpFirstName").val(),
+                last_name: this.$el.find("#inpLastName").val()
+            });
+            vent.trigger("task:add", mod);
         }
     });
 
     App.Views.single = Backbone.View.extend({
         tagName: "li",
-        // initialize: function() {
-        //     this.render();
-        // },
 
         model: App.Models.zrq,
 
         template: _.template($("#zrqTemplate").html()),
 
         render: function() {
-            // this.collection.each(function(item) {
-            //     // this.el = this.template(this.model.toJSON());
-            //     console.log(item.el);
-            // }, this);
-
+            var result = this.template(this.model.toJSON());
+            this.$el.html(result);
             return this;
         }
     });
 
 
     App.Views.multiple = Backbone.View.extend({
-        tagName: "ul",
-        collection: App.Collections.zrq,
+        el: "#zrqLista",
+
+        initialize: function() {
+            this.collection.on("add", this.addOne, this);
+        },
+
+        addOne: function(pModel) {
+
+            // console.log(pModel);
+            var view = new App.Views.single({
+                model: pModel
+            });
+
+            this.$el.append(view.render().el);
+        },
+
         render: function() {
             return this;
         }
@@ -78,9 +103,6 @@
         first_name: "Ricardo",
         last_name: "Quintas"
     });
-
-    // window.zrqCol = new App.Collections.zrq();
-    // zrqCol.add(zrqModel);
 
     window.zrqCol = new App.Collections.zrq([{
         first_name: "Ricardo",
@@ -97,6 +119,8 @@
         collection: zrqCol
     });
     var zrqFormView = new App.Views.zrqForm({});
+
+    Backbone.history.start();
 
     // var singleView = new App.Views.single({
     //     mode: zrqCol
