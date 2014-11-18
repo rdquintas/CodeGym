@@ -9,6 +9,7 @@
     "dependencies": {
         "jquery": null,
         "underscore": null,
+        "bootstrap": null,
         "backbone": null
     }
 }
