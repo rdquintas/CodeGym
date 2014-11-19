@@ -3,7 +3,8 @@
     var App = {
         Views: {},
         Collections: {},
-        Models: {}
+        Models: {},
+        Routers: {}
     };
 
     // Vars e Cenas ---------------------------------------------
@@ -21,6 +22,8 @@
             e.preventDefault();
             var zrqModel = new App.Models.task({
                 title: this.$el.find("#zrq-input").val()
+            }, {
+                validate: true
             });
 
             vent.trigger("task:add", zrqModel);
@@ -34,6 +37,31 @@
     App.Views.single = Backbone.View.extend({
         template: _.template($("#zrq-template").html()),
 
+        events: {
+            "click button#zrq-edit": "editTask",
+            "click button#zrq-delete": "deleteTask"
+        },
+
+        initialize: function() {
+            this.model.on("destroy", this.removeDomEntry, this);
+        },
+
+        editTask: function() {
+            var result = window.prompt("Meke caralho ?", this.model.get("title"));
+            this.model.set("title", result);
+            this.render();
+        },
+
+        deleteTask: function() {
+            console.log("deleteTask");
+            this.model.destroy();
+        },
+
+        removeDomEntry: function() {
+            console.log("removeDomEntry");
+            this.$el.remove();
+        },
+
         render: function() {
             var result = this.template(this.model.toJSON());
             this.$el.html(result);
@@ -44,29 +72,31 @@
     App.Views.multiple = Backbone.View.extend({
         el: "#zrq-list",
 
-        render: function() {
-            this.collection.each(function(pModel) {
-                if (pModel.get("title")) {
-                    var tmpView = new App.Views.single({
-                        model: pModel
-                    });
-                    this.$el.append(tmpView.render().el);
-                }
-            }, this)
+        initialize: function() {
+            this.collection.on("add", this.addTask, this);
+        },
 
+        addTask: function(pModel) {
+            var tmpView = new App.Views.single({
+                model: pModel
+            });
+            this.$el.append(tmpView.render().el);
+        },
+
+        render: function() {
             return this;
         }
     });
 
     // Models ---------------------------------------------
     App.Models.task = Backbone.Model.extend({
-        // defaults: {
-        // title: "",
-        // },
+        validate: function(attrs, options) {
+            if (attrs.title === "") {
+                attrs.title = null;
+            };
 
-        validate: function() {
-            if (!title) {
-                throw error;
+            if (!attrs.title) {
+                return "mete la um titalo caralho";
             }
         }
     });
@@ -79,8 +109,27 @@
         },
 
         addOneMore: function(pModel) {
-            console.log("ja esta: " + pModel.get("title"));
+            this.add(pModel);
         }
+    });
+
+
+    // Routers ---------------------------------------------
+    App.Routers.router = Backbone.Router.extend({
+
+        routes: {
+            "help": "help", // #help
+            "search/:query": "search" // #search/kiwis
+            // "search/:query/p:page": "search" // #search/kiwis/p7
+        },
+
+        help: function() {
+            ...
+        },
+
+        search: function(query) {            
+        }
+
     });
 
 
@@ -88,6 +137,7 @@
     Backbone.history.start();
 
     var zrqCol = new App.Collections.tasks({});
+    var zrqRout = new App.Routers.rout({});
 
     var zrqForm = new App.Views.form({
 
@@ -97,9 +147,5 @@
         collection: zrqCol
     });
 
-
     zrqView.render().el;
-
-    // console.log(zrqModel.get("title"));
-    // $("#zrq-list").html(zrqView.render().el);
 })();

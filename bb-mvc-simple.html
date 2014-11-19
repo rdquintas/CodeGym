@@ -4,21 +4,37 @@
 
 <head>
     <title>bb-mvc-simple</title>
-    <style type="text/css" scr="css/zrq.css"></style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <style>
+    .zrq-top {
+        margin-top: 5%;
+    }
+    .zrq-buttons {
+        padding-left: 5%;
+        font-size: 12px;
+    }
+    </style>
 </head>
+
 <script type="text/template" id="zrq-template">
     <div>
-        Task id:
-        <%=title %>
+        <p>Task id:
+            <%=title %>
+                <span class="zrq-buttons">
+                    <button id="zrq-edit">Edit</button>
+                    <button id="zrq-delete">Delete</button>
+                </span>
+        </p>
     </div>
 </script>
 
-<body>
-
-    <form id="zrq-form">
-        <input type="text" id="zrq-input" value="" placeholder="task id">
-        <button id="zrq-clica">Add</button>
-    </form>
+<body class="container">
+    <section class="row zrq-top">
+        <form id="zrq-form">
+            <input type="text" id="zrq-input" value="" placeholder="task id">
+            <button id="zrq-clica">Add</button>
+        </form>
+    </section>
     <hr>
     <div id="zrq-list">
 
