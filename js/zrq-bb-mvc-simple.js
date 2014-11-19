@@ -6,7 +6,32 @@
         Models: {}
     };
 
-    App.Views.singleTask = Backbone.View.extend({
+    // Vars e Cenas ---------------------------------------------
+    var vent = _.extend({}, Backbone.Events);
+
+    // Views ---------------------------------------------
+    App.Views.form = Backbone.View.extend({
+        el: "#zrq-form",
+
+        events: {
+            "click button#zrq-clica": "addTask"
+        },
+
+        addTask: function(e) {
+            e.preventDefault();
+            var zrqModel = new App.Models.task({
+                title: this.$el.find("#zrq-input").val()
+            });
+
+            vent.trigger("task:add", zrqModel);
+        },
+
+        render: function() {
+            return this;
+        }
+    });
+
+    App.Views.single = Backbone.View.extend({
         template: _.template($("#zrq-template").html()),
 
         render: function() {
@@ -16,9 +41,27 @@
         }
     });
 
+    App.Views.multiple = Backbone.View.extend({
+        el: "#zrq-list",
+
+        render: function() {
+            this.collection.each(function(pModel) {
+                if (pModel.get("title")) {
+                    var tmpView = new App.Views.single({
+                        model: pModel
+                    });
+                    this.$el.append(tmpView.render().el);
+                }
+            }, this)
+
+            return this;
+        }
+    });
+
+    // Models ---------------------------------------------
     App.Models.task = Backbone.Model.extend({
         // defaults: {
-            // title: "",
+        // title: "",
         // },
 
         validate: function() {
@@ -28,34 +71,35 @@
         }
     });
 
+    // Collections ---------------------------------------------
     App.Collections.tasks = Backbone.Collection.extend({
-        model: App.Models.task
+        model: App.Models.task,
+        initialize: function() {
+            vent.on("task:add", this.addOneMore, this)
+        },
+
+        addOneMore: function(pModel) {
+            console.log("ja esta: " + pModel.get("title"));
+        }
     });
+
+
+    // ************ START HERE *********************
+    Backbone.history.start();
 
     var zrqCol = new App.Collections.tasks({});
 
-    for (var i = 1; i < 10; i++) {
-        var zrqModel = new App.Models.task({
-            title: "task nr: " + i
-        });
+    var zrqForm = new App.Views.form({
 
-    	    console.log(zrqModel.get("title"));
-
-        zrqCol.add(zrqModel);
-    }
-
-    zrqCol.each(function(pModel) {
-
-        var zrqView = new App.Views.singleTask({
-            model: pModel
-        });
-
-        // $("#zrq-aqui").html(zrqView.render().el);
-        $("#zrq-aqui").append(zrqView.render().el);
     });
 
-    // zrqView.render();
+    var zrqView = new App.Views.multiple({
+        collection: zrqCol
+    });
+
+
+    zrqView.render().el;
 
     // console.log(zrqModel.get("title"));
-    // $("#zrq-aqui").html(zrqView.render().el);
+    // $("#zrq-list").html(zrqView.render().el);
 })();

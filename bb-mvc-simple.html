@@ -6,17 +6,21 @@
     <title>bb-mvc-simple</title>
     <style type="text/css" scr="css/zrq.css"></style>
 </head>
-
+<script type="text/template" id="zrq-template">
+    <div>
+        Task id:
+        <%=title %>
+    </div>
+</script>
 
 <body>
-    <script type="text/template" id="zrq-template">
-        <div>
-            Task id:
-            <%=title %>
-        </div>
-    </script>
 
-    <div id="zrq-aqui">
+    <form id="zrq-form">
+        <input type="text" id="zrq-input" value="" placeholder="task id">
+        <button id="zrq-clica">Add</button>
+    </form>
+    <hr>
+    <div id="zrq-list">
 
     </div>
 
