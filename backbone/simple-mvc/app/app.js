@@ -7,9 +7,12 @@
 // call the packages we need
 var express = require('express'); // call express
 var app = express(); // define our app using express
+var path = require('path');
+var logger = require('morgan');
+var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var server = require('./models/server');
-var router = require('./models/router')(app);
+
+var router = require('./routes/bears');
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST

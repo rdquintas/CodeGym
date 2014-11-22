@@ -1,12 +1,9 @@
-// ROUTES FOR OUR API
-// =============================================================================
 var express = require('express'); // call express
 var router = express.Router(); // get an instance of the express Router
+var server = require('../models/server');
 
 // middleware to use for all requests
 router.use(function(req, res, next) {
-    // do logging
-    // console.log('Something is happening.');
     next(); // make sure we go to the next routes and don't stop here
 });
 
@@ -37,6 +34,20 @@ router.route('/bears')
 router.route('/bears/:bear_id')
 
 // get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+.delete(function(req, res) {
+    var result = server.delete(req.params.bear_id);    
+    if (result.length !== 0) {
+        res.json({
+            message: 'Bear deleted: ' + req.params.bear_id
+        });
+    } else {
+        res.json({
+            message: 'Bear not deleted!'
+        });
+    }
+})
+
+// get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
 .get(function(req, res) {
     res.json(server.findById(req.params.bear_id));
 })
@@ -59,4 +70,4 @@ router.route('/bears/:bear_id')
     }
 });
 
-module.exports.router = router;
+module.exports = router;
