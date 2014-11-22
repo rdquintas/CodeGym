@@ -1,4 +1,7 @@
 CodeGym
 =======
 
-This is my CodeGym. Where I practice, practice and practice
+Simple MVC todo-list done with
+- node
+- backbone
+- lowdb (Json flat-file DB)
