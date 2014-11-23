@@ -8,5 +8,15 @@
       "title": "urso3",
       "id": "2a89f16d-2ec4-4be1-803b-0f909e909e9b"
     }
+  ],
+  "tasks": [
+    {
+      "title": "task 2",
+      "id": "e50ba643-b019-40bc-8c2d-1b3c85e2b3d6"
+    },
+    {
+      "title": "task 3",
+      "id": "2ae5efac-5ad7-4e87-bcb0-b5c7328ca5d9"
+    }
   ]
 }

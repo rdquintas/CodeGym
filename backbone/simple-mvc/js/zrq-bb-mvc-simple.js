@@ -90,22 +90,30 @@
 
     // Models ---------------------------------------------
     App.Models.task = Backbone.Model.extend({
+
+        defaults: {
+            id: "",
+            title: ""
+        },
+
         validate: function(attrs, options) {
             if (attrs.title === "") {
                 attrs.title = null;
-            };
+            }
 
             if (!attrs.title) {
                 return "mete la um titalo caralho";
             }
         }
+
+        // urlRoot: "task"
     });
 
     // Collections ---------------------------------------------
     App.Collections.tasks = Backbone.Collection.extend({
         model: App.Models.task,
         initialize: function() {
-            vent.on("task:add", this.addOneMore, this)
+            vent.on("task:add", this.addOneMore, this);
         },
 
         addOneMore: function(pModel) {
@@ -120,15 +128,14 @@
         routes: {
             "help": "help", // #help
             "search/:query": "search" // #search/kiwis
-            // "search/:query/p:page": "search" // #search/kiwis/p7
+                // "search/:query/p:page": "search" // #search/kiwis/p7
         },
 
         help: function() {
-            ...
+            // ...
         },
 
-        search: function(query) {            
-        }
+        search: function(query) {}
 
     });
 
@@ -137,7 +144,7 @@
     Backbone.history.start();
 
     var zrqCol = new App.Collections.tasks({});
-    var zrqRout = new App.Routers.rout({});
+    var zrqRout = new App.Routers.router({});
 
     var zrqForm = new App.Views.form({
 

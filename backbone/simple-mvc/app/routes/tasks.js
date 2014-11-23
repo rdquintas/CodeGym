@@ -15,13 +15,13 @@ router.get('/', function(req, res) {
 });
 
 
-// on routes that end in /bears
+// on routes that end in /task
 // ----------------------------------------------------
-router.route('/bears')
+router.route('/task')
     .post(function(req, res) {
-        var id = server.create(req.body.name);
+        var id = server.create(req.body.title);
         res.json({
-            message: 'Bear created with ID: ' + id
+            message: 'Task created with ID: ' + id
         });
     })
 
@@ -29,39 +29,39 @@ router.route('/bears')
     res.json(server.getAll());
 });
 
-// on routes that end in /bears/:bear_id
+// on routes that end in /task/:task_id
 // ----------------------------------------------------
-router.route('/bears/:bear_id')
+router.route('/task/:task_id')
 
-// get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+// get the bear with that id (accessed at GET http://localhost:8080/api/task/:task_id)
 .delete(function(req, res) {
-    var result = server.delete(req.params.bear_id);    
+    var result = server.delete(req.params.task_id);    
     if (result.length !== 0) {
         res.json({
-            message: 'Bear deleted: ' + req.params.bear_id
+            message: 'Task deleted: ' + req.params.task_id
         });
     } else {
         res.json({
-            message: 'Bear not deleted!'
+            message: 'Task not deleted!'
         });
     }
 })
 
-// get the bear with that id (accessed at GET http://localhost:8080/api/bears/:bear_id)
+// get the bear with that id (accessed at GET http://localhost:8080/api/task/:task_id)
 .get(function(req, res) {
-    res.json(server.findById(req.params.bear_id));
+    res.json(server.findById(req.params.task_id));
 })
 
-// update the bear with this id (accessed at PUT http://localhost:8080/api/bears/:bear_id)
+// update the bear with this id (accessed at PUT http://localhost:8080/api/task/:task_id)
 .put(function(req, res) {
 
     // use our bear model to find the bear we want
-    var id = server.findById(req.params.bear_id);
+    var id = server.findById(req.params.task_id);
 
     if (id) {
-        server.update(req.params.bear_id, req.body.name);
+        server.update(req.params.task_id, req.body.title);
         res.json({
-            message: 'Bear updated with new name: ' + req.body.name
+            message: 'Task updated with new title: ' + req.body.title
         });
     } else {
         res.json({
