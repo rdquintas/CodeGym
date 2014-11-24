@@ -92,8 +92,7 @@
     App.Models.task = Backbone.Model.extend({
 
         defaults: {
-            id: "",
-            title: ""
+            "title": ""
         },
 
         validate: function(attrs, options) {
