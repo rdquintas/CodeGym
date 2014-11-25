@@ -12,20 +12,25 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
-var router = require('./routes/tasks');
+var routerIndex = require('./routes/index');
+var routerTask = require('./routes/tasks');
+
 
 // configure app to use bodyParser()
 // this will let us get the data from a POST
 app.use(bodyParser.urlencoded({
     extended: true
 }));
+
 app.use(bodyParser.json());
+app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
 
 var port = process.env.PORT || 8080; // set our port
 
 // REGISTER OUR ROUTES -------------------------------
-// all of our routes will be prefixed with /api
-app.use('/api', router);
+app.use('/', routerIndex);
+app.use('/api', routerTask);
 
 // START THE SERVER
 // =============================================================================

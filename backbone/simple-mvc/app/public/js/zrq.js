@@ -39,13 +39,19 @@
 
         events: {
             "click button#zrq-edit": "editTask",
-            "click button#zrq-delete": "deleteTask"
+            "click button#zrq-delete": "deleteTask",
+            "click button#zrq-fetch": "fetchTask"
         },
 
         initialize: function() {
             this.model.on("destroy", this.removeDomEntry, this);
         },
 
+        fetchTask: function() {
+            var zrqFetch = this.model.fetch();
+            console.log("Fetchamos: " + zrqFetch);
+        },
+        
         editTask: function() {
             var result = window.prompt("Meke caralho ?", this.model.get("title"));
             this.model.set("title", result);
@@ -103,9 +109,9 @@
             if (!attrs.title) {
                 return "mete la um titalo caralho";
             }
-        }
+        },
 
-        // urlRoot: "task"
+        urlRoot: "api/task"
     });
 
     // Collections ---------------------------------------------

@@ -1,22 +1,12 @@
 {
-  "songs": [
-    {
-      "title": "urso1",
-      "id": "a7470db4-1d01-4623-85d2-4582594ee3a5"
-    },
-    {
-      "title": "urso3",
-      "id": "2a89f16d-2ec4-4be1-803b-0f909e909e9b"
-    }
-  ],
   "tasks": [
     {
-      "title": "task 2",
-      "id": "e50ba643-b019-40bc-8c2d-1b3c85e2b3d6"
+      "title": "task1",
+      "id": "8a2d73d1-e29a-4962-9341-5ad08b109255"
     },
     {
-      "title": "task 3",
-      "id": "2ae5efac-5ad7-4e87-bcb0-b5c7328ca5d9"
+      "title": "task2",
+      "id": "32dd7668-00e8-4698-b326-363f1e748f76"
     }
   ]
 }
