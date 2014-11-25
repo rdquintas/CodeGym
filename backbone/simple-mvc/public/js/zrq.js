@@ -26,6 +26,12 @@
                 validate: true
             });
 
+            var zrqModel2 = new App.Models.task({
+                "id": "32dd7668-00e8-4698-b326-363f1e748f76"
+            });
+
+            zrqModel2.fetch();
+                    
             vent.trigger("task:add", zrqModel);
         },
 
@@ -39,19 +45,13 @@
 
         events: {
             "click button#zrq-edit": "editTask",
-            "click button#zrq-delete": "deleteTask",
-            "click button#zrq-fetch": "fetchTask"
+            "click button#zrq-delete": "deleteTask"
         },
 
         initialize: function() {
             this.model.on("destroy", this.removeDomEntry, this);
         },
 
-        fetchTask: function() {
-            var zrqFetch = this.model.fetch();
-            console.log("Fetchamos: " + zrqFetch);
-        },
-        
         editTask: function() {
             var result = window.prompt("Meke caralho ?", this.model.get("title"));
             this.model.set("title", result);
