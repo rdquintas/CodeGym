@@ -26,12 +26,18 @@
                 validate: true
             });
 
-            var zrqModel2 = new App.Models.task({
-                "id": "32dd7668-00e8-4698-b326-363f1e748f76"
+            // var zrqModel2 = new App.Models.task({
+            //     "id": "32dd7668-00e8-4698-b326-363f1e748f76"
+            // });
+
+            // zrqModel2.fetch();
+
+            var zrqModel3 = new App.Models.task({
+                title: "ai o caralho"
             });
 
-            zrqModel2.fetch();
-                    
+            zrqModel3.save();
+
             vent.trigger("task:add", zrqModel);
         },
 
