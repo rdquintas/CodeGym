@@ -19,10 +19,16 @@ router.get('/', function(req, res) {
 // ----------------------------------------------------
 router.route('/task')
     .post(function(req, res) {
-        var id = server.create(req.body.title);
-        res.json({
-            message: 'Task created with ID: ' + id
-        });
+        var newModel = server.create(req.body.title);
+        if (newModel) {
+            res.json(
+                newModel
+            );
+        } else {
+            res.json({
+                message: 'Something went wrong with the CREATE'
+            });
+        }
     })
 
 .get(function(req, res) {
@@ -35,7 +41,7 @@ router.route('/task/:task_id')
 
 // get the bear with that id (accessed at GET http://localhost:8080/api/task/:task_id)
 .delete(function(req, res) {
-    var result = server.delete(req.params.task_id);    
+    var result = server.delete(req.params.task_id);
     if (result.length !== 0) {
         res.json({
             message: 'Task deleted: ' + req.params.task_id
@@ -59,10 +65,16 @@ router.route('/task/:task_id')
     var id = server.findById(req.params.task_id);
 
     if (id) {
-        server.update(req.params.task_id, req.body.title);
-        res.json({
-            message: 'Task updated with new title: ' + req.body.title
-        });
+        var result = server.update(req.params.task_id, req.body.title);
+        if (result) {
+            res.json({
+                message: 'Task updated with new title: ' + req.body.title
+            });
+        } else {
+            res.json({
+                message: 'Something went wrong with the UPDATE'
+            });
+        }
     } else {
         res.json({
             message: 'Invalid cena!'

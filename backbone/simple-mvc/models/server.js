@@ -5,10 +5,11 @@ low.mixin(require('underscore-db'));
 exports.create = function(pTitle) {
     return db('tasks').insert({
         title: pTitle
-    }).value().id;
+    }).value();
 };
 
 exports.delete = function(pID) {
+    console.log("delete: " + pID);
     return db('tasks').removeWhere({
         id: pID
     }).value();
@@ -19,11 +20,11 @@ exports.getAll = function() {
 };
 
 exports.update = function(pID, pTitle) {
-    db('tasks').find({
-        id: pID
-    }).assign({
+    var result = db('tasks').update(pID, {
         title: pTitle
-    });
+    }).value();
+
+    return result;
 };
 
 exports.findById = function(pID) {
