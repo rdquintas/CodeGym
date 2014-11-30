@@ -9,7 +9,6 @@ exports.create = function(pTitle) {
 };
 
 exports.delete = function(pID) {
-    console.log("delete: " + pID);
     return db('tasks').removeWhere({
         id: pID
     }).value();

@@ -18,6 +18,7 @@ router.get('/', function(req, res) {
 // on routes that end in /task
 // ----------------------------------------------------
 router.route('/task')
+// faz create (accessed at POST http://localhost:8080/api/task)
     .post(function(req, res) {
         var newModel = server.create(req.body.title);
         if (newModel) {
@@ -39,7 +40,7 @@ router.route('/task')
 // ----------------------------------------------------
 router.route('/task/:task_id')
 
-// get the bear with that id (accessed at GET http://localhost:8080/api/task/:task_id)
+// faz delete (accessed at DELETE http://localhost:8080/api/task/:task_id)
 .delete(function(req, res) {
     var result = server.delete(req.params.task_id);
     if (result.length !== 0) {
@@ -53,15 +54,14 @@ router.route('/task/:task_id')
     }
 })
 
-// get the bear with that id (accessed at GET http://localhost:8080/api/task/:task_id)
+// get the task with that id (accessed at GET http://localhost:8080/api/task/:task_id)
 .get(function(req, res) {
     res.json(server.findById(req.params.task_id));
 })
 
-// update the bear with this id (accessed at PUT http://localhost:8080/api/task/:task_id)
+// update the task with this id (accessed at PUT http://localhost:8080/api/task/:task_id)
 .put(function(req, res) {
 
-    // use our bear model to find the bear we want
     var id = server.findById(req.params.task_id);
 
     if (id) {

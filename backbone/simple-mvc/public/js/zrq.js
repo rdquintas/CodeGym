@@ -20,48 +20,12 @@
 
         addTask: function(e) {
             e.preventDefault();
+
             var zrqModel = new App.Models.task({
                 title: this.$el.find("#zrq-input").val()
             }, {
                 validate: true
             });
-
-
-            // http://stackoverflow.com/questions/10504023/backbone-js-not-updating-id-of-model-object-after-save-why-not
-
-            // zrqModel.save(null, {
-            //     success: function(model, response) {
-            //         console.log("uicabom");
-            //         // console.log("zrq id: " + model.set('id'));
-            //     }
-            // }, this);
-
-            zrqModel.save();
-            // zrqModel.save({
-            //     success: function() {
-            //         console.log("success");
-            //     },
-            //     error: function() {
-            //         console.log("error");
-            //     }
-            // });
-
-
-            console.log("zrqModel title: " + zrqModel.get("title"));
-            console.log("zrqModel id: " + zrqModel.get("id"));
-            
-            // var zrqModel2 = new App.Models.task({
-            //     "id": "32dd7668-00e8-4698-b326-363f1e748f76"
-            // });
-
-            // zrqModel2.fetch();
-
-            // var zrqModel3 = new App.Models.task({
-            // 	id: "987ba0f1-5256-4311-b260-cff3acfdea78",
-            //     title: "zrq1139"
-            // });
-
-            // zrqModel3.save();
 
             vent.trigger("task:add", zrqModel);
         },
@@ -86,17 +50,15 @@
         editTask: function() {
             var result = window.prompt("Meke caralho ?", this.model.get("title"));
             this.model.set("title", result);
+            this.model.save();
             this.render();
         },
 
         deleteTask: function() {
-            console.log("deleteTask");
-            this.model.set("id", "e4a229be-09f0-403c-8b21-26110f231d21");
             this.model.destroy();
         },
 
         removeDomEntry: function() {
-            console.log("removeDomEntry");
             this.$el.remove();
         },
 
@@ -143,7 +105,7 @@
             }
         },
 
-        urlRoot: "api/task"
+        urlRoot: "api/task" //no model devo usar urlRoot
     });
 
     // Collections ---------------------------------------------
@@ -151,11 +113,14 @@
         model: App.Models.task,
         initialize: function() {
             vent.on("task:add", this.addOneMore, this);
+            this.fetch();
         },
 
         addOneMore: function(pModel) {
-            this.add(pModel);
-        }
+            this.create(pModel);
+        },
+
+        url: "api/task" //na collection devo usar url
     });
 
 
@@ -191,5 +156,5 @@
         collection: zrqCol
     });
 
-    zrqView.render().el;
+    zrqView.render();
 })();
