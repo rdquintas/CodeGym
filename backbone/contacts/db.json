@@ -1,0 +1,25 @@
+{
+  "contacts": [
+    {
+      "id": "1fe17a66-7788-4d6f-964a-5df57cc22d72",
+      "first_name": "John",
+      "last_name": "Abc",
+      "email_address": "john@test.com",
+      "description": "Description John"
+    },
+    {
+      "id": "2fe17a66-7788-4d6f-964a-5df57cc22d72",
+      "first_name": "Barack",
+      "last_name": "Obama",
+      "email_address": "barack@test.com",
+      "description": "Mr Barraca Som Sistema"
+    },
+    {
+      "id": "3fe17a66-7788-4d6f-964a-5df57cc22d72",
+      "first_name": "Sandro",
+      "last_name": "Miguel",
+      "email_address": "sandro.miguel@gmail.com",
+      "description": "Ganda Chunga"
+    }
+  ]
+}
