@@ -1,26 +1,11 @@
 (function() {
-    var App = {
+    window.App = {
         Models: {},
         Views: {},
-        Collections: {}
+        Collections: {},
+        Router: {}
     };
 
-    var vent = _.extend({}, Backbone.Events);
-
-    // MODELS ==============================
-    App.Models.contact = Backbone.Model.extend({
-        defaults: {
-            first_name: "",
-            last_name: "",
-            email_address: "",
-            description: ""
-        }
-    });
-
-    // VIEWS ==============================
-
-
-    // COLLECTIONS ==============================
-
+    window.vent = _.extend({}, Backbone.Events);
 
 })();

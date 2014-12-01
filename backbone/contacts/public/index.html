@@ -4,7 +4,7 @@
 
 <head>
     <title>Contacts</title>
-    
+
     <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <style>
     .zrq-top {
@@ -14,37 +14,59 @@
         padding-left: 5%;
         font-size: 12px;
     }
+    .zrq-label {
+        width: 150px;
+        vertical-align: top
+    }
     </style>
 </head>
 
-<script type="text/template" id="zrq-template">
-    <div>
-        <p>Task id:
-            <%=title %>
-                <span class="zrq-buttons">
-                    <button id="zrq-edit">Edit</button>
-                    <button id="zrq-delete">Delete</button>
-                </span>
-        </p>
-    </div>
-</script>
+
 
 <body class="container">
-    <section class="row zrq-top">
-        <form id="zrq-form">
-            <input type="text" id="zrq-input" value="" placeholder="task id">
-            <button id="zrq-clica">Add</button>
-        </form>
-    </section>
-    <hr>
-    <div id="zrq-list">
-
-    </div>
+    <h1>Contacts</h1>
+    <form action="" id="addContact">
+        <div>
+            <label class="zrq-label" for="first_name">First Name:</label>
+            <input type="text" id="first_name" name="first_name">
+        </div>
+        <div>
+            <label class="zrq-label" for="last_name">Last Name:</label>
+            <input type="text" id="last_name" name="last_name">
+        </div>
+        <div>
+            <label class="zrq-label" for="email_address">Email Address:</label>
+            <input type="text" id="email_address" name="email_address">
+        </div>
+        <div>
+            <label class="zrq-label" for="description">Description:</label>
+            <textarea name="description" id="description" cols="22"></textarea>
+        </div>
+        <div>
+            <input type="submit" value="Add Contact">
+        </div>
+    </form>
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
     <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
     <script type="text/javascript" src="js/zrq.js"></script>
+    <script type="text/javascript" src="js/models.js"></script>
+    <script type="text/javascript" src="js/collections.js"></script>
+    <script type="text/javascript" src="js/views.js"></script>
+    <script type="text/javascript" src="js/router.js"></script>
+
+    <script>
+    new App.Router;
+    Backbone.history.start();
+
+    App.contacts = new App.Collections.Contacts;
+    App.contacts.fetch().then(function() {
+        new App.Views.App({
+            collection: App.contacts
+        });
+    });
+    </script>
 </body>
 
 </html>
