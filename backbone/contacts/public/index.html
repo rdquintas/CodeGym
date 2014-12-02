@@ -18,6 +18,12 @@
         width: 150px;
         vertical-align: top
     }
+    .zrq-col {
+        width: 150px;
+    }
+    table thead td {
+        font-weight: bold;
+    }
     </style>
 </head>
 
@@ -46,6 +52,37 @@
             <input type="submit" value="Add Contact">
         </div>
     </form>
+    <hr width="100%">
+    <table id="zrq-table">
+        <thead>
+            <tr>
+                <td class="zrq-col">FIRST NAME</td>
+                <td class="zrq-col">LAST NAME</td>
+                <td class="zrq-col">EMAIL ADDRESS</td>
+                <td class="zrq-col">DESCRIPTION</td>
+                <td class="zrq-col">CONFIG</td>
+            </tr>
+        </thead>
+    </table>
+
+    <script id="zrq-single-contact" type="text/template">
+        <td>
+            <%=first_name%>
+        </td>
+        <td>
+            <%=last_name%>
+        </td>
+        <td>
+            <%=email_address%>
+        </td>
+        <td>
+            <%=description%>
+        </td>
+        <td>
+            <a href="#contacts/<%=id%>" class="zrq-delete">Delete</a>
+        </td>
+    </script>
+
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
     <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
@@ -55,6 +92,7 @@
     <script type="text/javascript" src="js/collections.js"></script>
     <script type="text/javascript" src="js/views.js"></script>
     <script type="text/javascript" src="js/router.js"></script>
+
 
     <script>
     new App.Router;

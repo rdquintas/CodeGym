@@ -1,39 +1,18 @@
 {
   "contacts": [
     {
-      "id": "1fe17a66-7788-4d6f-964a-5df57cc22d72",
-      "first_name": "John",
-      "last_name": "Abc",
-      "email_address": "john@test.com",
-      "description": "Description John"
+      "first_name": "wer",
+      "last_name": "wer",
+      "email_address": "wer",
+      "description": "wer",
+      "id": "eb56b4e9-f9ce-40ce-a620-62b0ee848cc8"
     },
     {
-      "id": "2fe17a66-7788-4d6f-964a-5df57cc22d72",
-      "first_name": "Barack",
-      "last_name": "Obama",
-      "email_address": "barack@test.com",
-      "description": "Mr Barraca Som Sistema"
-    },
-    {
-      "id": "3fe17a66-7788-4d6f-964a-5df57cc22d72",
-      "first_name": "Sandro",
-      "last_name": "Miguel",
-      "email_address": "sandro.miguel@gmail.com",
-      "description": "Ganda Chunga"
-    },
-    {
-      "first_name": "aaa",
-      "last_name": "bbb",
-      "email_address": "ccc",
-      "description": "ddd",
-      "id": "0997f692-1b48-4012-9ced-e9719866da0d"
-    },
-    {
-      "first_name": "aaa2",
-      "last_name": "bbb",
-      "email_address": "ccc",
-      "description": "ddd",
-      "id": "772ebf7a-a474-474c-8f81-807ca41f1d18"
+      "first_name": "wer",
+      "last_name": "wer",
+      "email_address": "wer",
+      "description": "wer",
+      "id": "8412b1fb-99b3-483a-adf8-588298c94e08"
     }
   ]
 }
