@@ -10,7 +10,7 @@
     "jquery": null,
     "dojo": null,
     "dijit": null,
-    "dojox": null,
+    // "dojox": null,
     "bootstrap": null,
     "font-awesome": "~4.2.0"
   }
