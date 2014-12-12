@@ -1,0 +1,17 @@
+{
+  "name": "my-project",
+  "version": "1.0.0",
+  "private": "true",
+  "ignore": [
+    ".jshintrc",
+    "**/*.txt"
+  ],
+  "dependencies": {
+    "jquery": null,
+    "dojo": null,
+    "dijit": null,
+    "dojox": null,
+    "bootstrap": null,
+    "font-awesome": "~4.2.0"
+  }
+}

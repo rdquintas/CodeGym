@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+
+<head>
+    <title>bb-mvc-simple</title>
+    
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
+    <style>
+    .zrq-top {
+        margin-top: 5%;
+    }
+    .zrq-buttons {
+        padding-left: 5%;
+        font-size: 12px;
+    }
+    </style>
+</head>
+
+<script type="text/template" id="zrq-template">
+    <div>
+        <p>Task id:
+            <%=title %>
+                <span class="zrq-buttons">
+                    <button id="zrq-edit">Edit</button>
+                    <button id="zrq-delete">Delete</button>
+                </span>
+        </p>
+    </div>
+</script>
+
+<body class="container">
+    <section class="row zrq-top">
+        <form id="zrq-form">
+            <input type="text" id="zrq-input" value="" placeholder="task id">
+            <button id="zrq-clica">Add</button>
+        </form>
+    </section>
+    <hr>
+    <div id="zrq-list">
+
+    </div>
+
+    <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="bower_components/underscore/underscore.js"></script>
+    <script type="text/javascript" src="bower_components/backbone/backbone.js"></script>
+    <script type="text/javascript" src="js/zrq.js"></script>
+</body>
+
+</html>
