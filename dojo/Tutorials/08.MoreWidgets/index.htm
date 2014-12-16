@@ -4,15 +4,12 @@
 <head>
     <meta charset="utf-8">
     <title>My App!</title>
-    <!-- <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="myApp/widget/css/AuthorWidget.css">
 
     <script>
     // Instead of using data-dojo-config, we’re creating a dojoConfig object
     // *before* we load dojo.js; they’re functionally identical.
-    // console.log("location.pathname: " + location.pathname);
-    // console.log("location.pathname replace: " + location.pathname.replace(/\/[^/]*$/, ''));
-
     var dojoConfig = {
         async: true,
         // This code registers the correct location of the "demo" package
@@ -21,7 +18,6 @@
         packages: [{
             name: "myApp",
             location: location.pathname.replace(/\/[^/]*$/, '') + "/myApp"
-                // location: "../../Tutorials/08.MoreWidgets/myApp"
         }]
     };
     </script>
@@ -29,23 +25,11 @@
 
 <body>
     <h1 id="greeting">My App</h1>
-    <!-- load dojo and provide config via data attribute -->
-    <!-- <script src="../../bower_components/dojo/dojo.js" data-dojo-config="isDebug:1, async:1"></script> -->
     <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
 
     <div id="authorContainer"></div>
 
     <script>
-    // // Require the module we just created
-    // require(["demo/myModule"], function(myModule) {
-    //     // Use our module to change the text in the greeting
-    //     myModule.setText("greeting", "Hello Dojo!");
-
-    //     // After a few seconds, restore the text to its original state
-    //     setTimeout(function() {
-    //         myModule.restoreText("greeting");
-    //     }, 3000);
-    // });
     require(["dojo/request", "dojo/dom", "dojo/_base/array", "myApp/widget/AuthorWidget", "dojo/domReady!"],
         function(request, dom, arrayUtil, AuthorWidget) {
             // Load up our authors
