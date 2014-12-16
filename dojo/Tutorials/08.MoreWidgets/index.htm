@@ -4,14 +4,15 @@
 <head>
     <meta charset="utf-8">
     <title>My App!</title>
-    <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="../../bower_components/bootstrap/dist/css/bootstrap.min.css"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
 
     <script>
     // Instead of using data-dojo-config, we’re creating a dojoConfig object
     // *before* we load dojo.js; they’re functionally identical.
-    console.log("location.pathname: " + location.pathname);
-    console.log("location.pathname replace: " + location.pathname.replace(/\/[^/]*$/, ''));
-    
+    // console.log("location.pathname: " + location.pathname);
+    // console.log("location.pathname replace: " + location.pathname.replace(/\/[^/]*$/, ''));
+
     var dojoConfig = {
         async: true,
         // This code registers the correct location of the "demo" package
@@ -20,7 +21,7 @@
         packages: [{
             name: "myApp",
             location: location.pathname.replace(/\/[^/]*$/, '') + "/myApp"
-            // location: "../../Tutorials/08.MoreWidgets/myApp"
+                // location: "../../Tutorials/08.MoreWidgets/myApp"
         }]
     };
     </script>
@@ -30,7 +31,7 @@
     <h1 id="greeting">My App</h1>
     <!-- load dojo and provide config via data attribute -->
     <!-- <script src="../../bower_components/dojo/dojo.js" data-dojo-config="isDebug:1, async:1"></script> -->
-<script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
 
     <div id="authorContainer"></div>
 
