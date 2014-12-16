@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Widget 04 Template Based</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="myWidget/widget/css/AuthorWidget.css"> -->
+
+    <script>
+    // Instead of using data-dojo-config, we’re creating a dojoConfig object
+    // *before* we load dojo.js; they’re functionally identical.
+    var dojoConfig = {
+        async: true,
+        // This code registers the correct location of the "demo" package
+        // so we can load Dojo from the CDN whilst still being able to
+        // load local modules
+        packages: [{
+            name: "myApp",
+            location: location.pathname.replace(/\/[^/]*$/, '') + "/myWidget"
+        }]
+    };
+    </script>
+</head>
+
+<body>
+    <h1 id="greeting">Widget 04 Template Based</h1>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+
+
+    <div data-dojo-type="FancyCounter" data-dojo-props="label:'counter label'">button label</div>
+
+    <script>
+    require([
+        "dojo/_base/declare", "dojo/parser", "dojo/ready",
+        "dijit/_WidgetBase", "dijit/_TemplatedMixin"
+    ], function(declare, parser, ready, _WidgetBase, _TemplatedMixin) {
+
+        declare("FancyCounter", [_WidgetBase, _TemplatedMixin], {
+            // counter
+            _i: 0,
+
+            templateString: "<div>" +
+                "<button data-dojo-attach-event='onclick: increment'>press me</button>" +
+                "&nbsp; count: <span data-dojo-attach-point='conta_cenas'>0</span>" +
+                "</div>",
+
+            increment: function() {
+                this.conta_cenas.innerHTML = ++this._i;
+            }
+        });
+
+        ready(function() {
+            // Call the parser manually so it runs after our widget is defined, and page has finished loading
+            parser.parse();
+        });
+    });
+    </script>
+</body>
+
+</html>

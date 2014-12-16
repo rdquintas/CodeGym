@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Widget 02</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="myWidget/widget/css/AuthorWidget.css"> -->
+
+    <script>
+    // Instead of using data-dojo-config, we’re creating a dojoConfig object
+    // *before* we load dojo.js; they’re functionally identical.
+    var dojoConfig = {
+        async: true,
+        // This code registers the correct location of the "demo" package
+        // so we can load Dojo from the CDN whilst still being able to
+        // load local modules
+        packages: [{
+            name: "myApp",
+            location: location.pathname.replace(/\/[^/]*$/, '') + "/myWidget"
+        }]
+    };
+    </script>
+</head>
+
+<body>
+    <h1 id="greeting">Widget 02</h1>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+
+
+    <script>
+    // the parser is only needed, if you want
+    // to instantiate the widget declaratively (in markup)
+    require([
+        "dojo/_base/declare", "dojo/dom-construct", "dojo/ready", "dojo/_base/window",
+        "dijit/_WidgetBase",
+    ], function(declare, domConstruct, ready, win, _WidgetBase) {
+
+        declare("MyFirstWidget", [_WidgetBase], {
+            buildRendering: function() {
+                // create the DOM for this widget
+                this.domNode = domConstruct.create("button", {
+                    innerHTML: "push me"
+                });
+            }
+        });
+
+        ready(function() {
+            // Create the widget programmatically and place in DOM
+            (new MyFirstWidget()).placeAt(win.body());
+        });
+    });
+    </script>
+</body>
+
+</html>

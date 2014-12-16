@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Widget 03</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+    <!-- <link rel="stylesheet" href="myWidget/widget/css/AuthorWidget.css"> -->
+
+    <script>
+    // Instead of using data-dojo-config, we’re creating a dojoConfig object
+    // *before* we load dojo.js; they’re functionally identical.
+    var dojoConfig = {
+        async: true,
+        // This code registers the correct location of the "demo" package
+        // so we can load Dojo from the CDN whilst still being able to
+        // load local modules
+        packages: [{
+            name: "myApp",
+            location: location.pathname.replace(/\/[^/]*$/, '') + "/myWidget"
+        }]
+    };
+    </script>
+</head>
+
+<body>
+    <h1 id="greeting">Widget 03</h1>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+
+
+    <span data-dojo-type="Counter"></span>
+
+    <script>
+    require([
+        "dojo/_base/declare", "dojo/dom-construct", "dojo/parser", "dojo/ready",
+        "dijit/_WidgetBase",
+    ], function(declare, domConstruct, parser, ready, _WidgetBase) {
+        declare("Counter", [_WidgetBase], {
+            // counter
+            _i: 0,
+
+            buildRendering: function() {
+                // create the DOM for this widget
+                this.domNode = domConstruct.create("button", {
+                    innerHTML: this._i
+                });
+            },
+
+            postCreate: function() {
+                // every time the user clicks the button, increment the counter
+                this.connect(this.domNode, "onclick", "increment");
+            },
+
+            increment: function() {
+                this.domNode.innerHTML = ++this._i;
+            }
+        });
+
+        ready(function() {
+            // Call the parser manually so it runs after our widget is defined, and page has finished loading
+            parser.parse();
+        });
+    });
+    </script>
+</body>
+
+</html>

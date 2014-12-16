@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Widget 06 With Setters and Getters</title>
+    <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"> -->
+
+    <style>
+    .businessCard {
+        border: 3px inset gray;
+        margin: 1em;
+    }
+    .employeeName {
+        color: blue;
+    }
+    .specialEmployeeName {
+        color: red;
+    }
+    </style>
+
+    <script>
+    // Instead of using data-dojo-config, we’re creating a dojoConfig object
+    // *before* we load dojo.js; they’re functionally identical.
+    var dojoConfig = {
+        async: true,
+        // This code registers the correct location of the "demo" package
+        // so we can load Dojo from the CDN whilst still being able to
+        // load local modules
+        packages: [{
+            name: "myApp",
+            location: location.pathname.replace(/\/[^/]*$/, '') + "/myWidget"
+        }]
+    };
+    </script>
+</head>
+
+<body>
+    <h1 id="greeting">Widget 06 With Setters and Getters</h1>
+    <script src="http://ajax.googleapis.com/ajax/libs/dojo/1.10.3/dojo/dojo.js"></script>
+
+    <span data-dojo-type="HidePane" data-dojo-props="open:false" data-dojo-id="pane">This pane is initially hidden</span>
+    <!-- Reparem como faco a chamada do SET ao parameter OPEN, que depois chama um metodo que defini no meu codigo JS -->
+    <button onclick="pane.set('open', true);">show</button>  
+    <button onclick="pane.set('open', false);">hide</button>
+
+    <script>
+    require([
+        "dojo/_base/declare", "dojo/dom-style", "dojo/parser", "dojo/ready",
+        "dijit/_WidgetBase", "dijit/_TemplatedMixin"
+    ], function(declare, domStyle, parser, ready, _WidgetBase, _TemplatedMixin) {
+
+        declare("HidePane", [_WidgetBase], {
+            // parameters
+            open: true,
+
+            //Reparem como deve ser feito o SET/GET do parameter open
+            _setOpenAttr: function( /*Boolean*/ open) {
+                this._set("open", open);
+                domStyle.set(this.domNode, "display", open ? "block" : "none");
+            }
+        });
+
+        ready(function() {
+            // Call the parser manually so it runs after our widget is defined, and page has finished loading
+            parser.parse();
+        });
+    });
+    </script>
+</body>
+
+</html>
