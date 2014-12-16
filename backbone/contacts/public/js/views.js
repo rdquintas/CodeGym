@@ -11,7 +11,19 @@ App.Views.App = Backbone.View.extend({
         }).render();
 
         $("#zrq-table").append(allContacts.el);
+
+        vent.on("contact:edit", this.editContact, this);
+
+
+    },
+
+    editContact: function(model) {
+        var zrqEditContact = new App.Views.EditContact({
+            model: model
+        });
+        $("#editContact").html(zrqEditContact.render().el);
     }
+
 });
 
 // Form view =========================================
@@ -64,6 +76,45 @@ App.Views.AddContact = Backbone.View.extend({
 
 });
 
+
+// EDIT Contact view =========================================
+App.Views.EditContact = Backbone.View.extend({
+
+    template: template("zrq-edit-contact"),
+
+    events: {
+        "submit": "updateContact"
+    },
+
+    initialize: function() {
+        this.render();
+
+        this.form = this.$("form"); // ZRQ fiquei aqui isto nao esta a correr bem
+        this.first_name = this.form.find("#edit_first_name");
+        this.last_name = this.form.find("#edit_last_name");
+        this.email_address = this.form.find("#edit_email_address");
+        this.description = this.form.find("#edit_description");
+    },
+
+    updateContact: function(e) {
+        e.preventDefault();
+
+        this.model.save({
+            first_name: this.first_name.val(),
+            last_name: this.last_name.val(),
+            email_address: this.email_address.val(),
+            description: this.description.val()
+        });
+        // this.remove();
+    },
+
+    render: function() {
+        this.$el.html(this.template(this.model.toJSON()));
+        return this;
+    }
+});
+
+
 // Single Contact view =========================================
 App.Views.Contact = Backbone.View.extend({
     tagName: "tr",
@@ -75,7 +126,12 @@ App.Views.Contact = Backbone.View.extend({
     },
 
     events: {
-        "click a.zrq-delete": "deleteContact"
+        "click a.zrq-delete": "deleteContact",
+        "click a.zrq-edit": "editContact"
+    },
+
+    editContact: function() {
+        vent.trigger("contact:edit", this.model);
     },
 
     deleteContact: function() {
@@ -113,7 +169,7 @@ App.Views.Contacts = Backbone.View.extend({
         var contactView = new App.Views.Contact({
             model: contact
         });
-        console.log(contactView.render().el);
+        // console.log(contactView.render().el);
         this.$el.append(contactView.render().el);
     }
 

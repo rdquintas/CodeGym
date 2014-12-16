@@ -65,6 +65,9 @@
         </thead>
     </table>
 
+    <hr>
+    <div id="editContact"></div>
+
     <script id="zrq-single-contact" type="text/template">
         <td>
             <%=first_name%>
@@ -79,9 +82,39 @@
             <%=description%>
         </td>
         <td>
+            <a href="#contacts/<%=id%>" class="zrq-edit">Edit</a>
             <a href="#contacts/<%=id%>" class="zrq-delete">Delete</a>
         </td>
     </script>
+
+    <script id="zrq-edit-contact" type="text/template">
+        <h2>Edit Contact: <%=first_name%> <%=last_name%></h2>
+
+        <form action="" id="editContact">
+            <div>
+                <label class="zrq-label" for="edit_first_name">First Name:</label>
+                <input type="text" id="edit_first_name" name="edit_first_name" value=<%=first_name%>>
+            </div>
+            <div>
+                <label class="zrq-label" for="edit_last_name">Last Name:</label>
+                <input type="text" id="edit_last_name" name="edit_last_name" value=<%=last_name%>>
+            </div>
+            <div>
+                <label class="zrq-label" for="edit_email_address">Email Address:</label>
+                <input type="text" id="edit_email_address" name="edit_email_address" value=<%=email_address%>>
+            </div>
+            <div>
+                <label class="zrq-label" for="edit_description">Description:</label>
+                <textarea name="edit_description" id="edit_description" cols="22">
+                    <%=description%>
+                </textarea>
+            </div>
+            <div>
+                <input type="submit" value="Save">
+            </div>
+        </form>
+    </script>
+
 
 
     <script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
