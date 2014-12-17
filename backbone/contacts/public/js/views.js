@@ -89,22 +89,23 @@ App.Views.EditContact = Backbone.View.extend({
     initialize: function() {
         this.render();
 
-        this.form = this.$("form"); // ZRQ fiquei aqui isto nao esta a correr bem
-        this.first_name = this.form.find("#edit_first_name");
-        this.last_name = this.form.find("#edit_last_name");
-        this.email_address = this.form.find("#edit_email_address");
-        this.description = this.form.find("#edit_description");
     },
 
     updateContact: function(e) {
         e.preventDefault();
 
+        this.first_name = this.$("#edit_first_name");
+        this.last_name = this.$("#edit_last_name");
+        this.email_address = this.$("#edit_email_address");
+        this.description = this.$("#edit_description");
+        
         this.model.save({
             first_name: this.first_name.val(),
             last_name: this.last_name.val(),
             email_address: this.email_address.val(),
             description: this.description.val()
         });
+
         // this.remove();
     },
 
