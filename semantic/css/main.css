@@ -4,13 +4,20 @@ body {
     font: "helvetica", arial;
 }
 #mainHead {
-    margin: 40px 40px 0px 40px;
+    margin: 0px 40px 0px 40px;
+    text-align: center;
 }
 #menu {
     max-width: 1024px;
     margin: 0px auto;
+    position: relative;
+    top: 40px;
 }
-
+#m_btn {
+    display: none;
+    position: relative;
+    top: 40px;
+}
 #mainImage {
     width: 100%;
     height: auto;
@@ -18,9 +25,34 @@ body {
     top: 0;
     z-index: -1;
 }
+#chatIcon {
+    margin-top: 15%;
+}
+#chatIcon > i {
+    opacity: 0.6;
+}
+#chatIconMobile {
+    margin-top: 15%;
+    /*opacity: 0.6;*/   
+    display: none;
+    font-size: 1.2em;
+}
+@media all and (max-width: 745px) {
+    #chatIcon {
+        font-size: 1.2em;
+    }
+}
 @media all and (max-width: 630px) {
     #menu {
         display: none;
     }
-    
+    #m_btn {
+        display: inline-block;
+    }
+    #chatIconMobile {
+        display: inline-block;
+    }
+    #chatIcon {
+        display: none;
+    }
 }
