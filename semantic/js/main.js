@@ -1,8 +1,9 @@
 $(function() {
 
-    //este codigo determina o menu seleccionado, baseado no attributo REL do body
-    var rel = $("body[rel]").attr("rel");
-    $("#menu a:eq(" + rel + ") , #m_menu a:eq(" + rel + ")").addClass("active");
+    //este codigo determina o menu seleccionado, baseado no attributo data-zrq-menu do body
+    var selectedMenu = $("body").attr("data-zrq-menu");
+    console.log("data-zrq-menu: " + selectedMenu);
+    $("#menu a:eq(" + selectedMenu + ") , #m_menu a:eq(" + selectedMenu + ")").addClass("active");
 
 
     //testa o botao para fazer o toggle do side-bar
@@ -17,6 +18,7 @@ $(function() {
             $('#m_menu').sidebar('hide');
         }
     });
+
 
     //se fizermos o resize, devo fechar o side-bar caso este esteja aberto
     $(window).resize(function() {
