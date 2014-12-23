@@ -43,6 +43,34 @@ body {
     display: none;
     font-size: 1.2em;
 }
+#content {
+    padding: 20px;
+}
+#content p {
+    color: #666;
+    line-height: 180%;
+}
+#content img {
+    margin: 0 auto;
+}
+#content .column {
+    text-align: center;
+}
+#about {
+    padding: 20px;
+}
+#about .ui.breadcrumb {
+    display: block;
+}
+#about p {
+    line-height: 180%;
+    color: #666;
+}
+#center {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+}
 #footer {
     width: 100%;
     background-color: #eee;
