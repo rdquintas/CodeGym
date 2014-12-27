@@ -35,6 +35,39 @@ $(function() {
     });
 
 
+    // codigo para on hover do Portfolio
+    $('#portfolio .dimmable.image').dimmer({
+        on: 'hover',
+        duration: {
+            show: 500,
+            hide: 500
+        }
+    });
+
+    // codigo para o STEP do Portfolio
+    $("#portfolio .step").on("click", function() {
+        var selectedStep = $(this).attr("data-zrq-step");
+        $("#portfolio .step").removeClass("active");
+        $(this).addClass("active");
+        $('#portfolio .accordion').accordion("open", parseInt(selectedStep));
+    });
+
+    // codigo para o ACCORDION do Portfolio
+    $('#portfolio .accordion').accordion({
+        collapsible: false,
+        onOpen: function() {
+            $("#portfolio .step").removeClass("active");
+            $("#portfolio .step[data-zrq-step='" + this.id + "']").addClass("active");
+        }
+    });
+
+    // codigo para rating
+    $('#portfolio .rating').rating();
+
+    // codigo o CONTACT FORM
+    $('#contact .ui.checkbox').checkbox();
+    $('#contact .selection.dropdown').dropdown();
+
     //fechar o side-bar quando a tecla ESC for clicada    
     $(document).keyup(function(e) {
         if (e.keyCode == 27) {

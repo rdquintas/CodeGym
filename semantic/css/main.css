@@ -71,6 +71,10 @@ body {
     margin-bottom: 20px;
     text-align: center;
 }
+#portfolio .active.step {
+    /*Esta linha de CSS é importante para evitar que eu clique numa coisa que ja esta activa*/   
+    pointer-events: none;
+}
 #footer {
     width: 100%;
     background-color: #eee;
