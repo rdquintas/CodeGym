@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-
+<meta charset="utf-8" />
 <html>
 
 <head>
@@ -466,27 +466,40 @@
             <div class="ui segment orange raised">
 
                 <form class="ui form">
+                    <div class="ui icon error message">
+                        <i class="attention circular inverted icon"></i>
+                        <div class="content">
+                            <div class="header">
+                                Error
+                            </div>
+                            <ul class="list">
+                                <li>You can now have cover images on blog pages</li>
+                                <li>Drafts will now auto-save while writing</li>
+                            </ul>
+                        </div>
+                    </div>
                     <h4 class="ui dividing header">Personal Information</h4>
                     <div class="two fields">
                         <div class="field">
                             <label>Name</label>
                             <div class="two fields">
-                                <div class="field">
-                                    <input type="text" name="first-name" placeholder="First Name">
+                                <div class="field disabled">
+                                    <input type="text" name="first-name" placeholder="Este esta DISABLED">
                                 </div>
                                 <div class="field">
                                     <input type="text" name="last-name" placeholder="Last Name">
                                 </div>
                             </div>
                         </div>
-                        <div class="field">
+                        <div class="field error">
                             <label>Gender</label>
                             <div class="ui selection dropdown">
                                 <input type="hidden" name="gender">
                                 <div class="default text">Gender</div>
                                 <i class="dropdown icon"></i>
                                 <div class="menu">
-                                    <div class="item" data-value="male">Male</div>
+                                    <div class="item" data-value="male">
+                                    <i class="icon user circular inverted"></i>Male</div>
                                     <div class="item" data-value="female">Female</div>
                                 </div>
                             </div>
@@ -505,7 +518,7 @@
                                 <i class="user icon"></i>
                             </div>
                         </div>
-                        <div class="required field">
+                        <div class="required field inline">
                             <label>Password</label>
                             <div class="ui icon input">
                                 <input type="password">
@@ -527,6 +540,12 @@
                                 <div class="ui radio checkbox">
                                     <input type="radio" name="alone">
                                     <label>No</label>
+                                </div>
+                            </div>
+                            <div class="field">
+                                <div class="ui radio checkbox">
+                                    <input type="radio" name="alone">
+                                    <label>Maybe</label>
                                 </div>
                             </div>
                         </div>
@@ -569,7 +588,7 @@
                         <div class="header">We noticed some issues</div>
                     </div>
                     <div class="ui submit button">Register</div>
-                </div>
+            </div>
 
             </form>
         </section>

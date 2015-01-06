@@ -72,7 +72,13 @@ body {
     text-align: center;
 }
 #portfolio .active.step {
-    /*Esta linha de CSS é importante para evitar que eu clique numa coisa que ja esta activa*/   
+    /*Esta linha de CSS é importante para evitar que eu clique numa coisa que ja esta activa*/
+    
+    pointer-events: none;
+}
+#contact div.disabled {
+    /*Esta linha de CSS é importante para evitar que eu clique numa coisa que ja esta activa*/
+    
     pointer-events: none;
 }
 #footer {

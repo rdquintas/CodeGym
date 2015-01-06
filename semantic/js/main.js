@@ -64,6 +64,7 @@ $(function() {
     // codigo para rating
     $('#portfolio .rating').rating();
 
+  
     // codigo o CONTACT FORM
     $('#contact .ui.checkbox').checkbox();
     $('#contact .selection.dropdown').dropdown();

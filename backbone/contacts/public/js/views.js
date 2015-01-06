@@ -83,7 +83,8 @@ App.Views.EditContact = Backbone.View.extend({
     template: template("zrq-edit-contact"),
 
     events: {
-        "submit": "updateContact"
+        "submit form": "updateContact",
+        "click button.cancel": "cancelUpdate"
     },
 
     initialize: function() {
@@ -91,6 +92,11 @@ App.Views.EditContact = Backbone.View.extend({
 
     },
 
+    cancelUpdate: function(e) {
+        // e.preventDefault();
+        this.remove();
+    },
+    
     updateContact: function(e) {
         e.preventDefault();
 
@@ -98,7 +104,7 @@ App.Views.EditContact = Backbone.View.extend({
         this.last_name = this.$("#edit_last_name");
         this.email_address = this.$("#edit_email_address");
         this.description = this.$("#edit_description");
-        
+
         this.model.save({
             first_name: this.first_name.val(),
             last_name: this.last_name.val(),
@@ -106,7 +112,7 @@ App.Views.EditContact = Backbone.View.extend({
             description: this.description.val()
         });
 
-        // this.remove();
+        this.remove();
     },
 
     render: function() {
@@ -124,6 +130,10 @@ App.Views.Contact = Backbone.View.extend({
 
     initialize: function() {
         this.model.on("destroy", this.unrender, this);
+
+        // o on change é importante para garantir que faço o re-render da view quando 
+        // o modelo respectivo fol alterado
+        this.model.on("change", this.render, this);
     },
 
     events: {
@@ -156,9 +166,11 @@ App.Views.Contacts = Backbone.View.extend({
 
     initialize: function() {
         // Importante: atencao ao evento "sync"
-        // podia ter usado o "add", mas o "sync" garante-me que so vou acrescentar
+        // se usar "sync" em vez de "add", garante-me que so vou acrescentar
         // quando tiver db sincronizado também.
-        this.collection.on("sync", this.addOne, this);
+        // this.collection.on("sync", this.addOne, this);
+
+        this.collection.on("add", this.addOne, this);
     },
 
     render: function() {
