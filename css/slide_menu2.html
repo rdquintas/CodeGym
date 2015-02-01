@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- Este slide menu faz um ZOOM-OUT ao conteudo da pagina -->
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <style>
+    * {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        padding: 0;
+        margin: 0;
+        font-family: 'Ubuntu', sans-serif;
+    }
+    ul {
+        list-style-type: none;
+    }
+    li {
+        color: rgba(255, 255, 255, 0.8);
+        font-size: 16px;
+        -webkit-font-smoothing: antialiased;
+        cursor: pointer;
+        margin-bottom: 16px;
+    }
+    li:hover {
+        color: #0080FF;
+    }
+    .page-wrap {
+        background-color: #000;
+    }
+    .page-content {
+        background-color: #fff;
+        position: relative;
+        z-index: 0;
+        left: 0px;
+        /*height: 100%;*/
+        overflow: scroll;
+        -webkit-transform: scale(1);
+        -moz-transform: scale(1);
+        -ms-transform: scale(1);
+        -o-transform: scale(1);
+        transform: scale(1);
+        -webkit-transform-origin: center top;
+        -moz-transform-origin: center top;
+        -ms-transform-origin: center top;
+        -o-transform-origin: center top;
+        transform-origin: center top;
+        -webkit-transition: transform 500ms cubic-bezier(0.600, 0, 0.735, 0.045);
+        -webkit-transition: transform 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -moz-transition: transform 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -o-transition: transform 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        transition: transform 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    }
+    .sidebar {
+        position: fixed;
+        top: 0px;
+        bottom: 0px;
+        left: -190px;
+        z-index: 0;
+        width: 130px;
+        padding: 30px;
+        background-color: #000;
+        -webkit-transition: left 500ms cubic-bezier(0.600, 0, 0.735, 0.045);
+        -webkit-transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -moz-transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -o-transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    }
+    .toggle {
+        position: fixed;
+        top: 20px;
+        z-index: 1;
+        cursor: pointer;
+        color: black;
+        font-size: 30px;
+        left: 0px;
+        -webkit-transition: left 500ms cubic-bezier(0.600, 0, 0.735, 0.045);
+        -webkit-transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -moz-transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        -o-transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+        transition: left 500ms cubic-bezier(0.600, -0.280, 0.735, 0.045);
+    }
+    .toggle:hover {
+        color: #0080FF;
+    }
+    #sidebar-cb {
+        display: none;
+    }
+    #sidebar-cb:checked + .page-wrap .sidebar {
+        left: 0px;
+    }
+    #sidebar-cb:checked + .page-wrap .toggle {
+        left: 100px;
+        color: white;
+        cursor: pointer;
+    }
+    #sidebar-cb:checked + .page-wrap .toggle:hover {
+        color: #0080FF;
+    }
+    #sidebar-cb:checked + .page-wrap .page-content {
+        -webkit-transform: scale(0.7);
+        -moz-transform: scale(0.7);
+        -ms-transform: scale(0.7);
+        -o-transform: scale(0.7);
+        transform: scale(0.7);
+        /*margin-top: 5%;*/
+        /*top: 10px;*/
+    }
+    #sidebar-cb:checked + .page-wrap {
+        background-color: #fff;
+    }
+    </style>
+
+</head>
+
+<body>
+
+    <input type="checkbox" id="sidebar-cb">
+
+    <section class="page-wrap">
+
+        <label for="sidebar-cb" class="toggle"><i id="toggle-icon" class="fa fa-bars"></i>
+        </label>
+
+        <section class="page-content">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus culpa aliquam doloribus optio, quibusdam, dolorem odit veniam molestiae. Laudantium iste maxime consequuntur ipsa quia? Consequatur ut ipsum earum suscipit molestias alias consequuntur quas, laudantium necessitatibus nostrum hic laborum, harum illo. Praesentium dolor, dolore consequatur culpa vel numquam corporis vitae asperiores aut harum sequi tempora officia rem ipsam labore voluptate iste neque esse possimus ratione rerum doloremque expedita? Similique ducimus, delectus? Rem laudantium temporibus ab quis id, sunt sit ipsum vero dicta quisquam quia eum praesentium excepturi dolore esse architecto facere qui inventore adipisci nulla sequi nesciunt possimus exercitationem. Nostrum, magnam!</p>
+            <img src="img/img1.jpg" alt="">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus culpa aliquam doloribus optio, quibusdam, dolorem odit veniam molestiae. Laudantium iste maxime consequuntur ipsa quia? Consequatur ut ipsum earum suscipit molestias alias consequuntur quas, laudantium necessitatibus nostrum hic laborum, harum illo. Praesentium dolor, dolore consequatur culpa vel numquam corporis vitae asperiores aut harum sequi tempora officia rem ipsam labore voluptate iste neque esse possimus ratione rerum doloremque expedita? Similique ducimus, delectus? Rem laudantium temporibus ab quis id, sunt sit ipsum vero dicta quisquam quia eum praesentium excepturi dolore esse architecto facere qui inventore adipisci nulla sequi nesciunt possimus exercitationem. Nostrum, magnam!</p>
+            <img src="img/img2.jpg" alt="">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus culpa aliquam doloribus optio, quibusdam, dolorem odit veniam molestiae. Laudantium iste maxime consequuntur ipsa quia? Consequatur ut ipsum earum suscipit molestias alias consequuntur quas, laudantium necessitatibus nostrum hic laborum, harum illo. Praesentium dolor, dolore consequatur culpa vel numquam corporis vitae asperiores aut harum sequi tempora officia rem ipsam labore voluptate iste neque esse possimus ratione rerum doloremque expedita? Similique ducimus, delectus? Rem laudantium temporibus ab quis id, sunt sit ipsum vero dicta quisquam quia eum praesentium excepturi dolore esse architecto facere qui inventore adipisci nulla sequi nesciunt possimus exercitationem. Nostrum, magnam!</p>
+            <img src="img/img3.jpg" alt="">
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Blanditiis obcaecati, officiis aut neque sint velit odit numquam cupiditate quod, dolorem assumenda. Odit quae eveniet optio sit reiciendis maiores repellat omnis quis harum culpa cupiditate ab commodi rerum, animi quod sunt itaque incidunt, dolore, labore voluptates. Molestias maiores quod, temporibus magni ab hic aliquid amet facere sed nam quasi et quam non consequuntur? Non est qui, rerum ipsa dolor at provident incidunt sunt asperiores quos delectus voluptatibus dolorem, a id corporis quasi nisi nam! Velit molestias ab ducimus sint iusto dicta, hic eaque vitae doloribus aliquid quas consequuntur commodi dolorem, excepturi provident voluptas voluptatibus placeat possimus dolore praesentium, quia minima alias! Impedit voluptate fuga fugit quibusdam maxime nostrum atque magni cum rem vel hic incidunt harum facere provident quam ipsa iure eaque voluptatem praesentium, sequi alias repellendus. Nesciunt sed in pariatur repellat labore repudiandae optio voluptate impedit tenetur adipisci deleniti beatae odio quisquam ratione dolores nulla sequi officiis, consequuntur odit soluta. Ad, consectetur aperiam molestiae. Totam libero suscipit, eius non mollitia aliquam earum cum. Atque deserunt tempore autem accusantium, eius excepturi? Consequatur tenetur esse illo, ipsa architecto asperiores repudiandae eius. Et magnam impedit autem soluta nemo eaque dolorum aspernatur perferendis incidunt, non sequi dolorem quas quasi repellendus ut delectus veniam dolores nostrum illum possimus. Placeat mollitia quos odio ipsa dolores amet deserunt, nihil qui provident eos debitis quidem minima omnis dolorem quas quasi est enim adipisci sequi quod, quaerat aspernatur. Ducimus, adipisci sequi. Beatae alias nulla omnis laudantium, sint commodi nobis minima quae reiciendis expedita odit tenetur, harum aliquam esse ullam accusantium praesentium necessitatibus. Praesentium ipsum nulla molestiae sed totam. Reprehenderit velit sit alias nisi animi autem obcaecati sequi esse tempore iste, deserunt sed, dolorum nulla perspiciatis doloribus illo rem expedita optio quas mollitia ad voluptatem molestias nihil magni! Facilis possimus deleniti ad saepe nemo neque blanditiis veniam, magnam commodi, labore incidunt, repudiandae cumque nesciunt ullam quam impedit beatae. Quia libero sint id error excepturi. Adipisci in, autem animi mollitia quasi soluta ipsum nostrum necessitatibus doloribus illum inventore facilis quisquam labore eaque earum deserunt, commodi unde similique! Repellat dolorem laudantium cupiditate ipsa dicta expedita fuga quos similique qui porro quibusdam quae vitae obcaecati dolor rerum, iusto voluptatem et placeat eveniet! Sapiente sint deleniti, ex sed natus voluptatibus assumenda corporis voluptas veniam, quaerat culpa enim atque! Veniam, voluptatibus omnis dicta, voluptatem earum exercitationem, delectus voluptas quis eum necessitatibus optio. Distinctio reprehenderit explicabo placeat, amet repellendus ea tempore odio ad ab quae beatae molestiae, illo vel voluptate recusandae a quod quia. Iste obcaecati quos unde ab. Molestiae, praesentium quae amet aliquid sint eaque ea tenetur illum perferendis fugiat quibusdam architecto inventore, fugit ad sapiente adipisci dignissimos doloremque dolores quaerat tempora distinctio aut magni nulla labore! In, sit dolorem eos vitae voluptatum molestias aliquam libero eaque. Possimus distinctio similique, soluta rerum obcaecati voluptas fuga suscipit exercitationem ad molestiae illo quae a rem necessitatibus eveniet molestias repellat, tempora perferendis ab et beatae natus. Amet cumque illum, ducimus libero in saepe tempora voluptates architecto nihil, quibusdam inventore! Cum sunt unde voluptates, harum earum. Numquam explicabo animi consectetur ratione veniam adipisci libero laboriosam temporibus ducimus ab omnis minus tempora repellendus fugiat reiciendis expedita eligendi a beatae fugit, vitae doloremque. Vitae sit facere accusantium recusandae fugiat laudantium adipisci aliquid repellat quaerat asperiores similique magnam, iure autem vel corrupti, ut maxime eum. Placeat minima, voluptatibus. Quas consequuntur doloribus totam recusandae nulla. Suscipit totam ducimus voluptate dignissimos cum error, sunt neque fugiat perferendis eaque voluptatum mollitia maxime amet optio iure ab obcaecati ea nihil rem. Quaerat deleniti consequatur voluptates facilis minima eveniet ratione tempore facere suscipit recusandae incidunt voluptate dolore adipisci officiis fugit esse sunt veritatis quod, provident blanditiis ipsam vitae dolorum accusantium. Fugiat alias sapiente id eaque harum ipsa, excepturi amet aperiam delectus, cum dolor eligendi perspiciatis possimus qui totam sed quis laborum pariatur eveniet nisi necessitatibus commodi consectetur rerum non maiores. Fugit repellat sint perspiciatis laboriosam illo placeat odio necessitatibus voluptates quia temporibus quasi voluptatem, eos nam impedit illum eum magnam corporis quibusdam maiores. Necessitatibus est facilis maiores sed sunt. At itaque velit tenetur, dolor. Labore cum, est autem deleniti hic, vel facilis earum asperiores ad ut suscipit unde? Officiis, animi velit. Eaque ipsa ratione ut quisquam, placeat expedita dolor, obcaecati? Sequi at rerum repudiandae quis similique aspernatur culpa vero, quo placeat itaque dolore, sunt eaque aut in cumque labore quia assumenda, ipsa voluptatibus sint pariatur eos nam odit. Ab soluta quas eum vero dolorum pariatur, perferendis, fuga architecto quae asperiores error ad, ullam nobis animi tenetur quidem esse alias ipsa perspiciatis quos. Esse quaerat quo assumenda quia deserunt cupiditate, voluptatem reprehenderit ipsum perspiciatis totam quam ipsa reiciendis libero sunt dolores modi unde, amet vero fugiat aut adipisci! A possimus voluptate deleniti maiores inventore, dolor quod officiis ea culpa maxime asperiores voluptatum numquam et nisi quidem fugiat aspernatur harum rerum corporis distinctio quae. Officiis, vel rem minima modi dicta neque iure accusantium aspernatur eos, mollitia ut quam. Magni asperiores dolorem mollitia nam placeat eos consequatur molestias? Doloremque necessitatibus facere in asperiores architecto, veritatis tempore, provident perspiciatis, fuga dolorum nesciunt velit illo consequuntur adipisci nam eum totam maxime quos quia natus! Quos alias voluptatem corrupti inventore rem ducimus, error fugit id voluptas ratione natus. At provident incidunt suscipit distinctio itaque recusandae illo cumque soluta corporis, impedit amet accusamus molestias modi? Quibusdam consequuntur repudiandae harum error aliquid sit rerum velit quam, nesciunt veniam maxime dolor in dignissimos vel assumenda vero autem eius architecto, libero doloribus praesentium, voluptate animi cumque incidunt asperiores. Debitis sequi consequuntur nobis, laudantium, nihil autem earum cumque, corrupti similique cupiditate non quo neque tempora dolores pariatur doloremque error? Quam consequatur sequi voluptatibus eius vel tempora porro obcaecati velit incidunt cupiditate quo quibusdam, voluptatem cumque, facere rem odio aperiam veritatis et sit illo dolor, voluptas quisquam fugit odit temporibus! Tenetur, id, perspiciatis? Architecto, accusamus cupiditate! Natus quasi, deserunt, unde voluptatum distinctio iusto magnam laborum, minima asperiores iste provident, ea! Aliquam repellat pariatur ad earum iste nisi ratione animi perferendis deserunt sequi, inventore necessitatibus labore voluptatibus sunt eos, reiciendis.</p>
+
+            <img src="img/img4.jpg" alt="">
+        </section>
+        <section class="sidebar">
+            <ul>
+                <li>Home</li>
+                <li>Menu 1</li>
+                <li>Menu 2</li>
+                <li>Menu 3</li>
+            </ul>
+        </section>
+    </section>
+    <script src="js/jquery-1.11.2.min.js"></script>
+
+    <script type="text/javascript">
+    jQuery(document).ready(function($) {
+
+        $("#toggle-icon").on("click", function() {
+            $(this).toggleClass('fa-bars');
+            $(this).toggleClass('fa-times');
+        });
+
+        // checks ESC key
+        $(document).keyup(function(e) {
+            if (e.keyCode == 27) {
+                $checkbox = $('#sidebar-cb');
+                if ($checkbox[0].checked) {
+                    $('#sidebar-cb').click();
+                    $("#toggle-icon").toggleClass('fa-bars');
+                    $("#toggle-icon").toggleClass('fa-times');
+                }
+            }
+        });
+    });
+    </script>
+</body>
+
+
+</html>
