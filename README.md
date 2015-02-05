@@ -1,6 +1,6 @@
 CodeGym
 =======
 
-This is my CodeGym. Where I practice, practice and practice
+This is my CodeGym. Where I practice, practice and practice.
 
 ----------
