@@ -1,0 +1,61 @@
+/* =============================================================================
+  GLOBALS
+============================================================================= */
+
+@import 'https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin';
+*, *:after, *:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+html {
+    padding: 2rem;
+    font-weight: 100;
+    line-height: 1.5;
+    font-family: "Lato", sans-serif;
+}
+h1, h2, h3, h4, h5, h6, p, ul, ol {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+h1, h2, h3, h4, h5, h6 {
+    margin-bottom: 0.5rem;
+    line-height: 1.1;
+}
+/*Exemplo dum CLEARFIX*/
+
+.class-qualquer:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+/* =============================================================================
+  MEDIA QUERIES
+============================================================================= */
+/* 
+ ========= SMALL DEVICES (mobiles) ============
+*/
+
+@media screen and (min-width: 0px) and (max-width: 767px) {
+    html {
+        font-size: 14px;
+    }
+}
+/* 
+ ========= MEDIUM DEVICES (tablets) ============
+*/
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    html {
+        font-size: 20px;
+    }
+}
+/* 
+ ========= LARGE DEVICES (desktops) ============
+*/
+
+@media screen and (min-width: 993px) {
+    html {
+        font-size: 24px;
+    }
+}
