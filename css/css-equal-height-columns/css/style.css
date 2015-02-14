@@ -1,0 +1,213 @@
+/* ------------------------------------------------------------ *\
+|* ------------------------------------------------------------ *|
+|* Globals
+|* ------------------------------------------------------------ *|
+\* ------------------------------------------------------------ */
+h1 {
+    font-size: 40px
+}
+h2 {
+    margin-bottom: 10px
+}
+hr {
+    margin: 30px 0;
+    border: none;
+    height: 1px;
+    background-color: #c8c8c8;
+}
+p {
+    margin-bottom: 30px
+}
+p:last-child {
+    margin-bottom: 0
+}
+/* ------------------------------------------------------------ *\
+|* ------------------------------------------------------------ *|
+|* Navigation
+|* ------------------------------------------------------------ *|
+\* ------------------------------------------------------------ */
+nav {
+    background-color: #ff3c3c;
+    padding: 10px 0 6px 0;
+}
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+nav li {
+    display: inline-block;
+    line-height: 1;
+}
+nav a {
+    display: block;
+    margin-bottom: 4px;
+    padding: 10px;
+    background-color: #fff;
+    color: #ff3c3c;
+}
+nav a.active,
+nav a:hover {
+    background-color: #6f0000;
+    color: #fff;
+}
+/* ------------------------------------------------------------ *\
+|* ------------------------------------------------------------ *|
+|* Demo 1
+|* ------------------------------------------------------------ *|
+\* ------------------------------------------------------------ */
+.demo-1 .main .container {
+    padding: 0 360px 0 30px;
+    overflow: hidden;
+}
+.demo-1 .content {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+}
+.demo-1 .sidebar {
+    float: right;
+    margin-right: -330px;
+    width: 300px;
+    background-color: #fff;
+}
+.demo-1 .content,
+.demo-1 .sidebar {
+    padding-bottom: 99999px;
+    margin-bottom: -99999px;
+}
+.demo-1 section,
+.demo-1 aside {
+    padding: 30px
+}
+/* ------------------------------------------------------------ *\
+|* ------------------------------------------------------------ *|
+|* Demo 2
+|* ------------------------------------------------------------ *|
+\* ------------------------------------------------------------ */
+.demo-2 .main .container {
+    padding: 0 360px 0 30px;
+    position: relative;
+    overflow: hidden;
+}
+.demo-2 .content {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+}
+.demo-2 .sidebar {
+    float: right;
+    margin-right: -330px;
+    width: 300px;
+    background-color: #fff;
+}
+.demo-2 .content:after,
+.demo-2 .sidebar:after {
+    display: block;
+    position: absolute;
+    height: 100%;
+    content: "";
+    background-color: #fff;
+}
+.demo-2 .content:after {
+    left: 30px;
+    right: 360px;
+}
+.demo-2 .sidebar:after {
+    right: 30px;
+    width: 300px;
+}
+.demo-2 section,
+.demo-2 aside {
+    padding: 30px
+}
+/* ------------------------------------------------------------ *\
+|* ------------------------------------------------------------ *|
+|* Demo 3
+|* ------------------------------------------------------------ *|
+\* ------------------------------------------------------------ */
+.demo-3 .main .container {
+    padding: 0 0
+}
+.demo-3 .table {
+    display: table;
+    border-collapse: separate;
+    border-spacing: 30px 0;
+}
+.demo-3 .row {
+    display: table-row
+}
+.demo-3 .col {
+    display: table-cell;
+    background-color: #fff;
+    padding: 30px;
+}
+.demo-3 .col.sidebar {
+    width: 300px
+}
+/* ------------------------------------------------------------ *\
+|* ------------------------------------------------------------ *|
+|* Media Queries
+|* ------------------------------------------------------------ *|
+\* ------------------------------------------------------------ */
+@media all and (max-width: 840px) { 
+  /* demo 1 */
+  .demo-1 .main .container {
+      padding: 0 30px;
+      overflow: visible;
+  }
+  .demo-1 .content {
+      float: none
+  }
+  .demo-1 .sidebar {
+      float: none;
+      margin-right: 0;
+      width: 100%;
+  }
+  .demo-1 .content,
+  .demo-1 .sidebar {
+      padding-bottom: 0;
+      margin-bottom: 0;
+  }
+  .demo-1 .content {
+      margin-bottom: 30px
+  }
+  /* demo 2 */
+  .demo-2 .main .container {
+      padding: 0 30px;
+      overflow: visible;
+  }
+  .demo-2 .content {
+      float: none;
+      margin-bottom: 30px;
+  }
+  .demo-2 .sidebar {
+      float: none;
+      margin-right: 0;
+      width: 100%;
+  }
+  .demo-2 .content:after,
+  .demo-2 .sidebar:after {
+      display: none
+  }
+  /* demo 3 */
+  .demo-3 .main .container {
+      padding: 0 30px
+  }
+  .demo-3 .table {
+      display: block
+  }
+  .demo-3 .row {
+      display: block
+  }
+  .demo-3 .col {
+      display: block
+  }
+  .demo-3 .col.content {
+      margin-bottom: 30px
+  }
+  .demo-3 .col.sidebar {
+      width: 100%
+  }
+}

@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<!-- 
+Tirei exemplo daqui
+http://callmenick.com/2014/03/26/slide-and-push-menus-with-css3-transitions/
+
+Notas:
+Utiliza 2 files CSS bem simples de mastigar.
+Utiliza uns JS para acrescentar classes e cenas, em vez de usar JQUERY. Go and figure.
+
+Curioso, quando clico no menu, ha um div que e criado, e apgado quando fecho o menu:
+<div class="mask"></div>
+
+Este div serve para "bloquear" o ecran
+-->
+<head>
+
+<!-- title and meta -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Slide and push menus that are initially hidden off screen, and transition into view with CSS transitions." />
+<title>Slide And Push Menus With CSS3 Transitions</title>
+    
+<!-- css -->
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,700italic,400,600,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Bitter:400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="css/font-awesome/font-awesome.css">
+<link rel="stylesheet" href="css/base.css" />
+<link rel="stylesheet" href="css/slide_menu_com_js_CSS_transition.css" />
+
+</head>
+
+
+
+<body>
+
+<nav class="menu slide-menu-left">
+    <ul>
+        <li><button class="close-menu">&larr; Close</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /slide menu left -->
+
+<nav class="menu slide-menu-right">
+    <ul>
+        <li><button class="close-menu">Close &rarr;</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /slide menu right -->
+
+<nav class="menu slide-menu-top">
+    <ul>
+        <li><button class="close-menu">&uarr; Close</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /slide menu top -->
+
+<nav class="menu slide-menu-bottom">
+    <ul>
+        <li><button class="close-menu">Close &darr;</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /slide menu bottom -->
+
+<nav class="menu push-menu-left">
+    <ul>
+        <li><button class="close-menu">&larr; Close</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /push menu left -->
+
+<nav class="menu push-menu-right">
+    <ul>
+        <li><button class="close-menu">Close &rarr;</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /push menu right -->
+
+<nav class="menu push-menu-top">
+    <ul>
+        <li><button class="close-menu">&uarr; Close</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /push menu top -->
+
+<nav class="menu push-menu-bottom">
+    <ul>
+        <li><button class="close-menu">Close &darr;</button></li>
+        <li><a href="#">Broccoli</a></li>
+        <li><a href="#">Tomato</a></li>
+        <li><a href="#">Cucumber</a></li>
+        <li><a href="#">Kale</a></li>
+        <li><a href="#">Celery</a></li>
+    </ul>
+</nav><!-- /push menu bottom -->
+
+<div id="wrapper">
+
+
+    <div id="main">
+        <div class="container">
+            
+            <div class="buttons">
+                <button class="nav-toggler toggle-slide-left">Slide Menu Left</button>
+                <button class="nav-toggler toggle-slide-right">Slide Menu Right</button>
+                <button class="nav-toggler toggle-slide-top">Slide Menu Top</button>
+                <button class="nav-toggler toggle-slide-bottom">Slide Menu Bottom</button><br>
+                <button class="nav-toggler toggle-push-left">Push Menu Left</button>
+                <button class="nav-toggler toggle-push-right">Push Menu Right</button>
+                <button class="nav-toggler toggle-push-top">Push Menu Top</button>
+                <button class="nav-toggler toggle-push-bottom">Push Menu Bottom</button>
+            </div><!-- /buttons -->
+
+            <section class="content">
+                <h1>Vegetables</h1>
+
+                <p>Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.</p>
+
+                <p>Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.</p>
+
+                <p>Turnip greens yarrow ricebean rutabaga endive cauliflower sea lettuce kohlrabi amaranth water spinach avocado daikon napa cabbage asparagus winter purslane kale. Celery potato scallion desert raisin horseradish spinach carrot soko. Lotus root water spinach fennel kombu maize bamboo shoot green bean swiss chard seakale pumpkin onion chickpea gram corn pea. Brussels sprout coriander water chestnut gourd swiss chard wakame kohlrabi beetroot carrot watercress. Corn amaranth salsify bunya nuts nori azuki bean chickweed potato bell pepper artichoke.</p>
+                
+            </section>
+
+        </div>
+    </div><!-- #main -->
+
+
+    <footer>
+        <div class="container">
+         
+        </div>
+    </footer><!-- /footer -->
+
+</div><!-- /#wrapper -->
+
+<!-- js -->
+<script src="js/classie.js"></script>
+<script src="js/nav.js"></script>
+
+
+</body>
+</html>
