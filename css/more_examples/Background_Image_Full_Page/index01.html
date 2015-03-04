@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<!-- 
+======================================================================
+Este exemplo utiliza o CSS BACKGROUND
+Nota como posso usar o background para todo o HTML como para um DIV em particular.
+Sendo que esse div tem um widht especifico e a imagem nao fica deformada.
+Nice
+======================================================================
+ -->
+<html>
+
+<head>
+    <style type="text/css">
+    div {
+        margin: 0 auto;
+        width: 50%;
+        height: 200px;
+    }
+    div h1 {
+        top: 30%;
+        position: relative;
+        color: #fff;
+        text-align: center;
+    }
+    html {
+        background: url(img/1024x683clouds.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    .cena {
+        background: url(img/1024x683.jpg) no-repeat center center fixed;
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        -o-background-size: cover;
+        background-size: cover;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="cena">
+        <h1>ALTA CENA</h1>
+    </div>
+</body>
+
+</html>

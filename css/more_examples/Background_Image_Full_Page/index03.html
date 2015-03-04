@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<!-- 
+======================================================================
+Este exemplo utiliza o IMG com CSS simples com um DIV a fazer de wrap
+
+Wrapping the image in a div. 
+That div we'll make twice as big as the browser window. 
+Then the image will be placed, still preserving it's aspect ratio and covering the visible browser window,
+and the dead center of that.
+======================================================================
+ -->
+<html>
+
+<head>
+    <style type="text/css">
+    .bg {
+        position: fixed;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+    }
+    .bg img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+        min-width: 50%;
+        min-height: 50%;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="bg">
+        <img src="img/1024x683clouds.jpg" alt="">
+    </div>
+</body>
+
+</html>

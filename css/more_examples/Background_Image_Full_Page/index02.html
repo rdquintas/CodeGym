@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- 
+======================================================================
+Este exemplo utiliza o IMG com media queries
+Here we use an inline <img> element, which will be able to resize in any browser. 
+We set a min-height which keeps it filling the browser window vertically, 
+and set a 100% width which keeps it filling horizontally. 
+
+We also set a min-width of the width of the image so that the image never gets smaller than it actually is.
+
+The especially clever bit is using a media query to check if the browser window is smaller than the image,
+and using a combo percentage-left and negative left margin to keep it centered regardless.
+======================================================================
+ -->
+<html>
+
+<head>
+    <style type="text/css">
+    img.bg {
+        /* Set rules to fill background */
+        
+        min-height: 100%;
+        min-width: 1024px;
+        /* Set up proportionate scaling */
+        
+        width: 100%;
+        height: auto;
+        /* Set up positioning */
+        
+        position: fixed;
+        top: 0;
+        left: 0;
+    }
+    @media screen and (max-width: 1024px) {
+        /* Specific to this particular image */
+        
+        img.bg {
+            left: 50%;
+            margin-left: -512px;
+            /* 50% */
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <img class="bg" src="img/1024x683.jpg" alt="">
+</body>
+
+</html>
