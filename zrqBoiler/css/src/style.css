@@ -1,0 +1,771 @@
+/* =============================================================================
+  GLOBALS
+============================================================================= */
+
+@import url(https://fonts.googleapis.com/css?family=Lato:300,400,700);
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+body {
+    z-index: 0;
+    margin: 0;
+    padding: 0;
+}
+html {
+    max-width: 1366px;
+    margin: 0 auto;
+    font-family: "Lato", sans-serif;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: 300;
+    line-height: 1.5em;
+}
+p {
+    font-weight: 400;
+    word-spacing: 2px;
+    line-height: 1.5;
+    font-size: 18px;
+}
+.quote {
+    margin: 100px 200px 100px 200px;
+    text-align: center;
+    color: #838383;
+}
+.hide-me {
+    display: none;
+}
+/*Animations ======== */
+
+@-webkit-keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        -webkit-transform: translateY(60px);
+    }
+    100% {
+        opacity: 1;
+        -webkit-transform: translateY(0);
+    }
+}
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(60px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* =============================================================================
+  MODULE PRE LOADER
+============================================================================= */
+
+#module-preloader div {
+    z-index: 10;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    background-color: #fff;
+    text-align: center;
+    /*display: none;*/
+}
+#module-preloader img {
+    position: relative;
+    margin-top: 10%;
+}
+/* =============================================================================
+  MODULE HEADER
+============================================================================= */
+
+#module-header {
+    display: none;
+    width: 100%;
+    padding: 80px 0 61px 100px;
+}
+#module-header .toggle {
+    margin-top: -10px;
+    position: absolute;
+    right: 20px;
+    display: none;
+    z-index: 20;
+}
+#module-header .logo {
+    width: 450px;
+    margin-left: -2px;
+}
+#module-header .languages {
+    margin-top: 20px;
+}
+#module-header .languages a {
+    color: #BFBDBD;
+    padding-right: 10px;
+    text-decoration: none;
+    font-size: 20px;
+    -o-transition: .2s;
+    -ms-transition: .2s;
+    -moz-transition: .2s;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+#module-header .languages .selected {
+    color: #000;
+    pointer-events: none;
+}
+#module-header .languages a:hover {
+    color: #A40000;
+}
+#module-header ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#module-header li {
+    margin-right: 5%;
+    text-transform: uppercase;
+    display: inline;
+}
+#module-header li a {
+    color: #BFBDBD;
+    font-size: 25px;
+    text-decoration: none;
+    -o-transition: .5s;
+    -ms-transition: .5s;
+    -moz-transition: .5s;
+    -webkit-transition: .5s;
+    transition: .5s;
+}
+#module-header li a:hover {
+    color: #A40000;
+}
+/* =============================================================================
+  MODULE HERO
+============================================================================= */
+
+#module-hero {
+    position: relative;
+    opacity: 0;
+}
+#module-hero img {
+    max-width: 100%
+}
+#module-hero.animated {
+    -webkit-animation-duration: 1800ms;
+    animation-duration: 1800ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-hero.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+/* =============================================================================
+  MODULE PHOTOS 1
+============================================================================= */
+
+#module-photos-1 {
+    color: #fff;
+    background-color: #000;
+}
+#module-photos-1:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+#module-photos-1 img {
+    width: 100%;
+    float: left;
+}
+#module-photos-1 [class*='col-'] {
+    float: left;
+}
+#module-photos-1 .col-1-2 {
+    width: 50%;
+    height: 100%;
+}
+#module-photos-1 .white {
+    background-color: #fff;
+}
+#module-photos-1 .text a {
+    text-decoration: none;
+    color: #A40000;
+    -o-transition: .2s;
+    -ms-transition: .2s;
+    -moz-transition: .2s;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+#module-photos-1 .text a:hover {
+    color: #fff;
+}
+#module-photos-1 .text {
+    padding: 100px 100px 0 100px;
+    background: #000;
+}
+#module-photos-1 .img1.animated {
+    opacity: 0;
+    -webkit-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-photos-1 .img1.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+#module-photos-1 .img2.animated {
+    opacity: 0;
+    -webkit-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-delay: 200ms;
+    animation-delay: 200ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-photos-1 .img2.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+/* =============================================================================
+  MODULE PHOTOS 2
+============================================================================= */
+
+#module-photos-2:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+#module-photos-2 img {
+    width: 100%;
+    float: left;
+}
+#module-photos-2 [class*='col-'] {
+    float: left;
+}
+#module-photos-2 .col-1-2 {
+    width: 50%;
+}
+#module-photos-2 .img1.animated {
+    opacity: 0;
+    -webkit-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-photos-2 .img1.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+#module-photos-2 .img2.animated {
+    opacity: 0;
+    -webkit-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-delay: 400ms;
+    animation-delay: 400ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-photos-2 .img2.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+/* =============================================================================
+  MODULE GUYS
+============================================================================= */
+
+#module-guys .container {
+    background-color: #000;
+}
+#module-guys h1 {
+    margin: 50px 200px 50px 200px;
+    text-align: center;
+    color: #838383;
+    font-weight: 300;
+    line-height: 1.3;
+}
+#module-guys .container .item {
+    cursor: pointer;
+}
+#module-guys .container img {
+    width: 100%;
+    overflow: hidden;
+    -webkit-transition: all 200ms ease;
+    -moz-transition: all 200ms ease;
+    -o-transition: all 200ms ease;
+    -ms-transition: all 200ms ease;
+    transition: all 200ms ease;
+}
+#module-guys .container img:hover {
+    width: 105%;
+}
+.container .item {
+    overflow: hidden;
+    float: left;
+}
+#module-guys .container .size-small {
+    width: 10%;
+}
+#module-guys .container .size-normal {
+    width: 20%;
+}
+#module-guys .container .size-big {
+    width: 30%;
+}
+#module-guys .tooltip {
+    display: none;
+    position: absolute;
+    z-index: 10;
+    top: -10px;
+    padding: 10px;
+    width: 280px;
+    background-color: #939393;
+    border: 1px solid #ACACAC;
+    -moz-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    -box-shadow: 0 0 10px rgba(0, 0, 0, .5);
+    text-shadow: none;
+}
+#module-guys .tooltip .title {
+    font-weight: 700;
+    float: left;
+    color: #000;
+    font-size: 15px;
+    margin: 0;
+}
+#module-guys .tooltip .desc {
+    clear: both;
+    font-size: 15px;
+}
+#module-guys .tooltip i {
+    margin-top: -7px;
+    margin-right: -6px;
+    float: right;
+}
+#module-guys .tooltip i:hover {
+    color: #fff;
+}
+#module-guys .tooltip .www {
+    font-weight: 700;
+    text-decoration: none;
+}
+#module-guys .tooltip .www:hover {
+    color: #fff;
+}
+/* =============================================================================
+  MODULE MUSIC
+============================================================================= */
+
+#module-music {
+    background-color: #F2F2F2;
+}
+#module-music h1 {
+    padding: 40px;
+    text-align: center;
+}
+#module-music:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+#module-music img {
+    width: 100%;
+    float: left;
+}
+#module-music [class*='col-'] {
+    float: left;
+}
+#module-music .col-1-3 {
+    width: 28.33%;
+    background-color: #fff;
+    text-align: center;
+    padding: 40px;
+    height: 200px;
+    margin-right: 3.75%;
+    margin-bottom: 3.75%;
+    -webkit-transition: all 500ms ease;
+    -moz-transition: all 500ms ease;
+    -o-transition: all 500ms ease;
+    -ms-transition: all 500ms ease;
+    transition: all 500ms ease;
+}
+#module-music .col-1-3:hover {
+    background-color: #000;
+    color: #fff;
+}
+#module-music .wrap .col-1-3:nth-child(3n+1) {
+    margin-left: 3.75%;
+}
+#module-music .wrap audio {
+    width: 100%;
+}
+#module-music .title {
+    text-align: left;
+}
+#module-music .desc {
+    text-align: left;
+}
+#module-music .img1.animated {
+    opacity: 0;
+    -webkit-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-music .img1.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+#module-music .img2.animated {
+    opacity: 0;
+    -webkit-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-delay: 400ms;
+    animation-delay: 400ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-music .img2.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+/* =============================================================================
+  MODULE CONTACTS
+============================================================================= */
+
+#module-contacts {
+    color: #fff;
+    background: #000;
+}
+#module-contacts:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+#module-contacts img {
+    width: 100%;
+    float: left;
+}
+#module-contacts [class*='col-'] {
+    float: left;
+}
+#module-contacts .col-1-2 {
+    width: 50%;
+}
+#module-contacts .text a {
+    text-decoration: none;
+    color: #A40000;
+    -o-transition: .2s;
+    -ms-transition: .2s;
+    -moz-transition: .2s;
+    -webkit-transition: .2s;
+    transition: .2s;
+}
+#module-contacts .text a:hover {
+    color: #fff;
+}
+#module-contacts .text {
+    padding: 50px 100px 0 100px;
+    background: #000;
+}
+#module-contacts .email:before {
+    font-family: "FontAwesome";
+    content: "\f0e0";
+    padding-right: 20px;
+}
+#module-contacts .phone:before {
+    font-family: "FontAwesome";
+    content: "\f095";
+    padding-right: 20px;
+}
+#module-contacts .white {
+    background-color: #fff;
+}
+#module-contacts .img1.animated {
+    opacity: 0;
+    -webkit-animation-duration: 1200ms;
+    animation-duration: 1200ms;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+}
+#module-contacts .img1.animated.fadeInUp {
+    -webkit-animation-name: fadeInUp;
+    animation-name: fadeInUp;
+}
+/* =============================================================================
+  MODULE FOOTER
+============================================================================= */
+
+#module-footer {
+    padding: 50px;
+    height: 100px;
+    background: #fff;
+    text-align: center;
+}
+#module-footer h3 {
+    padding-bottom: 80px;
+}
+#module-footer a {
+    text-decoration: none;
+    color: #000;
+}
+#module-footer a:hover {
+    text-decoration: none;
+    color: #A40000;
+}
+/* =============================================================================
+  MEDIA QUERIES
+============================================================================= */
+/* 
+ ========= SMALL DEVICES (mobiles) ============
+*/
+
+@media screen and (min-width: 0px) and (max-width: 767px) {
+    html {
+        max-width: 100%;
+    }
+    h1 {
+        font-size: 1.3em;
+    }
+    h2 {
+        font-size: 1.2em;
+    }
+    p {
+        font-size: 1em;
+    }
+    h3 {
+        font-size: 0.8em;
+        font-weight: 400;
+    }
+    .quote {
+        padding: 15px;
+        margin: 0;
+    }
+    #module-header {
+        padding: 20px;
+    }
+    #module-header .logo {
+        width: 200px;
+        float: left;
+    }
+    #module-header .toggle {
+        display: block;
+        margin-top: 2px;
+        margin-right: -10px;
+    }
+    #module-header .toggle a {
+        text-decoration: none;
+        font-size: 30px;
+        color: #BFBDBD;
+    }
+    #module-header .toggle a:hover {
+        color: #000;
+    }
+    #module-header nav {
+        display: none;
+        background: #fff;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        position: fixed;
+    }
+    #module-header nav .guys.animated {
+        opacity: 0;
+        -webkit-animation-duration: 600ms;
+        animation-duration: 600ms;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+    #module-header nav .guys.animated.fadeInUp {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+    }
+    #module-header nav .music.animated {
+        opacity: 0;
+        -webkit-animation-delay: 200ms;
+        animation-delay: 200ms;
+        -webkit-animation-duration: 600ms;
+        animation-duration: 600ms;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+    #module-header nav .music.animated.fadeInUp {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+    }
+    #module-header nav .contacts.animated {
+        opacity: 0;
+        -webkit-animation-delay: 400ms;
+        animation-delay: 400ms;
+        -webkit-animation-duration: 600ms;
+        animation-duration: 600ms;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        animation-timing-function: cubic-bezier(0.250, 0.460, 0.450, 0.940);
+    }
+    #module-header nav .contacts.animated.fadeInUp {
+        -webkit-animation-name: fadeInUp;
+        animation-name: fadeInUp;
+    }
+    #module-header .languages {
+        clear: both;
+        margin-top: -15px;
+        margin-bottom: 15px;
+    }
+    #module-header .languages {
+        font-size: 15px;
+    }
+    #module-header .languages a {
+        font-size: 15px;
+        padding-right: 7px;
+        padding-left: 3px;
+    }
+    #module-header nav ul {
+        margin-top: 75px;
+    }
+    #module-header li {
+        text-align: right;
+        margin-top: 20px;
+        display: block;
+    }
+    #module-photos-1 .col-1-2 {
+        width: 100%;
+    }
+    #module-photos-1 .col-1-2 .text {
+        padding: 30px;
+        margin: 0;
+    }
+    #module-photos-2 .col-1-2 {
+        width: 100%;
+    }
+    #module-guys h1 {
+        margin: 20px;
+    }
+    #module-guys .container .size-small {
+        width: 33.3333%;
+    }
+    #module-guys .container .size-normal {
+        width: 66.6666%;
+    }
+    #module-guys .container .size-big {
+        width: 99.9999%;
+    }
+    #module-guys .tooltip {
+        width: 220px;
+    }
+    #module-guys .tooltip .title {
+        font-size: 13px;
+    }
+    #module-guys .tooltip .desc {
+        font-size: 13px;
+    }
+    #module-music .col-1-3 {
+        width: 100%;
+        margin: 0 !important;
+    }
+    #module-contacts .col-1-2 {
+        width: 100%;
+    }
+    #module-contacts .text {
+        padding: 30px;
+        margin: 0;
+    }
+    #module-footer {
+        padding: 0;
+        width: 100%;
+        margin-top: 20px;
+        height: 50px;
+    }
+    #module-footer h3 {
+        padding: 0;
+        margin: 0;
+    }
+}
+/* 
+ ========= MEDIUM DEVICES (tablets) ============
+*/
+
+@media screen and (min-width: 768px) and (max-width: 1150px) {
+    #module-photos-1 .col-1-2 {
+        width: 100%;
+    }
+    #module-photos-1 .col-1-2 .text {
+        padding: 50px;
+        margin: 0;
+    }
+}
+@media screen and (min-width: 768px) and (max-width: 992px) {
+    h1 {
+        font-size: 1.7em;
+    }
+    #module-music .wrap .col-1-3:nth-child(3n+1) {
+        margin-left: 0%;
+    }
+    #module-music .col-1-3 {
+        width: 40%;
+        margin-right: 6.66%;
+    }
+    #module-music .wrap .col-1-3:nth-child(odd) {
+        margin-left: 6.66%;
+    }
+    .quote {
+        margin: 50px;
+    }
+    #module-header {
+        padding: 20px 0 20px 40px;
+    }
+    #module-guys .container .size-small {
+        width: 16.6666%;
+    }
+    #module-guys .container .size-normal {
+        width: 33.3332%;
+    }
+    #module-guys .container .size-big {
+        width: 49.9998%;
+    }
+    #module-contacts .col-1-2 {
+        width: 100%;
+    }
+    #module-contacts .text {
+        padding: 20px 100px 20px 100px;
+    }
+}
+/* 
+ ========= LARGE DEVICES (desktops) ============
+*/
+/*
+@media screen and (min-width: 993px) {
+   
+}
+*/
