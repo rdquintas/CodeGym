@@ -2,49 +2,60 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
 
-        // JSHint
+        // ================================
+        // clean: Deletes files
+        // ================================          
+        clean: ['js/<%= pkg.name %>.js'],
+
+
+        // ================================
+        // jshint: JS Hint
+        // ================================          
         jshint: {
             dev: {
                 src: ['js/src/*.js']
             }
         },
 
-        // Concatenation
+
+        // ================================
+        // concat: Concatenation
+        // ================================          
         concat: {
             options: {
                 stripBanners: true,
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
                     '<%= grunt.template.today("yyyy-mm-dd") %> */'
             },
-            js: {
+            js_libs: {
                 src: [
-                    'js/src/libs/*.js',
+                    'js/src/libs/739bf436-1824-4067-a456-9bd34cfd8f44.js',
+                    'js/src/libs/jquery-1.11.2.min.js',
+                    'js/src/libs/handlebars-v2.0.0.js',
+                    'js/src/libs/imagesloaded.pkgd.min.js',
+                    'js/src/libs/packery.pkgd.min.js',
+                    'js/src/libs/path.min.js'
+                ],
+                dest: 'js/<%= pkg.name %>.libs.js'
+            },
+            js_custom: {
+                src: [
                     'js/src/*.js'
                 ],
                 dest: 'js/<%= pkg.name %>.js'
             },
             css: {
                 src: [
-                    // 'css/src/<%= pkg.name %>.css',
                     'css/src/*.css'
                 ],
                 dest: 'css/<%= pkg.name %>.min.css'
             }
         },
 
-        // Watch me now
-        watch: {
-            scripts: {
-                files: ['css/src/*.css', 'js/src/*.js'],
-                tasks: ['default'],
-                options: {
-                    event: ['all'],
-                    interrupt: true
-                }
-            }
-        },
 
-        // Rename
+        // ================================
+        // rename: Rename files
+        // ================================          
         rename: {
             js: {
                 files: [{
@@ -60,7 +71,10 @@ module.exports = function(grunt) {
             }
         },
 
-        // JS minify
+
+        // ================================
+        // uglify: JS minify
+        // ================================  
         uglify: {
             js: {
                 src: 'js/<%= pkg.name %>.js',
@@ -69,7 +83,9 @@ module.exports = function(grunt) {
         },
 
 
-        // CSS minify
+        // ================================
+        // cssmin: CSS minify
+        // ================================        
         cssmin: {
             target: {
                 files: [{
@@ -80,6 +96,60 @@ module.exports = function(grunt) {
                         // ext: '<%= pkg.name %>.min.css'
                 }]
             }
+        },
+
+
+        // ================================
+        // compress: ZIP files
+        // ================================
+        compress: {
+            main: {
+                options: {
+                    mode: "zip",
+                    archive: '<%= pkg.name %>_v<%= pkg.version %>.zip'
+                },
+                files: [{
+                    expand: true,
+                    src: [
+                        '**/**',
+                        '!.git/**',
+                        '!node_modules/**',
+                        '!.gitignore',
+                        '!Gruntfile.js',
+                        '!package.json',
+                        '!README.md'
+                    ],
+                    dest: '<%= pkg.name %>_v<%= pkg.version %>/'
+                }]
+            }
+        },
+
+
+        // ================================
+        // watch: WATCH me now
+        // ================================          
+        watch: {
+            scripts: {
+                files: ['css/src/*.css', 'js/src/*.js'],
+                tasks: ['dev'],
+                options: {
+                    event: ['all'],
+                    interrupt: true
+                }
+            }
+        },
+
+
+        // ================================
+        // connect: HTTP server
+        // ================================
+        connect: {
+            server: {
+                options: {
+                    port: 8080,
+                    keepalive: true
+                }
+            }
         }
     });
 
@@ -89,15 +159,54 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-rename');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-compress');
 
-    // Task: DEV
-    // JS: jshint, concat
-    // CSS: concat
-    grunt.registerTask('default', ['jshint:dev', 'concat:css', 'rename:css', 'concat:js', 'rename:js']);
 
-    // Task: PROD
-    // JS: jshint, concat, minify
-    // CSS: concat, minify
-    grunt.registerTask('prod', ['jshint:dev', 'concat:css', 'cssmin:target', 'concat:js', 'uglify:js']);
+    // ================================
+    // Task: 	default
+    // ================================
+    grunt.registerTask('default', [
+        'watch'
+    ]);
 
+
+    // ================================
+    // Task: 	http
+    // ================================
+    grunt.registerTask('http', [
+        'connect'
+    ]);
+
+
+    // ================================
+    // Task: 	dev
+    // JS: 		jshint, concat
+    // CSS: 	concat
+    // ================================
+    grunt.registerTask('dev', [
+        'jshint:dev',
+        'concat:css',
+        'rename:css',
+        'concat:js_libs',
+        'concat:js_custom',
+        'rename:js'
+    ]);
+
+
+    // ================================
+    // Task: 	prod
+    // JS: 		jshint, concat, minify
+    // CSS: 	concat, minify
+    // ================================    
+    grunt.registerTask('prod', [
+        'jshint:dev',
+        'concat:css',
+        'cssmin:target',
+        'concat:js_libs',
+        'concat:js_custom',
+        'uglify:js',
+        'clean'
+    ]);
 };
