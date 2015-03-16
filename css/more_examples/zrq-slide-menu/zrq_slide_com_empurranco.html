@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<!-- 
+ Esta pagina tem um exemplo de slide menu com 
+ - JQUERY
+ - o slide menu empurra o de baixo (basicamente e o BODY que anda dum lado para o outro)
+ - pode ocupar o ecran total ou nao
+ - usa EASING plugin
+-->
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin">
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <style type="text/css">
+    *,
+    *:after,
+    *:before {
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+    }
+    body {
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        height: 100%;
+    }
+    html {
+        font-weight: 100;
+        line-height: 1.5;
+        font-family: "Lato", sans-serif;
+    }
+    .class-qualquer:after {
+        content: "";
+        display: table;
+        clear: both;
+    }
+    .header {
+        width: 100%;
+        height: 80px;
+        background-color: #000;
+        color: #fff;
+        padding: 10px;
+    }
+    .header h1 {
+        margin: 0;
+        padding: 0;
+        text-align: center;
+    }
+    .header a {
+        text-decoration: none;
+        color: #fff;
+    }
+    .header a:hover {
+        color: #C3C3C3;
+    }
+    .header i {
+        margin: 10px;
+        font-size: 30px;
+    }
+    .header i {
+        float: left;
+    }
+    .slide-menu ul {
+        margin-top: 100px;
+    }
+    .slide-menu {
+        position: absolute;
+        /*width: 100%;*/
+        
+        width: 200px;
+        bottom: 0;
+        top: 0;
+        background-color: #666;
+    }
+    </style>
+    <title>zrq slide 01</title>
+
+</head>
+
+<body>
+    <div class="slide-menu">
+        <ul>
+            <li>Option 1</li>
+            <li>Option 2</li>
+            <li>Option 3</li>
+            <li>Option 4</li>
+            <li>Option 5</li>
+        </ul>
+    </div>
+    <div class="header">
+        <a href="#"><i class="fa fa-times"></i></a>
+
+        <h1>Main Header</h1>
+    </div>
+
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="js/jquery.easing.1.3.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+
+        /* This is to initialize the slide menu hidden.
+           Podia fazer com CSS mas prefiro fazer com js
+           Reparem que se for para mobile e quiser ocupar todo o ecran com o slide,
+           entao uso a instrucao para em run-time saber quando e o width do body com insto 
+           $(".slide-menu").css("left", slideWidth * -1);        
+        */
+
+        var slideWidth = $("body").width();
+        // $(".slide-menu").css("left", slideWidth * -1); //isto e para a opcao de 100%
+        $(".slide-menu").css("left", "-200px");
+
+        // Aqui faco o click para abrir menu
+        $(".header a").on("click", function(e) {
+            e.preventDefault();
+            var slideDistance;
+            var menuItemsDistance;
+
+            if ($("body").css("left") === "0px") {
+                slideDistance = "200px";
+                // slideDistance = slideWidth * -1; //isto e para a opcao de 100%
+                menuItemsDistance = "25px";
+
+            } else {
+                slideDistance = "0px";
+                menuItemsDistance = "auto";
+            }
+
+            $("body").animate({
+                left: slideDistance
+            }, {
+                duration: 500,
+                easing: "easeOutBounce"
+            });
+
+            // Isto e uma forma simpatica de animar os menus. Tambem sem CSS, tudo feito com JS
+            if ($("body").css("left") !== "0px") {
+                $(".slide-menu ul li").each(function() {
+                    $(this).css("margin-left", "initial");
+                });
+            } else {
+                var d = 60,
+                    factor = d / 2 * 2; // encrement speed by two thirds original speed
+                $(".slide-menu ul li").each(function() {
+                    $(this).delay(d = d + factor).animate({
+                        marginLeft: menuItemsDistance
+                    }, {
+                        duration: 800,
+                        easing: "easeOutElastic"
+                    });
+                });
+            }
+
+        });
+    });
+    </script>
+</body>
+
+</html>
