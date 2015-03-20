@@ -1,0 +1,37 @@
+// Typography
+$font-family: "Lato";
+$font-type: sans-serif;
+$font-size: 16px;
+$font-weight: 100;
+$line-height: 1.5;
+$primary-color: #333;
+// Breakpoints
+$small-min: 0px;
+$small-max: 767px;
+$medium-min: 768px;
+$medium-max: 992px;
+$large-min: 993px;
+// Others
+$site-max-width: 1366px;
+// Global Stuff
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+    font-size: $font-size;
+    font-weight: $font-weight;
+    line-height: $line-height;
+    font-family: $font-family, $font-type;
+}
+
+body {
+    margin: 0 auto;
+    max-width: $site-max-width;
+}

@@ -130,11 +130,36 @@ module.exports = function(grunt) {
         // ================================          
         watch: {
             scripts: {
-                files: ['css/src/*.css', 'js/src/*.js'],
+                files: ['css/scss/*.*', 'js/src/*.js', '*.html'],
                 tasks: ['dev'],
                 options: {
                     event: ['all'],
+                    livereload: true,
                     interrupt: true
+                }
+            }
+        },
+
+        // ================================
+        // sass: SASS baby
+        // ================================
+        sass: {
+            dev: {
+                options: {
+                    sourceMap: false
+                    // outputStyle: "compressed"
+                },
+                files: {
+                    'css/<%= pkg.name %>.min.css': 'css/scss/starthere.scss'
+                }
+            },
+            prod: {
+                options: {
+                    sourceMap: false,
+                    outputStyle: "compressed"
+                },
+                files: {
+                    'css/<%= pkg.name %>.min.css': 'css/scss/starthere.scss'
                 }
             }
         },
@@ -162,33 +187,26 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-clean');
     grunt.loadNpmTasks('grunt-contrib-connect');
     grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-sass');
 
 
     // ================================
-    // Task: 	default
+    // Task:    default
     // ================================
     grunt.registerTask('default', [
         'watch'
     ]);
 
-
     // ================================
-    // Task: 	http
-    // ================================
-    grunt.registerTask('http', [
-        'connect'
-    ]);
-
-
-    // ================================
-    // Task: 	dev
-    // JS: 		jshint, concat
-    // CSS: 	concat
+    // Task:    dev
+    // JS:      jshint, concat
+    // CSS:     concat
     // ================================
     grunt.registerTask('dev', [
         'jshint:dev',
-        'concat:css',
-        'rename:css',
+        'sass:dev',
+        // 'concat:css',
+        // 'rename:css',
         'concat:js_libs',
         'concat:js_custom',
         'rename:js'
@@ -196,14 +214,15 @@ module.exports = function(grunt) {
 
 
     // ================================
-    // Task: 	prod
-    // JS: 		jshint, concat, minify
-    // CSS: 	concat, minify
+    // Task:    prod
+    // JS:      jshint, concat, minify
+    // CSS:     concat, minify
     // ================================    
     grunt.registerTask('prod', [
         'jshint:dev',
-        'concat:css',
-        'cssmin:target',
+        // 'concat:css',
+        'sass:prod',
+        // 'cssmin:target',
         'concat:js_libs',
         'concat:js_custom',
         'uglify:js',
