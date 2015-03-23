@@ -11,3 +11,4 @@ Version | 1.0
 * css - plenty of CSS stuff I have gathered from the web, as well some of my own
 * semantic - stuff I did with semantic-ui
 * dojo - stuff I did with Dojo toolkit
+* Wordpress - stuff I did with Wordpress
