@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>swatches</title>
+
+    <script src="js/sass.min.js"></script>
+    <script>
+    // get a file's content
+    // Sass.readFile(filename, function callback(content) {
+    //     // (string) content is the file's content,
+    //     //   `undefined` when the read failed
+    // });
+    var scss = '$someVar: 123px; .some-selector { width: $someVar; }';
+    var css = Sass.compile(scss);
+
+    // register a file to be available for @import
+    // var success = Sass.writeFile("caralho.css", "cenas");
+    var success = Sass.writeFile('one.css', '.one { color: red; }');
+
+    console.log("success: " + success);
+    console.log("css: " + css);
+    </script>
+</head>
+
+<body>
+    <p class="one">Teste</p>
+
+    <link href="one.css" media="all" rel="stylesheet" />
+</body>
+
+</html>
