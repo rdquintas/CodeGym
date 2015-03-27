@@ -1,0 +1,52 @@
+@import "normalize";
+@import url(http://fonts.googleapis.com/css?family=Libre+Baskerville);
+// Fonts
+@base_font: 16;
+@base_magic_number: 1.414;
+@base_font_ems: unit(@base_font / 16, em);
+@header_font: "Libre Baskerville";
+// Other
+@max_width: 1366px;
+html {
+    font-size: @base_font_ems;
+    margin: @base_font_ems * @base_magic_number * 5;
+    max-width: @max_width;
+}
+
+p {
+    line-height: @base_font_ems * @base_magic_number;
+}
+
+h1 {
+    font-family: @header_font;
+    font-size: @base_font_ems * pow(@base_magic_number, 4);
+}
+
+h2 {
+    font-family: @header_font;
+    font-size: @base_font_ems * pow(@base_magic_number, 3);
+}
+
+h3 {
+    font-family: @header_font;
+    font-size: @base_font_ems * pow(@base_magic_number, 2);
+}
+
+h4 {
+    font-family: @header_font;
+    font-size: @base_font_ems * pow(@base_magic_number, 1);
+}
+
+h5 {
+    font-family: @header_font;
+    font-size: @base_font_ems * pow(@base_magic_number, 0);
+    text-transform: uppercase;
+    letter-spacing: @base_font_ems * 0.05;
+}
+
+h6 {
+    font-family: @header_font;
+    font-size: @base_font_ems * pow(@base_magic_number, -1);
+    text-transform: uppercase;
+    letter-spacing: @base_font_ems * 0.05;
+}
