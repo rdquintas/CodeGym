@@ -1,12 +1,37 @@
 @import "normalize";
 @import url(http://fonts.googleapis.com/css?family=Libre+Baskerville);
-// Fonts
+/*==================
+FONTS
+==================*/
+
 @base_font: 16;
 @base_magic_number: 1.414;
 @base_font_ems: unit(@base_font / 16, em);
-@header_font: "Libre Baskerville";
+@header_font: "Libre Baskerville",
+serif;
+@body_font: "",
+sans-serif;
+/*==================
+COLORS
+==================*/
+
+@color_primary1: #23b7fb;
+@color_primary2: #4e2b63;
+@color_primary3: #fcd116;
+@color_shade1: #666;
+@color_shade2: #666;
+@color_shade3: #666;
+@color_shade4: #666;
 // Other
 @max_width: 1366px;
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
 html {
     font-size: @base_font_ems;
     margin: @base_font_ems * @base_magic_number * 5;
@@ -14,7 +39,8 @@ html {
 }
 
 p {
-    line-height: @base_font_ems * @base_magic_number;
+    // font-family: @body_font;
+    line-height: @base_font_ems * @base_magic_number * 1.1;
 }
 
 h1 {
@@ -49,4 +75,87 @@ h6 {
     font-size: @base_font_ems * pow(@base_magic_number, -1);
     text-transform: uppercase;
     letter-spacing: @base_font_ems * 0.05;
+}
+
+.col {
+    float: left;
+    padding: @base_font_ems * @base_magic_number;
+    width: 50%;
+}
+
+.swatches {
+    div {
+        float: left;
+        width: 20%;
+        margin: 20px;
+        height: 100px;
+        padding-top: 10px;
+        text-align: center;
+    }
+    .grouped_colors {
+        width: 100%;
+        .clearfix();
+    }
+    .color_primary1 {
+        background-color: @color_primary1;
+        color: contrast(@color_primary1);
+        &:after {
+            content: "@{color_primary1}";
+        }
+    }
+    .color_primary2 {
+        background-color: @color_primary2;
+        color: contrast(@color_primary2);
+        &:after {
+            content: "@{color_primary2}";
+        }
+    }
+    .color_primary3 {
+        background-color: @color_primary3;
+        color: contrast(@color_primary3);
+        &:after {
+            content: "@{color_primary3}";
+        }
+    }
+    .color_shade1 {
+        background-color: @color_shade1;
+        color: contrast(@color_shade1);
+        &:after {
+            content: "@{color_shade1}";
+        }
+    }
+    .color_shade2 {
+        background-color: @color_shade2;
+        color: contrast(@color_shade2);
+        &:after {
+            content: "@{color_shade2}";
+        }
+    }
+    .color_shade3 {
+        background-color: @color_shade3;
+        color: contrast(@color_shade3);
+        &:after {
+            content: "@{color_shade3}";
+        }
+    }
+    .color_shade4 {
+        background-color: @color_shade4;
+        color: contrast(@color_shade4);
+        &:after {
+            content: "@{color_shade4}";
+        }
+    }
+}
+/*==================
+MIXINS
+==================*/
+
+.clearfix() {
+    &:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
 }
