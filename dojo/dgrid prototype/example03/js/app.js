@@ -3,6 +3,7 @@ var _data_index = [];
 
 var _TAB_SIZE = 15; // this is used for the indentation TAB size
 
+
 require([
     'dojo/_base/declare',
     'dojo/_base/lang',
@@ -23,11 +24,18 @@ require([
     'dgrid/Keyboard',
     'dgrid/Editor',
     'dgrid/extensions/ColumnResizer',
-    'dgrid/extensions/ColumnHider'
+    'dgrid/extensions/ColumnHider',
+    'dojo/domReady!'
 ], function(declare, lang, on, domClass, aspect, query, domStyle, TextBox, Button, Memory, Trackable, ColumnSet,
     OnDemandGrid, Grid, CompoundColumns, Selection, Keyboard, Editor, ColumnResizer, ColumnHider) {
 
     createData();
+
+    // var myDialog = new Dialog({
+    //     title: "My Dialog",
+    //     content: "Test content.",
+    //     style: "width: 300px"
+    // });
 
     // var store = new(declare([Memory, Trackable]))({
     //     data: _data
@@ -53,6 +61,14 @@ require([
     dojo.connect(query('button.delete')[0], "onclick", deleteRow);
     dojo.connect(query('button.clone')[0], "onclick", cloneRow);
     dojo.connect(query('button.prettify')[0], "onclick", doPrettify);
+    dojo.connect(query('button.save')[0], "onclick", doSaveToSAP);
+    dojo.connect(query('button.settings')[0], "onclick", toggleSettings);
+
+    // Style header and sub-header columns
+    domClass.add(query(".dgrid-column-set-0 tr")[1], "header");
+    domClass.add(query(".dgrid-column-set-1 tr")[1], "header");
+    domClass.add(query(".dgrid-column-set-0 tr")[2], "sub-header");
+    domClass.add(query(".dgrid-column-set-1 tr")[2], "sub-header");
 
     doIndentation(window._data);
 
@@ -73,6 +89,19 @@ require([
                 if (e.value.split(",")[0] === "w" || e.value.split(",")[0] === "W") {
                     window._data[row.id].line_type = "W";
                     tmpProjId = e.value.split(",")[1];
+                }
+
+
+                if (e.value.split(",")[0] === "t1" || e.value.split(",")[0] === "T1") {
+                    return;
+                }
+
+                if (e.value.split(",")[0] === "t2" || e.value.split(",")[0] === "T2") {
+                    return;
+                }
+
+                if (e.value.split(",")[0] === "excel" || e.value.split(",")[0] === "excel") {
+                    return;
                 }
 
                 window._data_index.push(tmpProjId);
@@ -138,6 +167,11 @@ require([
             if (elem.line_type !== "P") {
                 domStyle.set(query("#grid-row-" + elem.id + " .field-project")[0], "padding-left", elem.spacer + "px");
             };
+
+            //Style column type ACTIVITY
+            if (elem.line_type === "A") {
+                domClass.add(query("#grid-row-" + elem.id + " tr")[0], "activity-row");
+            };
         });
     }
 
@@ -170,13 +204,10 @@ require([
 
     function cloneRow(e) {
         var selectedRow = parseInt(Object.keys(grid.selection)[0]);
-        if (selectedRow) {
-            // var newRow = window._data[selectedRow];
 
-            var newRow = {};
-            newRow = window._data.slice(selectedRow, selectedRow + 1)[0];
-            // JSON.parse(JSON.stringify(window._data[selectedRow]));
-            // newRow.id = "X";
+        // clone the row
+        if (selectedRow) {
+            var newRow = JSON.parse(JSON.stringify(window._data[selectedRow]));
             window._data.push(newRow);
             window._data_index.push(newRow.project);
         };
@@ -186,8 +217,9 @@ require([
         var result = [];
         window._data_index.forEach(function(key) {
             for (var i = 0; i < window._data.length; i++) {
-                if (key === window._data[i].project) {
+                if (window._data[i] && key === window._data[i].project) {
                     result.push(window._data[i]);
+                    window._data[i] = null;
                     break;
                 };
             };
@@ -198,7 +230,6 @@ require([
         // correct the ID's
         for (var i = 0; i < window._data.length; i++) {
             window._data[i].id = i;
-            console.log("0: " + window._data[0].id + "   1: " + window._data[1].id + "   2: " + window._data[2].id);
         };
 
         grid.refresh()
@@ -206,14 +237,93 @@ require([
         doIndentation(window._data);
     }
 
+
+
+
+    /***********************************************************
+     * toggles the settings area
+     ***********************************************************/
+    function toggleSettings(e) {
+
+        var ease = '';
+        var dur;
+
+        var size = $('div.mainheader').height();
+
+        var isClosed = true;
+
+        if (size === 400) {
+            size = "67px";
+            ease = "swing";
+            dur = 300;
+            isClosed = false;
+        } else {
+            ease = "easeOutElastic";
+            size = "400px";
+            dur = 1000;
+            isClosed = true;
+        }
+
+        $('div.mainheader').animate({
+            height: size
+        }, {
+            duration: dur,
+            easing: ease,
+            complete: function() {
+                // $("." + selectedMenuClass).removeClass("no-pointers");
+            }
+        });
+
+        if (isClosed) {
+            $('div.mainheader .form').fadeIn(1000);
+        } else {
+            $('div.mainheader .form').fadeOut(300);
+
+        }
+    }
+
+
+    /***********************************************************
+     * performs simulation of Save to SAP, while showing line with errors
+     ***********************************************************/
+    function doSaveToSAP(e) {
+        domClass.add(query("#grid-row-2")[0], "line-with-error");
+        domClass.add(query("#grid-row-3")[0], "line-with-error");
+        domClass.add(query("#grid-row-7")[0], "line-with-error");
+
+        new Messi('Please correct the lines with errors first!!', {
+            title: 'Can\'t save',
+            titleClass: 'anim error',
+            modal: true
+        });
+    }
+
+
+    /***********************************************************
+     * pretiffy organizes and refreshes data onto the grid
+     ***********************************************************/
     function doPrettify(e) {
         window._data_index.sort();
 
         var result = [];
+        var command = null;
 
         //Clean project commands
         for (var i = 0; i < window._data.length; i++) {
             if (window._data[i].project.indexOf(",") !== -1) {
+                command = window._data[i].project.split(",")[0];
+                if (command === "t1" || command === "T1") {
+                    createT1();
+                    break;
+                };
+                if (command === "t2" || command === "T2") {
+                    createT2();
+                    break;
+                };
+                if (command === "excel" || command === "EXCEL") {
+                    createFromExcel();
+                    break;
+                };
                 window._data[i].project = window._data[i].project.split(",")[1];
             };
         };
@@ -247,22 +357,102 @@ require([
 
         _data.push(grid_line(1, "P", "CS/001166", null, "Special Project", "ZEGY", "50000600",
             "50000600", true, "Timecharge", "T,M,E,S", null));
-        _data.push(grid_line(2, "W", "CS/001166-01", "CS/001166", "WBS 1", "ZEGY", "50000600",
+        _data.push(grid_line(2, "W", "CS/001166-10", "CS/001166", "WBS 1", "ZEGY", "50000600",
             "50000600", true, "Timecharge", "T,M,E,S", null));
-        _data.push(grid_line(3, "W", "CS/001166-02", "CS/001166-01", "tunnel", "GRAD", "52345600",
+        _data.push(grid_line(3, "W", "CS/001166-20", "CS/001166-10", "tunnel", "GRAD", "52345600",
             "52345600", true, "Timecharge", "M,E", null));
-        _data.push(grid_line(4, "W", "CS/001166-02-01", "CS/001166-02", "Initial planning", "GRAD", "52000020",
+        _data.push(grid_line(4, "W", "CS/001166-20-01", "CS/001166-20", "Initial planning", "GRAD", "52000020",
             "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(5, "W", "CS/001166-02-01-01", "CS/001166-02-01", "2nd stage", "GRAD", "52000020",
+        _data.push(grid_line(5, "W", "CS/001166-20-01-01", "CS/001166-20-01", "2nd stage", "GRAD", "52000020",
             "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(6, "A", "CS/001166-02-01-01-01", "CS/001166-02-01-01", "The activity", "GRAD", "52000020",
+        _data.push(grid_line(6, "A", "CS/001166-20-01-01-01", "CS/001166-20-01-01", "The activity", "GRAD", "52000020",
             "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(7, "W", "CS/001166-03", "CS/001166-02", "XPTO wbs", "GRIS", "54668800",
+        _data.push(grid_line(7, "W", "CS/001166-30", "CS/001166-20", "XPTO wbs", "GRIS", "54668800",
             "54668800", true, "Timecharge", "T", "xpto reference"));
-        _data.push(grid_line(8, "A", "CS/001166-03-01", "CS/001166-03", "Another activity", "GRAD", "52000020",
+        _data.push(grid_line(8, "A", "CS/001166-30-01", "CS/001166-30", "Another activity", "GRAD", "52000020",
             "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(9, "W", "CS/001166-04", "CS/001166-03", "WBS nr.4", "GRIS", "54668800",
+        _data.push(grid_line(9, "W", "CS/001166-40", "CS/001166", "WBS nr.4", "GRIS", "54668800",
             "54668800", true, "Timecharge", "T,M", "no ref"));
+    }
+
+
+    /***********************************************************
+     * creates dummy template data T1
+     ***********************************************************/
+    function createT1() {
+        var gridSize = _data.length;
+
+        _data.push(grid_line(gridSize++, "W", "CS/001166-05", "CS/001166", "T1 TEMPLATE WBS", "ZEGY", "50000600",
+            "50000600", true, "Timecharge", "T,M,E,S", null));
+        _data.push(grid_line(gridSize++, "W", "CS/001166-05-01", "CS/001166-05", "T1 TEMPLATE WBS", "GRAD", "52345600",
+            "52345600", true, "Timecharge", "M,E", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-05-01-01", "CS/001166-05-01", "T1 TEMPLATE ACTIVITY", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+    }
+
+    /***********************************************************
+     * creates dummy template data T2
+     ***********************************************************/
+    function createT2() {
+        var gridSize = _data.length;
+
+        _data.push(grid_line(gridSize++, "W", "CS/001166-35", "CS/001166", "T2 TEMPLATE WBS", "ZEGY", "50000600",
+            "50000600", true, "Timecharge", "T,M,E,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-01", "CS/001166-35", "Activity nr.1 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-02", "CS/001166-35", "Activity nr.2 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-03", "CS/001166-35", "Activity nr.3 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-04", "CS/001166-35", "Activity nr.4 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-05", "CS/001166-35", "Activity nr.5 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-06", "CS/001166-35", "Activity nr.6 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-07", "CS/001166-35", "Activity nr.7 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-08", "CS/001166-35", "Activity nr.8 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-09", "CS/001166-35", "Activity nr.9 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-10", "CS/001166-35", "Activity nr.10 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-11", "CS/001166-35", "Activity nr.11 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-12", "CS/001166-35", "Activity nr.12 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-13", "CS/001166-35", "Activity nr.13 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-14", "CS/001166-35", "Activity nr.14 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+        _data.push(grid_line(gridSize++, "A", "CS/001166-35-15", "CS/001166-35", "Activity nr.15 from T2 template", "GRAD", "52000020",
+            "52000020", false, "Fixed fee", "M,S", null));
+    }
+
+
+    /***********************************************************
+     * creates dummy data from Excel
+     ***********************************************************/
+    function createFromExcel() {
+        var gridSize = _data.length;
+
+        _data.push(grid_line(gridSize++, "W", "CS/001166-15", "CS/001166", "New WBS from Excel", "NA", "50000600",
+            "50000600", true, "Timecharge", "T,M", "Excel document"));
+        _data.push(grid_line(gridSize++, "W", "CS/001166-15-01", "CS/001166-15", "New WBS from Excel", "NA", "50000600",
+            "50000600", true, "Timecharge", "T,M", "Excel document"));
+        _data.push(grid_line(gridSize++, "W", "CS/001166-15-02", "CS/001166-15", "New WBS from Excel", "NA", "50000600",
+            "50000600", true, "Timecharge", "T,M", "Excel document"));
+        _data.push(grid_line(gridSize++, "W", "CS/001166-15-03", "CS/001166-15", "New WBS from Excel", "NA", "50000600",
+            "50000600", true, "Timecharge", "T,M", "Excel document"));
+
+        _data.push(grid_line(gridSize++, "W", "CS/001166-14-01", "CS/001166-14", "New WBS 14 from Excel", "NA", "50000600",
+            "50000600", true, "Timecharge", "T,M", "Excel document"));
+        _data.push(grid_line(gridSize++, "W", "CS/001166-14", "CS/001166", "New WBS 14 from Excel", "NA", "50000600",
+            "50000600", true, "Timecharge", "T,M", "Excel document"));
+
+        _data.push(grid_line(gridSize++, "W", "CS/001166-13", "CS/001166", "DELETE THIS ONE!!", "NA", "50000600",
+            "50000600", true, "Timecharge", "T,M", "Excel document"));
     }
 
 
@@ -285,7 +475,7 @@ require([
 
         obj.id = id; // ex: 1
         obj.line_type = line_type; // P = project, W = WBS, A = Activity
-        obj.project = project; // ex: CS/001166-02
+        obj.project = project; // ex: CS/001166-20
         obj.project_description = project_description; // ex: Initial planning
         obj.profit_centre = profit_centre; // ex: GRIS
         obj.project_manager = project_manager; // ex: 52345600
@@ -318,9 +508,13 @@ require([
                 [
                     [{
                         label: 'Project',
-                        field: 'project',
-                        editor: TextBox,
-                        editOn: 'dblclick',
+                        // field: 'project',
+                        children: [{
+                            label: 'Activity ID',
+                            field: 'project',
+                            editor: TextBox,
+                            editOn: 'dblclick',
+                        }]
                     }]
                 ],
                 [
@@ -345,159 +539,76 @@ require([
                         }
                     }, {
                         label: 'Project Description',
-                        field: 'project_description',
-                        editor: TextBox,
-                        editOn: 'click'
+                        // field: 'project_description',
+                        children: [{
+                            label: 'Activity field 1',
+                            field: 'project_description',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
                     }, {
                         label: 'Profit Centre',
-                        field: 'profit_centre',
-                        editor: TextBox,
-                        editOn: 'click'
+                        // field: 'profit_centre',
+                        children: [{
+                            label: 'Activity field 2',
+                            field: 'profit_centre',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
                     }, {
                         label: 'Project Manager',
-                        field: 'project_manager',
-                        editor: TextBox,
-                        editOn: 'click'
+                        // field: 'project_manager',
+                        children: [{
+                            label: 'Activity field 3',
+                            field: 'project_manager',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
                     }, {
                         label: 'Project Director',
-                        field: 'project_director',
-                        editor: TextBox,
-                        editOn: 'click'
+                        // field: 'project_director',
+                        children: [{
+                            label: 'Activity field 4',
+                            field: 'project_director',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
                     }, {
                         label: 'Billable',
-                        field: 'billable',
-                        editor: TextBox,
-                        editOn: 'click'
+                        // field: 'billable',
+                        children: [{
+                            label: 'Activity field 5',
+                            field: 'billable',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
                     }, {
                         label: 'Fee Type',
-                        field: 'fee_type',
-                        editor: TextBox,
-                        editOn: 'click'
+                        // field: 'fee_type',
+                        children: [{
+                            label: 'Activity field 6',
+                            field: 'fee_type',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
                     }, {
                         label: 'Use itemized billing for',
-                        field: 'itemized_for',
-                        editor: TextBox,
-                        editOn: 'click'
+                        // field: 'itemized_for',
+                        children: [{
+                            label: 'Activity field 7',
+                            field: 'itemized_for',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
                     }, {
                         label: 'Client Ref',
                         field: 'client_ref',
-                        editor: TextBox,
-                        editOn: 'click'
-                    }]
-                ]
-            ];
-        } else if (set === 3) {
-            return [
-                [
-                    [{
-                        label: 'Columns 1 and 2',
                         children: [{
-                            label: 'Column 1',
-                            field: 'col1'
-                        }, {
-                            label: 'Column 2',
-                            field: 'col2',
-                            sortable: false
+                            label: 'Activity field 8',
+                            field: 'client_ref',
+                            editor: TextBox,
+                            editOn: 'click'
                         }]
-                    }]
-                ],
-                [
-                    [{
-                        label: "Columns 3 and 4",
-                        children: [{
-                            label: 'Column 3',
-                            field: 'col3'
-                        }, {
-                            label: 'Column 4',
-                            field: 'col4'
-                        }]
-                    }]
-                ],
-                [
-                    [{
-                        label: "Columns 4 and 5",
-                        children: [{
-                            label: 'Column 4',
-                            field: 'col4'
-                        }, {
-                            label: 'Column 5',
-                            field: 'col5'
-                        }]
-                    }]
-                ]
-            ];
-        } else if (set === 4) {
-            return [
-                [
-                    [{
-                        label: 'Columns 1 and 2',
-                        children: [{
-                            label: 'Column 1',
-                            field: 'col1'
-                        }, {
-                            label: 'Column 2',
-                            field: 'col2',
-                            sortable: false
-                        }]
-                    }]
-                ],
-                [
-                    [{
-                        label: "Columns 4 & 5, 3, 4, 4 & 5",
-                        children: [{
-                            label: "Columns 4 and 5",
-                            children: [{
-                                label: 'Column 4',
-                                field: 'col4'
-                            }, {
-                                label: 'Column 5',
-                                field: 'col5'
-                            }]
-                        }, {
-                            label: 'Column 3',
-                            field: 'col3'
-                        }, {
-                            label: 'Column 4',
-                            field: 'col4'
-                        }, {
-                            label: "Columns 4 and 5",
-                            children: [{
-                                label: 'Column 4',
-                                field: 'col4'
-                            }, {
-                                label: 'Column 5',
-                                field: 'col5'
-                            }]
-                        }]
-                    }]
-                ]
-            ];
-        } else {
-            // Set 1 / default
-            return [
-                [
-                    [{
-                        label: 'Columns 1 and 2',
-                        children: [{
-                            label: 'Column 1',
-                            field: 'col1'
-                        }, {
-                            label: 'Column 2',
-                            field: 'col2',
-                            sortable: false
-                        }]
-                    }, {
-                        label: 'Column 4',
-                        field: 'col4'
-                    }]
-                ],
-                [
-                    [{
-                        label: 'Column 1',
-                        field: 'col1'
-                    }, {
-                        label: 'Column 4',
-                        field: 'col4'
                     }]
                 ]
             ];

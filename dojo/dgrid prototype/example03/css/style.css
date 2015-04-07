@@ -1,5 +1,36 @@
+body {
+    overflow-y: scroll;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Francois One', sans-serif;
+}
+h1 {
+    font-size: 3.5em;
+    margin-top: 1em;
+    margin-left: 0.7em;
+    margin-bottom: 0.5em;
+}
+.mainheader {
+    background-color: #ddd;
+}
+.mainheader .form {
+    display: none;
+    /*padding: 20px;*/
+}
+.mainheader .form .col {
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 46%;
+    float: left;
+}
+.mainheader .buttons {
+    -webkit-box-shadow: -1px 4px 17px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: -1px 4px 17px 0px rgba(0, 0, 0, 0.75);
+    box-shadow: -1px 4px 17px 0px rgba(0, 0, 0, 0.75);
+}
 .buttons {
     padding: 20px;
+    background-color: #fff;
 }
 .buttons button {
     margin-right: 20px;
@@ -81,4 +112,27 @@
 }
 .grid .dgrid-column-1-0-0 {
     padding: 0;
+}
+.grid .dgrid-row.line-with-error tr {
+    background-color: #FFAEAE;
+}
+.grid .dgrid-column-set-0 .header th {
+    color: #000;
+    text-transform: uppercase;
+}
+.grid .dgrid-column-set-1 .header th {
+    color: #000;
+    text-transform: uppercase;
+}
+.grid .dgrid-column-set-0 .sub-header th {
+    color: #989898;
+    font-style: italic;
+}
+.grid .dgrid-column-set-1 .sub-header th {
+    color: #989898;
+    font-style: italic;
+}
+.grid tr.activity-row {
+    color: #989898;
+    font-style: italic;
 }
