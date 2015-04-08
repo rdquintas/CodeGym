@@ -15,10 +15,10 @@ URL | [http://rdquintas.github.io/XXXXX](http://rdquintas.github.io/XXXXX)
 * dojo - stuff I did with Dojo toolkit
 * Wordpress - stuff I did with Wordpress
 
-# Log - Branches
-### Version 2.0
+# Changelog (Branches)
+### v2-xxxxx
 - added this...
 - fixed that....
 
-### Version 1.0
+### v1-initial
 - initial build
