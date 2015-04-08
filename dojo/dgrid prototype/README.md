@@ -8,7 +8,10 @@ Version | 1.0
 # Features
 - using dGrid
 
-# Log - Branches
+# ChangeLog 
+### Version 4.0
+- added TABS
+
 ### Version 3.0
 - added jQuery
 - added jQuery easing

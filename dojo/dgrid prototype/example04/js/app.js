@@ -1,6 +1,12 @@
 var _data = [];
 var _data_index = [];
 
+var _data2 = [];
+var _data_index2 = [];
+
+var _data3 = [];
+var _data_index3 = [];
+
 var _TAB_SIZE = 15; // this is used for the indentation TAB size
 
 
@@ -29,32 +35,28 @@ require([
 ], function(declare, lang, on, domClass, aspect, query, domStyle, TextBox, Button, Memory, Trackable, ColumnSet,
     OnDemandGrid, Grid, CompoundColumns, Selection, Keyboard, Editor, ColumnResizer, ColumnHider) {
 
-    createData();
-
-    // var myDialog = new Dialog({
-    //     title: "My Dialog",
-    //     content: "Test content.",
-    //     style: "width: 300px"
-    // });
-
-    // var store = new(declare([Memory, Trackable]))({
-    //     data: _data
-    // });
-
-    // var grid = new(declare([OnDemandGrid, CompoundColumns, ColumnSet, Editor, Selection, Keyboard]))({
-    //     collection: store,
-    //     columnSets: getColumnSets(2)
-    // }, "grid");
-
-    // grid.startup();
-
-
-
+    // grid - main view
+    createData(1);
     var grid = new(declare([Grid, CompoundColumns, ColumnSet, Editor, Selection, Keyboard]))({
-        columnSets: getColumnSets(2)
+        columnSets: getColumnSets(1)
     }, "grid");
-
     grid.renderArray(window._data);
+
+
+    // grid2 - Forecast View
+    createData(2);
+    var grid2 = new(declare([Grid, CompoundColumns, ColumnSet, Editor, Selection, Keyboard]))({
+        columnSets: getColumnSets(2)
+    }, "grid2");
+    grid2.renderArray(window._data2);
+
+
+    // grid3 - main view
+    createData(3);
+    var grid3 = new(declare([Grid, CompoundColumns, ColumnSet, Editor, Selection, Keyboard]))({
+        columnSets: getColumnSets(3)
+    }, "grid3");
+    grid3.renderArray(window._data3);
 
     // dojo.connect(query('button.add')[0], "onmouseup", addRow);
     dojo.connect(query('button.add')[0], "onclick", addRow);
@@ -64,6 +66,9 @@ require([
     dojo.connect(query('button.save')[0], "onclick", doSaveToSAP);
     dojo.connect(query('button.settings')[0], "onclick", toggleSettings);
     dojo.connect(query('a.cheat')[0], "onclick", cheatSheet);
+    dojo.connect(query('a.view1')[0], "onclick", showGrid1);
+    dojo.connect(query('a.view2')[0], "onclick", showGrid2);
+    dojo.connect(query('a.view3')[0], "onclick", showGrid3);
 
     // Style header and sub-header columns
     domClass.add(query(".dgrid-column-set-0 tr")[1], "header");
@@ -71,7 +76,9 @@ require([
     domClass.add(query(".dgrid-column-set-0 tr")[2], "sub-header");
     domClass.add(query(".dgrid-column-set-1 tr")[2], "sub-header");
 
-    doIndentation(window._data);
+    doIndentation();
+    doIndentation2();
+    doIndentation3();
 
     grid.on('dgrid-datachange', lang.hitch(this, function(e) {
         var row = grid.row(e);
@@ -160,6 +167,7 @@ require([
     }));
 
 
+
     /***********************************************************
      * performs indentation for the 1st column only
      ***********************************************************/
@@ -174,6 +182,52 @@ require([
                 domClass.add(query("#grid-row-" + elem.id + " tr")[0], "activity-row");
             };
         });
+    }
+
+    function doIndentation2() {
+        window._data2.forEach(function(elem) {
+            if (elem.line_type !== "P") {
+                domStyle.set(query("#grid2-row-" + elem.id + " .field-project")[0], "padding-left", elem.spacer + "px");
+            };
+
+            //Style column type ACTIVITY
+            if (elem.line_type === "A") {
+                domClass.add(query("#grid2-row-" + elem.id + " tr")[0], "activity-row");
+            };
+        });
+    }
+
+
+    function doIndentation3() {
+        window._data3.forEach(function(elem) {
+            if (elem.line_type !== "P") {
+                domStyle.set(query("#grid3-row-" + elem.id + " .field-project")[0], "padding-left", elem.spacer + "px");
+            };
+
+            //Style column type ACTIVITY
+            if (elem.line_type === "A") {
+                domClass.add(query("#grid3-row-" + elem.id + " tr")[0], "activity-row");
+            };
+        });
+    }
+
+    function showGrid1() {
+        $("#grid2").hide();
+        $("#grid3").hide();
+        $("#grid").fadeTo("slow", 1);
+
+    }
+
+    function showGrid2() {
+        $("#grid").hide();
+        $("#grid3").hide();
+        $("#grid2").fadeTo("slow", 1);
+    }
+
+    function showGrid3() {
+        $("#grid").hide();
+        $("#grid2").hide();
+        $("#grid3").fadeTo("slow", 1);
     }
 
 
@@ -259,6 +313,8 @@ require([
         var dur;
 
         var size = $('div.mainheader').height();
+
+        $('.mainheader .buttons').toggleClass("dropshadow")
 
         var isClosed = true;
 
@@ -386,27 +442,75 @@ require([
     /***********************************************************
      * creates dummy data
      ***********************************************************/
-    function createData() {
-        _data.push(grid_line(0, "NEW"));
+    function createData(type) {
+        if (type === 1) {
+            _data.push(grid_line(0, "NEW"));
 
-        _data.push(grid_line(1, "P", "CS/001166", null, "Special Project", "ZEGY", "50000600",
-            "50000600", true, "Timecharge", "T,M,E,S", null));
-        _data.push(grid_line(2, "W", "CS/001166-10", "CS/001166", "WBS 1", "ZEGY", "50000600",
-            "50000600", true, "Timecharge", "T,M,E,S", null));
-        _data.push(grid_line(3, "W", "CS/001166-20", "CS/001166-10", "tunnel", "GRAD", "52345600",
-            "52345600", true, "Timecharge", "M,E", null));
-        _data.push(grid_line(4, "W", "CS/001166-20-01", "CS/001166-20", "Initial planning", "GRAD", "52000020",
-            "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(5, "W", "CS/001166-20-01-01", "CS/001166-20-01", "2nd stage", "GRAD", "52000020",
-            "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(6, "A", "CS/001166-20-01-01-01", "CS/001166-20-01-01", "The activity", "GRAD", "52000020",
-            "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(7, "W", "CS/001166-30", "CS/001166-20", "XPTO wbs", "GRIS", "54668800",
-            "54668800", true, "Timecharge", "T", "xpto reference"));
-        _data.push(grid_line(8, "A", "CS/001166-30-01", "CS/001166-30", "Another activity", "GRAD", "52000020",
-            "52000020", false, "Fixed fee", "M,S", null));
-        _data.push(grid_line(9, "W", "CS/001166-40", "CS/001166", "WBS nr.4", "GRIS", "54668800",
-            "54668800", true, "Timecharge", "T,M", "no ref"));
+            _data.push(grid_line(1, "P", "CS/001166", null, "Special Project", "ZEGY", "50000600",
+                "50000600", true, "Timecharge", "T,M,E,S", null));
+            _data.push(grid_line(2, "W", "CS/001166-10", "CS/001166", "WBS 1", "ZEGY", "50000600",
+                "50000600", true, "Timecharge", "T,M,E,S", null));
+            _data.push(grid_line(3, "W", "CS/001166-20", "CS/001166-10", "tunnel", "GRAD", "52345600",
+                "52345600", true, "Timecharge", "M,E", null));
+            _data.push(grid_line(4, "W", "CS/001166-20-01", "CS/001166-20", "Initial planning", "GRAD", "52000020",
+                "52000020", false, "Fixed fee", "M,S", null));
+            _data.push(grid_line(5, "W", "CS/001166-20-01-01", "CS/001166-20-01", "2nd stage", "GRAD", "52000020",
+                "52000020", false, "Fixed fee", "M,S", null));
+            _data.push(grid_line(6, "A", "CS/001166-20-01-01-01", "CS/001166-20-01-01", "The activity", "GRAD", "52000020",
+                "52000020", false, "Fixed fee", "M,S", null));
+            _data.push(grid_line(7, "W", "CS/001166-30", "CS/001166-20", "XPTO wbs", "GRIS", "54668800",
+                "54668800", true, "Timecharge", "T", "xpto reference"));
+            _data.push(grid_line(8, "A", "CS/001166-30-01", "CS/001166-30", "Another activity", "GRAD", "52000020",
+                "52000020", false, "Fixed fee", "M,S", null));
+            _data.push(grid_line(9, "W", "CS/001166-40", "CS/001166", "WBS nr.4", "GRIS", "54668800",
+                "54668800", true, "Timecharge", "T,M", "no ref"));
+        };
+
+        if (type === 2) {
+            _data2.push(grid_line2(0, "NEW"));
+
+            _data2.push(grid_line2(1, "P", "CS/001166", null, "Special Project", "10.5", "11.0",
+                "11.0", "£ 11,222.0", "£ 11,222.0", "T,M,E,S", null));
+            _data2.push(grid_line2(2, "W", "CS/001166-10", "CS/001166", "WBS 1", "23.0", "26.0",
+                "26.0", "£ 22.0", "£ 2,082.0", "T,M,E,S", null));
+            _data2.push(grid_line2(3, "W", "CS/001166-20", "CS/001166-10", "tunnel", "40.5", "26.0",
+                "27.0", "£ 4,122.0", "NA", "M,E", null));
+            _data2.push(grid_line2(4, "W", "CS/001166-20-01", "CS/001166-20", "Initial planning", "1.0", "27.0",
+                "0.0", "£ 212.20", "£ 11,222.0", "M,S", null));
+            _data2.push(grid_line2(5, "W", "CS/001166-20-01-01", "CS/001166-20-01", "2nd stage", "9.0", "0.0",
+                "0.0", "£ 2,082.0", "£ 2,082.0", "M,S", null));
+            _data2.push(grid_line2(6, "A", "CS/001166-20-01-01-01", "CS/001166-20-01-01", "The activity", "25.5", "0.0",
+                "2.5", "£ 121.0", "£ 2,082.0", "M,S", null));
+            _data2.push(grid_line2(7, "W", "CS/001166-30", "CS/001166-20", "XPTO wbs", "26.0", "2.5",
+                "4.5", "£ 122.0", "£ 11,222.0", "T", "xpto reference"));
+            _data2.push(grid_line2(8, "A", "CS/001166-30-01", "CS/001166-30", "Another activity", "122.5", "122.5",
+                "3.0", "£ 2.0", "£ 11,222.05", "M,S", null));
+            _data2.push(grid_line2(9, "W", "CS/001166-40", "CS/001166", "WBS nr.4", "32.5", "66.5",
+                "1.0", "£ 11,222.05", "£ 11,222.05", "T,M", "no ref"));
+        };
+
+        if (type === 3) {
+            _data3.push(grid_line3(0, "NEW"));
+
+            _data3.push(grid_line3(1, "P", "CS/001166", null, "Special Project", "23/01/2015", "11.0",
+                "11.0", "£ 11,222.0", "£ 11,222.0", "T,M,E,S", null));
+            _data3.push(grid_line3(2, "W", "CS/001166-10", "CS/001166", "WBS 1", "04/02/1971", "26.0",
+                "26.0", "£ 22.0", "£ 2,082.0", "T,M,E,S", null));
+            _data3.push(grid_line3(3, "W", "CS/001166-20", "CS/001166-10", "tunnel", "04/02/1971", "26.0",
+                "27.0", "£ 4,122.0", "NA", "M,E", null));
+            _data3.push(grid_line3(4, "W", "CS/001166-20-01", "CS/001166-20", "Initial planning", "22/04/2002", "27.0",
+                "0.0", "£ 212.20", "£ 11,222.0", "M,S", null));
+            _data3.push(grid_line3(5, "W", "CS/001166-20-01-01", "CS/001166-20-01", "2nd stage", "22/04/2002", "0.0",
+                "0.0", "£ 2,082.0", "£ 2,082.0", "M,S", null));
+            _data3.push(grid_line3(6, "A", "CS/001166-20-01-01-01", "CS/001166-20-01-01", "The activity", "18/05/2004", "0.0",
+                "2.5", "£ 121.0", "£ 2,082.0", "M,S", null));
+            _data3.push(grid_line3(7, "W", "CS/001166-30", "CS/001166-20", "XPTO wbs", "25/04/1974", "2.5",
+                "4.5", "£ 122.0", "£ 11,222.0", "T", "xpto reference"));
+            _data3.push(grid_line3(8, "A", "CS/001166-30-01", "CS/001166-30", "Another activity", "NA", "122.5",
+                "3.0", "£ 2.0", "£ 11,222.05", "M,S", null));
+            _data3.push(grid_line3(9, "W", "CS/001166-40", "CS/001166", "WBS nr.4", "19/11/2014", "66.5",
+                "1.0", "£ 11,222.05", "£ 11,222.05", "T,M", "no ref"));
+        };
     }
 
 
@@ -533,11 +637,99 @@ require([
         return obj;
     }
 
+
+    /***********************************************************
+     * this function is used to create single lines
+     ***********************************************************/
+    function grid_line2(id, line_type, project, parent_project, project_description, profit_centre,
+        project_manager, project_director, billable, fee_type, itemized_for, client_ref) {
+
+        var obj = {};
+
+        var parent_spacer = 0;
+
+        for (var i = 0; i < _data2.length; i++) {
+            if (_data2[i].project === parent_project) {
+                parent_spacer = _data2[i].spacer;
+                break;
+            };
+        };
+
+        obj.id = id; // ex: 1
+        obj.line_type = line_type; // P = project, W = WBS, A = Activity
+        obj.project = project; // ex: CS/001166-20
+        obj.project_description = project_description; // ex: Initial planning
+        obj.profit_centre = profit_centre; // ex: GRIS
+        obj.project_manager = project_manager; // ex: 52345600
+        obj.project_director = project_director; // ex: 52345600
+        obj.billable = billable; // true/false
+        obj.fee_type = fee_type; // Timecharge/Fixed Fee
+        obj.itemized_for = itemized_for; // ex: T, M, E, S
+        obj.client_ref = client_ref; // ex: 13221
+
+        //set spacer
+        if (parent_project && parent_project.length < project.length) {
+            obj.spacer = parent_spacer + _TAB_SIZE; //this is used for the indentation TAB size
+        } else {
+            obj.spacer = parent_spacer;
+        }
+
+        // if (line_type !== "NEW") {
+        //     window._data_index.push(project);
+        // };
+
+        return obj;
+    }
+
+
+    /***********************************************************
+     * this function is used to create single lines
+     ***********************************************************/
+    function grid_line3(id, line_type, project, parent_project, project_description, profit_centre,
+        project_manager, project_director, billable, fee_type, itemized_for, client_ref) {
+
+        var obj = {};
+
+        var parent_spacer = 0;
+
+        for (var i = 0; i < _data3.length; i++) {
+            if (_data3[i].project === parent_project) {
+                parent_spacer = _data3[i].spacer;
+                break;
+            };
+        };
+
+        obj.id = id; // ex: 1
+        obj.line_type = line_type; // P = project, W = WBS, A = Activity
+        obj.project = project; // ex: CS/001166-20
+        obj.project_description = project_description; // ex: Initial planning
+        obj.profit_centre = profit_centre; // ex: GRIS
+        obj.project_manager = project_manager; // ex: 52345600
+        obj.project_director = project_director; // ex: 52345600
+        obj.billable = billable; // true/false
+        obj.fee_type = fee_type; // Timecharge/Fixed Fee
+        obj.itemized_for = itemized_for; // ex: T, M, E, S
+        obj.client_ref = client_ref; // ex: 13221
+
+        //set spacer
+        if (parent_project && parent_project.length < project.length) {
+            obj.spacer = parent_spacer + _TAB_SIZE; //this is used for the indentation TAB size
+        } else {
+            obj.spacer = parent_spacer;
+        }
+
+        // if (line_type !== "NEW") {
+        //     window._data_index.push(project);
+        // };
+
+        return obj;
+    }
+
     /***********************************************************
      * prepares the columnSet for the grid
      ***********************************************************/
     function getColumnSets(set) {
-        if (set === 2) {
+        if (set === 1) {
             return [
                 [
                     [{
@@ -640,6 +832,177 @@ require([
                         children: [{
                             label: 'Activity field 8',
                             field: 'client_ref',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }]
+                ]
+            ];
+        }
+
+        if (set === 2) {
+            return [
+                [
+                    [{
+                        label: 'Project',
+                        // field: 'project',
+                        children: [{
+                            label: 'Activity ID',
+                            field: 'project',
+                            editor: TextBox,
+                            editOn: 'dblclick',
+                        }]
+                    }]
+                ],
+                [
+                    [{
+                        label: '',
+                        field: 'line_type',
+                        editor: TextBox,
+                        editOn: 'click',
+                        formatter: function(type) {
+                            if (type === "NEW") {
+                                return '<img src="img/new.png" title="new" alt="new">';
+                            };
+                            if (type === "P") {
+                                return '<img src="img/project.png" title="project" alt="project">';
+                            };
+                            if (type === "W") {
+                                return '<img src="img/wbs.png" title="wbs" alt="wbs">';
+                            };
+                            if (type === "A") {
+                                return '<img src="img/activity.png" title="activity" alt="activity">';
+                            };
+                        }
+                    }, {
+                        label: 'Project Description',
+                        // field: 'project_description',
+                        children: [{
+                            label: '.',
+                            field: 'project_description',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'Actual Hours',
+                        // field: 'profit_centre',
+                        children: [{
+                            label: '.',
+                            field: 'profit_centre',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'Forecast Hours',
+                        // field: 'project_manager',
+                        children: [{
+                            label: '.',
+                            field: 'project_manager',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'Actual Hours',
+                        // field: 'project_director',
+                        children: [{
+                            label: '.',
+                            field: 'project_director',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'Actual Revenue',
+                        // field: 'billable',
+                        children: [{
+                            label: '.',
+                            field: 'billable',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'Forecast Revenue',
+                        // field: 'fee_type',
+                        children: [{
+                            label: '.',
+                            field: 'fee_type',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }]
+                ]
+            ];
+        }
+
+
+
+
+        if (set === 3) {
+            return [
+                [
+                    [{
+                        label: 'Project',
+                        // field: 'project',
+                        children: [{
+                            label: 'Activity ID',
+                            field: 'project',
+                            editor: TextBox,
+                            editOn: 'dblclick',
+                        }]
+                    }]
+                ],
+                [
+                    [{
+                        label: '',
+                        field: 'line_type',
+                        editor: TextBox,
+                        editOn: 'click',
+                        formatter: function(type) {
+                            if (type === "NEW") {
+                                return '<img src="img/new.png" title="new" alt="new">';
+                            };
+                            if (type === "P") {
+                                return '<img src="img/project.png" title="project" alt="project">';
+                            };
+                            if (type === "W") {
+                                return '<img src="img/wbs.png" title="wbs" alt="wbs">';
+                            };
+                            if (type === "A") {
+                                return '<img src="img/activity.png" title="activity" alt="activity">';
+                            };
+                        }
+                    }, {
+                        label: 'Project Description',
+                        // field: 'project_description',
+                        children: [{
+                            label: '.',
+                            field: 'project_description',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'Date',
+                        // field: 'profit_centre',
+                        children: [{
+                            label: '.',
+                            field: 'profit_centre',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'Value',
+                        // field: 'billable',
+                        children: [{
+                            label: '.',
+                            field: 'billable',
+                            editor: TextBox,
+                            editOn: 'click'
+                        }]
+                    }, {
+                        label: 'NET Value',
+                        // field: 'fee_type',
+                        children: [{
+                            label: '.',
+                            field: 'fee_type',
                             editor: TextBox,
                             editOn: 'click'
                         }]

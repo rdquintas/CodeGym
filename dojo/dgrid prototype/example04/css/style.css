@@ -22,7 +22,7 @@ h1 {
     width: 46%;
     float: left;
 }
-.mainheader .buttons {
+.mainheader .buttons.dropshadow {
     -webkit-box-shadow: -1px 4px 17px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: -1px 4px 17px 0px rgba(0, 0, 0, 0.75);
     box-shadow: -1px 4px 17px 0px rgba(0, 0, 0, 0.75);
@@ -77,11 +77,6 @@ h1 {
     height: 400px;
     overflow: auto;
 }
-/*
-.grid .dgrid-cell {
-    width: 80px;
-}*/
-
 .grid .dgrid-header {
     overflow: visible;
 }
@@ -138,6 +133,98 @@ h1 {
 .cheat-msg {
     display: inline-block;
     font-weight: bold;
-    color: #888;
+    color: #D80000;
     width: 220px;
+}
+#grid2 {
+    display: none;
+}
+.grid2 {
+    width: 100%;
+    height: 400px;
+    overflow: auto;
+}
+.grid2 .dgrid-header {
+    overflow: visible;
+}
+.grid2 .dgrid-cell {
+    white-space: nowrap;
+}
+.grid2 .field-project {
+    width: 850px;
+}
+.grid2 .field-line_type {
+    width: 20px;
+}
+.grid2 .dgrid-column-1-0-0 {
+    padding: 0;
+}
+.grid2 .dgrid-row.line-with-error tr {
+    background-color: #FFAEAE;
+}
+.grid2 .dgrid-column-set-0 .header th {
+    color: #000;
+    text-transform: uppercase;
+}
+.grid2 .dgrid-column-set-1 .header th {
+    color: #000;
+    text-transform: uppercase;
+}
+.grid2 .dgrid-column-set-0 .sub-header th {
+    color: #989898;
+    font-style: italic;
+}
+.grid2 .dgrid-column-set-1 .sub-header th {
+    color: #989898;
+    font-style: italic;
+}
+.grid2 tr.activity-row {
+    color: #989898;
+    font-style: italic;
+}
+#grid3 {
+    display: none;
+}
+.grid3 {
+    width: 100%;
+    height: 400px;
+    overflow: auto;
+}
+.grid3 .dgrid-header {
+    overflow: visible;
+}
+.grid3 .dgrid-cell {
+    white-space: nowrap;
+}
+.grid3 .field-project {
+    width: 850px;
+}
+.grid3 .field-line_type {
+    width: 20px;
+}
+.grid3 .dgrid-column-1-0-0 {
+    padding: 0;
+}
+.grid3 .dgrid-row.line-with-error tr {
+    background-color: #FFAEAE;
+}
+.grid3 .dgrid-column-set-0 .header th {
+    color: #000;
+    text-transform: uppercase;
+}
+.grid3 .dgrid-column-set-1 .header th {
+    color: #000;
+    text-transform: uppercase;
+}
+.grid3 .dgrid-column-set-0 .sub-header th {
+    color: #989898;
+    font-style: italic;
+}
+.grid3 .dgrid-column-set-1 .sub-header th {
+    color: #989898;
+    font-style: italic;
+}
+.grid3 tr.activity-row {
+    color: #989898;
+    font-style: italic;
 }
