@@ -159,8 +159,11 @@ h1 {
 .grid2 .dgrid-column-1-0-0 {
     padding: 0;
 }
-.grid2 .dgrid-row.line-with-error tr {
-    background-color: #FFAEAE;
+.grid2 .dgrid-row.line-with-info tr {
+    background-color: #CCAEFF;
+}
+.grid2 .dgrid-row.line-with-info2 tr {
+    background-color: #AEFFC1;
 }
 .grid2 .dgrid-column-set-0 .header th {
     color: #000;

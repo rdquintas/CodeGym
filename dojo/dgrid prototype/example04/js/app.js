@@ -222,12 +222,18 @@ require([
         $("#grid").hide();
         $("#grid3").hide();
         $("#grid2").fadeTo("slow", 1);
+
+        domClass.add(query("#grid2-row-2")[0], "line-with-info");
+        domClass.add(query("#grid2-row-5")[0], "line-with-info2");
+
     }
 
     function showGrid3() {
         $("#grid").hide();
         $("#grid2").hide();
         $("#grid3").fadeTo("slow", 1);
+
+         domClass.add(query("#grid3-row-3")[0], "line-with-error");
     }
 
 
