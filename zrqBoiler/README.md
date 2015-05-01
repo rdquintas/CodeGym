@@ -3,22 +3,20 @@
 Project | Protoype for...
 --- | ---
 Info | .....
-Version | 1.0
 URL | [http://rdquintas.github.io/XXXXX](http://rdquintas.github.io/XXXXX)
 
-
 # Features
-- zrqBoiler - my personal template for projects
-- backbone - stuff I did with backbone.js
-- css - plenty of CSS stuff I have gathered from the web, as well some of my own
-- semantic - stuff I did with semantic-ui
-- dojo - stuff I did with Dojo toolkit
-- Wordpress - stuff I did with Wordpress
+- js: **jquery**
+- js: **packery** for the photo grid layout
+- js: **jquery-scrollto** for scroll navigation/positioning
+- js: **picturefill** for the hero image resize
+- css: **normalize**
+- css: **fontawesome**
 
-# Changelog (Branches)
-### v2-xxxxx
+# Changelog
+## v2
 - added this...
 - fixed that....
 
-### v1-initial
+## v1
 - initial build
