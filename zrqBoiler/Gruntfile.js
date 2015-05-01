@@ -1,14 +1,10 @@
 module.exports = function(grunt) {
+
     var _js_libs = [
-        'js/739bf436-1824-4067-a456-9bd34cfd8f44.js',
-        'bower_components/jquery/dist/jquery.min.js',
-        'bower_components/handlebars/handlebars.min.js',
-        'bower_components/packery/dist/packery.pkgd.min.js',
-        'bower_components/slick-carousel/slick/slick.min.js'
-        // 'js/src/libs/jquery.history.js',                    
-        // 'js/src/libs/imagesloaded.pkgd.min.js',
-        // 'js/src/libs/jquery.easing.1.3.js',
-        // 'js/src/libs/path.min.js'
+        'bower_components/jquery/dist/jquery.min.js'
+        // 'bower_components/handlebars/handlebars.min.js',
+        // 'bower_components/packery/dist/packery.pkgd.min.js',
+        // 'bower_components/slick-carousel/slick/slick.min.js'
     ];
 
     var _js_custom = [
@@ -58,10 +54,10 @@ module.exports = function(grunt) {
         // uglify: JS minify
         // ================================  
         uglify: {
-            js_libs: {
-                src: 'js/libs.dist.js',
-                dest: 'js/libs.dist.js'
-            },
+            // js_libs: {
+            //     src: 'js/libs.dist.js',
+            //     dest: 'js/libs.dist.js'
+            // },
             js_custom: {
                 src: 'js/app.dist.js',
                 dest: 'js/app.dist.js'
@@ -75,7 +71,7 @@ module.exports = function(grunt) {
         cssmin: {
             css_custom: {
                 files: {
-                    'css/app.dist.css': ['css/app.dist.css']
+                    'css/style.dist.css': ['css/style.dist.css']
                 }
             }
         },
@@ -87,7 +83,7 @@ module.exports = function(grunt) {
         libsass: {
             css_custom: {
                 src: 'sass/start_here.scss',
-                dest: 'css/app.dist.css'
+                dest: 'css/style.dist.css'
             }
         },
 
@@ -124,10 +120,10 @@ module.exports = function(grunt) {
         // // copy: Copy files
         // // ================================  
         copy: {
-            purecss: {
-                src: 'bower_components/pure/pure-min.css',
-                dest: 'css/pure-min.css'
-            },
+            // purecss: {
+            //     src: 'bower_components/pure/pure-min.css',
+            //     dest: 'css/pure-min.css'
+            // },
         },
         // // ================================
         // // clean: Deletes files
@@ -201,7 +197,7 @@ module.exports = function(grunt) {
         'concat:js_custom',
         'uglify:js_custom',
         'libsass:css_custom',
-        'copy:purecss',
+        // 'copy:purecss',
         'cssmin:css_custom'
     ]);
 
