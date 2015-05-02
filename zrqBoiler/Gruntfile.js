@@ -8,7 +8,6 @@ module.exports = function(grunt) {
     ];
 
     var _js_custom = [
-        'js/translations.js',
         'js/app.js'
     ];
 
@@ -16,10 +15,21 @@ module.exports = function(grunt) {
         'sass/start_here.scss'
     ];
 
+    grunt.loadNpmTasks('grunt-contrib-uglify');
+    grunt.loadNpmTasks('grunt-contrib-jshint');
+    grunt.loadNpmTasks('grunt-contrib-concat');
+    grunt.loadNpmTasks('grunt-contrib-rename');
+    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-contrib-clean');
+    grunt.loadNpmTasks('grunt-contrib-connect');
+    grunt.loadNpmTasks('grunt-contrib-compress');
+    grunt.loadNpmTasks('grunt-contrib-less');
+    grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-libsass');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
 
         // ================================
         // jshint: JS Hint
@@ -35,10 +45,6 @@ module.exports = function(grunt) {
         // concat: Concatenation
         // ================================          
         concat: {
-            // options: {
-            //     stripBanners: true,
-            //     banner: '/*! Build Date: ' + '<%= grunt.template.today("yyyy-mm-dd") %> */'
-            // },
             js_libs: {
                 src: _js_libs,
                 dest: 'js/libs.dist.js'
@@ -53,7 +59,7 @@ module.exports = function(grunt) {
         // ================================
         // uglify: JS minify
         // ================================  
-        uglify: {  
+        uglify: {
             js_custom: {
                 src: 'js/app.dist.js',
                 dest: 'js/app.dist.js'
@@ -100,7 +106,7 @@ module.exports = function(grunt) {
                 }
             },
             css_custom: {
-                files: _css_custom,
+                files: "sass/*.scss",
                 tasks: [
                     'libsass:css_custom',
                     'cssmin:css_custom'
@@ -112,6 +118,7 @@ module.exports = function(grunt) {
             }
         },
 
+
         // // ================================
         // // copy: Copy files
         // // ================================  
@@ -121,6 +128,8 @@ module.exports = function(grunt) {
                 dest: 'css/pure-min.css'
             },
         },
+
+
         // // ================================
         // // clean: Deletes files
         // // ================================          
@@ -153,20 +162,6 @@ module.exports = function(grunt) {
         }
 
     });
-
-
-    grunt.loadNpmTasks('grunt-contrib-uglify');
-    grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-rename');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
-    grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-compress');
-    grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-libsass');
 
 
     // ================================

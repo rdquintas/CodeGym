@@ -2,10 +2,16 @@
  * VARS
  **********************************************************************/
 
+// GLOBALS
+$phi: 1.414;
 $max-width: 1366px;
-$magic-number: 1.414;
+// FONTS
+@import url(https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic&subset=latin);
 $header-font: "Lato", Arial, sans-serif;
 $body-font: "Lato", Arial, sans-serif;
+$base-font-size: 1em;
+$base-line-height: $base-font-size * $phi;
+// $h1-size: 1em * $phi;
 /**********************************************************************
  * BASE
  **********************************************************************/
@@ -18,20 +24,50 @@ $body-font: "Lato", Arial, sans-serif;
 
 html {
     max-width: $max-width;
-    margin: 0 auto;
+    margin: $base-font-size * $phi;
     padding: 0;
-}
-
-h1, h2, h3, h4, h5, h6 {
-    font-family: $header-font;
-}
-
-p {
-    font-family: $body-font;
 }
 
 body {
     font-size: 100%;
+    line-height: $base-line-height;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $header-font;
+    margin: $base-line-height 0 0 0;
+}
+
+h6 {
+    font-size: $base-font-size * -$phi;
+    text-transform: uppercase;
+    letter-spacing: $base-font-size * 0.2;
+    // margin: $base-font-size * 0.2;
+}
+
+h5 {
+    font-size: $base-font-size;
+}
+
+h4 {
+    font-size: $base-font-size * $phi;
+}
+
+h3 {
+    font-size: $base-font-size * $phi * $phi;
+}
+
+h2 {
+    font-size: $base-font-size * $phi * $phi * $phi;
+}
+
+h1 {
+    font-size: $base-font-size * $phi * $phi * $phi * $phi;
+}
+
+p {
+    font-family: $body-font;
+    font-size: $base-font-size;
 }
 
 .preloader {
@@ -76,8 +112,6 @@ body {
 /**********************************************************************
  * MODULE
  **********************************************************************/
-
-
 /**********************************************************************
  * MEDIA QUERIES
  **********************************************************************/
