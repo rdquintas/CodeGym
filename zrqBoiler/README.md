@@ -7,11 +7,13 @@ URL | [http://rdquintas.github.io/XXXXX](http://rdquintas.github.io/XXXXX)
 
 # Features
 - js: **jquery**
-- js: **packery** for the photo grid layout
-- js: **jquery-scrollto** for scroll navigation/positioning
-- js: **picturefill** for the hero image resize
+- js: [**packery**](http://xxxxxxx) for the photo grid layout
+- js: [**handlebars**](http://xxxxxxx) for the photo grid layout
+- js: [**slick**](http://xxxxxxx) for the photo grid layout
 - css: **normalize**
 - css: **fontawesome**
+
+
 
 # Changelog
 ## v2
