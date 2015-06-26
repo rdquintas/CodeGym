@@ -11,9 +11,7 @@
     "grunt-contrib-rename": "*",
     "grunt-contrib-uglify": "*",
     "grunt-contrib-watch": "*",
-    "grunt-contrib-connect": "*"
-  },
-  "devDependencies": {
+    "grunt-contrib-connect": "*",
     "grunt-contrib-copy": "*",
     "grunt-contrib-less": "*",
     "grunt-libsass": "*"
