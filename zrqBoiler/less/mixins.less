@@ -1,0 +1,230 @@
+/***********************************************************
+ * sets borders for the main TD cells
+ ***********************************************************/
+ .cell-borders() {
+  & {
+    border-top: @cell-b-top;
+    border-right: @cell-b-right;
+    border-bottom: @cell-b-bottom;
+    border-left: @cell-b-left;
+  }   
+}
+
+
+/***********************************************************
+ * sets borders for the ID TD cells
+ ***********************************************************/
+ .cell-id-borders(@color) {
+  & {
+    border-top: @cell-id-b-top;
+    border-right: @cell-id-b-right;
+    border-bottom: @cell-id-b-bottom;
+    border-left: @cell-id-b-left;
+    border-color: @color;
+  }   
+}
+
+
+/***********************************************************
+ * sets borders for TR
+ ***********************************************************/
+ .row-borders() {
+  & {
+    border-top: @row-b-top;
+    border-right: @row-b-right;
+    border-bottom: @row-b-bottom;
+    border-left: @row-b-left;
+  }   
+}
+
+
+/***********************************************************
+ * settings for the fixed columns
+ ***********************************************************/
+.fixed-cols() {
+    .fixed-cols {
+        position: fixed;
+        border-right: 2px solid darken(@header_color, 10%);
+    }
+}
+
+
+/***********************************************************
+ * prepares the WIDTH for each column
+ ***********************************************************/
+.prepare-columns {
+    &.special-column {
+        width: 27px;
+        height: 27px;
+    } 
+    
+    &.col2 {
+        margin-left: 454px;
+    } 
+    
+    .set-column-size(col_id; @cold_id_size);
+    .set-column-size(col1; @col1_size);
+    .set-column-size(col2; @col2_size);
+    .set-column-size(col3; @col3_size);
+    .set-column-size(col4; @col4_size);
+    .set-column-size(col5; @col5_size);
+    .set-column-size(col6; @col6_size);
+    .set-column-size(col7; @col7_size);
+    .set-column-size(col8; @col8_size);
+    .set-column-size(col9; @col9_size);
+    .set-column-size(col10; @col10_size);
+    .set-column-size(col11; @col11_size);
+}
+
+
+/***********************************************************
+ * sets the column size for each column and create a CSS clss for each
+ ***********************************************************/
+.set-column-size(@column; @size) {
+    &.@{column}
+    {
+        width: @size;
+    }
+}
+
+
+/***********************************************************
+ * sets the column padding for the table body
+ ***********************************************************/
+.set-column-padding () {
+    padding-top: @column_padding;
+    padding-bottom: @column_padding;
+    padding-left: @header_padding;
+    padding-right: @header_padding;
+}
+
+
+/***********************************************************
+ * creates the indentation padding for the TDs regarding the child/parent
+ * creates a CSS class for each TD level
+ ***********************************************************/
+.set-indentation (@counter: 10) {
+    .mixin-loop (@i) when (@i > 0) {
+        &.level@{i} {
+            padding-left: @header_padding * @scale * @indentation_rate * @i;
+        }
+        // &.level@{i}::before { 
+        //     content: "|";
+        //     padding-right: 3px;
+        //     color: #C3C3C3;
+        //     font-size: 20px;
+        // }
+        .mixin-loop(@i - 1);
+    }
+    .mixin-loop(@counter);
+}
+
+
+/***********************************************************
+ * sets the specific color for each TD
+ ***********************************************************/
+.set-colors-for-row-type(@borderRadius: 5px; @borderSize: 2px) {
+    &.type_project {
+        background-color: @project_color;
+        border-radius: @borderRadius;
+        color: @project_font_color;
+        margin-top: 1px;
+        margin-bottom: 1px;
+        .cell-id-borders(@project_border_color);
+    }
+    &.type_wbs {
+        background-color: @wbs_color;    
+        border-radius: @borderRadius;
+        color: @wbs_font_color;        
+        margin-top: 1px;
+        margin-bottom: 1px;     
+        .cell-id-borders(@wbs_border_color);        
+    }
+    &.type_activity {
+        background-color: @activity_color;      
+        border-radius: @borderRadius;
+        color: @activity_font_color;        
+        margin-top: 1px;
+        margin-bottom: 1px;   
+        .cell-id-borders(@activity_border_color);
+    }
+    &.special-column {
+        border: 0px solid #fff !important;
+        i {
+            cursor: pointer;
+            &:hover {
+                color: @icon_special_column_color;
+            }  
+        }
+    }    
+}
+
+
+/***********************************************************
+ * sets the specific color for each TD: hover
+ ***********************************************************/
+.set-colors-for-row-type-hover() {
+    &.type_project {
+        background-color: @project_hover_color;
+    }
+    &.type_wbs {
+        background-color: @wbs_hover_color;    
+    }
+    &.type_activity {        
+        background-color: @activity_hover_color;                
+    }
+}
+
+/***********************************************************
+ * creates the animtations for the GRID, this includes fade-in and fade-outs
+ ***********************************************************/
+.create-animations () {
+    @-webkit-keyframes fade-out {
+        .do-fade-out();
+    }
+    @-moz-keyframes fade-out {
+        .do-fade-out();
+    }
+    @-o-keyframes fade-out {
+        .do-fade-out();
+    }
+    @keyframes fade-out {
+        .do-fade-out();
+    }
+    @-webkit-keyframes fade-in {
+        .do-fade-in();
+    }
+    @-moz-keyframes fade-in {
+        .do-fade-in();
+    }
+    @-o-keyframes fade-in {
+        .do-fade-in();
+    }
+    @keyframes fade-in {
+        .do-fade-in();
+    }
+}
+.do-fade-out() {
+    from {
+        opacity: 1;
+        pointer-events: none;
+        margin-top: 0px;
+    }
+    to {
+        pointer-events: initial;
+        opacity: 0;
+        margin-top: -1 * @animation_pixels;
+    }
+}
+.do-fade-in() {
+    from {
+        pointer-events: none;
+        opacity: 0;
+        margin-top: -1 * @animation_pixels;
+    }
+    to {
+        pointer-events: initial;
+        opacity: 1;
+        margin-top: 0px;
+    }
+}

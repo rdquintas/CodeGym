@@ -1,19 +1,11 @@
 {
-  "name": "ricardoquintas.com",
-  "version": "1.0.0",
-  "dependencies": {
-    "grunt": "*",
-    "grunt-contrib-clean": "*",
-    "grunt-contrib-compress": "*",
-    "grunt-contrib-concat": "*",
-    "grunt-contrib-cssmin": "*",
-    "grunt-contrib-jshint": "*",
-    "grunt-contrib-rename": "*",
-    "grunt-contrib-uglify": "*",
-    "grunt-contrib-watch": "*",
-    "grunt-contrib-connect": "*",
-    "grunt-contrib-copy": "*",
-    "grunt-contrib-less": "*",
-    "grunt-libsass": "*"
-  }
+    "name": "ricardoquintas.com",
+    "version": "1.0.0",
+    "dependencies": {
+        "grunt": "*",
+        "grunt-contrib-jshint": "*",
+        "grunt-contrib-concat": "*",
+        "grunt-contrib-watch": "*",
+        "grunt-contrib-less": "*",
+    }
 }

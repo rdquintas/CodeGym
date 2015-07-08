@@ -1,97 +1,61 @@
 module.exports = function(grunt) {
 
     var _js_libs = [
-        'bower_components/jquery/dist/jquery.min.js'
-        // 'bower_components/handlebars/handlebars.min.js',
-        // 'bower_components/packery/dist/packery.pkgd.min.js',
-        // 'bower_components/slick-carousel/slick/slick.min.js'
+        "bower_components/echojs/dist/echo.min.js",
+        "bower_components/superfish/dist/js/hoverIntent.js",
+        "bower_components/superfish/dist/js/superfish.min.js"
     ];
 
     var _js_custom = [
-        'js/app.js'
+        'user/themes/zrq/js/app.js'
     ];
 
-    var _css_custom = [
-        'sass/start_here.scss'
-    ];
-
-    grunt.loadNpmTasks('grunt-contrib-uglify');
+    // grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-concat');
-    grunt.loadNpmTasks('grunt-contrib-rename');
-    grunt.loadNpmTasks('grunt-contrib-cssmin');
+    // grunt.loadNpmTasks('grunt-contrib-rename');
+    // grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
-    grunt.loadNpmTasks('grunt-contrib-clean');
-    grunt.loadNpmTasks('grunt-contrib-connect');
-    grunt.loadNpmTasks('grunt-contrib-compress');
+    // grunt.loadNpmTasks('grunt-contrib-clean');
+    // grunt.loadNpmTasks('grunt-contrib-connect');
+    // grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-contrib-less');
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-libsass');
+    // grunt.loadNpmTasks('grunt-contrib-copy');
+
+
+    // ================================
+    // Task:    default
+    // ================================
+    grunt.registerTask('default', [
+        // 'concat:js_libs',
+        'jshint:js_custom',
+        'concat:js_libs',
+        'concat:js_custom',
+        // 'uglify:js_custom',
+        'less:css_custom'
+        // 'copy:purecss',
+        // 'cssmin:css_custom'
+    ]);
+
+
+    // ================================
+    // Task:    prod
+    // ================================    
+    grunt.registerTask('prod', [
+        // 'concat:js_libs',
+        // 'jshint:js_custom',
+        // 'concat:js_custom',
+        // 'uglify:js_custom',
+        // 'libsass:css_custom',
+        // 'copy:purecss',
+        // 'cssmin:css_custom'
+    ]);
+
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
-
         // ================================
-        // jshint: JS Hint
-        // ================================          
-        jshint: {
-            js_custom: {
-                src: _js_custom
-            }
-        },
-
-
-        // ================================
-        // concat: Concatenation
-        // ================================          
-        concat: {
-            js_libs: {
-                src: _js_libs,
-                dest: 'js/libs.dist.js'
-            },
-            js_custom: {
-                src: _js_custom,
-                dest: 'js/app.dist.js'
-            }
-        },
-
-
-        // ================================
-        // uglify: JS minify
-        // ================================  
-        uglify: {
-            js_custom: {
-                src: 'js/app.dist.js',
-                dest: 'js/app.dist.js'
-            }
-        },
-
-
-        // ================================
-        // cssmin: CSS minify
-        // ================================        
-        cssmin: {
-            css_custom: {
-                files: {
-                    'css/style.dist.css': ['css/style.dist.css']
-                }
-            }
-        },
-
-
-        // ================================
-        // libsass: SASS compilation
-        // ================================  
-        libsass: {
-            css_custom: {
-                src: 'sass/start_here.scss',
-                dest: 'css/style.dist.css'
-            }
-        },
-
-
-        // ================================
-        // watch: WATCH me now
+        // WATCH me now
         // ================================          
         watch: {
             js_custom: {
@@ -106,10 +70,9 @@ module.exports = function(grunt) {
                 }
             },
             css_custom: {
-                files: "sass/*.scss",
+                files: "user/themes/zrq/less/*.less",
                 tasks: [
-                    'libsass:css_custom',
-                    'cssmin:css_custom'
+                    'less:css_custom'
                 ],
                 options: {
                     event: ['all'],
@@ -119,25 +82,91 @@ module.exports = function(grunt) {
         },
 
 
-        // // ================================
-        // // copy: Copy files
-        // // ================================  
-        copy: {
-            purecss: {
-                src: 'bower_components/pure/pure-min.css',
-                dest: 'css/pure-min.css'
-            },
+        // ================================
+        // LESS
+        // ================================  
+        less: {
+            css_custom: {
+                options: {
+                    sourceMap: true,
+                    sourceMapFilename: "user/themes/zrq/css/app.dist.css.map",
+                    cleancss: false,
+                    compress: false
+                },
+                files: {
+                    "user/themes/zrq/css/app.dist.css": "user/themes/zrq/less/start_here.less"
+                }
+            }
+        },
+
+    
+        // ================================
+        // JSHINT
+        // ================================          
+        jshint: {
+            js_custom: {
+                src: _js_custom
+            }
         },
 
 
+        // ================================
+        // CONCAT
+        // ================================          
+        concat: {
+            js_libs: {
+                src: _js_libs,
+                dest: 'user/themes/zrq/js/libs.dist.js'
+            },
+            js_custom: {
+                src: _js_custom,
+                dest: 'user/themes/zrq/js/app.dist.js'
+            }
+        }
+
+
         // // ================================
-        // // clean: Deletes files
+        // // UGLIFY: JS minify
+        // // ================================  
+        // uglify: {
+        //     js_custom: {
+        //         src: 'js/app.dist.js',
+        //         dest: 'js/app.dist.js'
+        //     }
+        // },
+
+
+        // // ================================
+        // // CSSMIN
+        // // ================================        
+        // cssmin: {
+        //     css_custom: {
+        //         files: {
+        //             'css/style.dist.css': ['css/style.dist.css']
+        //         }
+        //     }
+        // },
+
+
+        // // ================================
+        // // COPY: Copy files
+        // // ================================  
+        // copy: {
+        //     purecss: {
+        //         src: 'bower_components/pure/pure-min.css',
+        //         dest: 'css/pure-min.css'
+        //     }
+        // },
+
+
+        // // ================================
+        // // CLEAN: Deletes files
         // // ================================          
         // clean: ['js/<%= pkg.name %>.js'],
 
 
         // // ================================
-        // // rename: Rename files
+        // // RENAME: Rename files
         // // ================================          
         // rename: {
         //     // css: {
@@ -149,45 +178,17 @@ module.exports = function(grunt) {
         // },
 
 
-        // ================================
-        // connect: HTTP server
-        // ================================
-        connect: {
-            server: {
-                options: {
-                    port: 8080,
-                    keepalive: true
-                }
-            }
-        }
+        // // ================================
+        // // connect: HTTP server
+        // // ================================
+        // connect: {
+        //     server: {
+        //         options: {
+        //             port: 8080,
+        //             keepalive: true
+        //         }
+        //     }
+        // }
 
     });
-
-
-    // ================================
-    // Task:    default
-    // ================================
-    grunt.registerTask('default', [
-        'concat:js_libs',
-        'jshint:js_custom',
-        'concat:js_custom',
-        // 'uglify:js_custom',
-        'libsass:css_custom',
-        // 'copy:purecss',
-        // 'cssmin:css_custom'
-    ]);
-
-    // ================================
-    // Task:    prod
-    // ================================    
-    grunt.registerTask('prod', [
-        'concat:js_libs',
-        'jshint:js_custom',
-        'concat:js_custom',
-        'uglify:js_custom',
-        'libsass:css_custom',
-        // 'copy:purecss',
-        'cssmin:css_custom'
-    ]);
-
 };
