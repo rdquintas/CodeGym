@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+    body {
+        margin: 0;
+        background-color: #ddd;
+    }
+    .content {
+        float: left;
+        top: 0;
+        /*width: 100%;*/
+        /*height: 100%;*/
+        
+        padding: 60px;
+        /*display: none;*/
+    }
+    .container {
+        -webkit-transition-property: left;
+        -moz-transition-property: left;
+        -o-transition-property: left;
+        transition-property: left;
+        -webkit-transition-duration: 200ms;
+        -moz-transition-duration: 200ms;
+        -o-transition-duration: 200ms;
+        transition-duration: 200ms;
+        -webkit-transition-timing-function: ease-in-out;
+        -moz-transition-timing-function: ease-in-out;
+        -o-transition-timing-function: ease-in-out;
+        transition-timing-function: ease-in-out;
+        -webkit-transition-delay: 0s;
+        -moz-transition-delay: 0s;
+        -o-transition-delay: 0s;
+        transition-delay: 0s;
+        position: absolute;
+        /*top: 0;*/
+        /*bottom: 0;*/
+        /*height: 100%;*/
+        
+        left: 0;
+        width: 100%;
+        background-color: #666;
+        float: left;
+    }
+    .container.move {
+        left: 100%;
+    }
+    .header {
+        /*position: absolute;*/
+        /*top: 0;*/
+        /*left: 0;*/
+        /*width: 100%;*/
+        /*float: left;*/
+        background-color: #5CC5B9;
+        padding: 15px;
+    }
+    .navigation {
+        position: absolute;
+        bottom: 0;
+        height: 100%;
+        top: 48px;
+        
+        left: -100%;
+        width: 100%;
+        background-color: #ddd;
+        float: left;
+        -webkit-transition-property: left;
+        -moz-transition-property: left;
+        -o-transition-property: left;
+        transition-property: left;
+        -webkit-transition-duration: 200ms;
+        -moz-transition-duration: 200ms;
+        -o-transition-duration: 200ms;
+        transition-duration: 200ms;
+        -webkit-transition-timing-function: ease-in-out;
+        -moz-transition-timing-function: ease-in-out;
+        -o-transition-timing-function: ease-in-out;
+        transition-timing-function: ease-in-out;
+        -webkit-transition-delay: 0ms;
+        -moz-transition-delay: 0ms;
+        -o-transition-delay: 0ms;
+        transition-delay: 0ms;
+    }
+    .navigation li {
+        margin-left: -40px;
+        -webkit-transition-property: margin;
+        -moz-transition-property: margin;
+        -o-transition-property: margin;
+        transition-property: margin;
+        -webkit-transition-duration: 225ms;
+        -moz-transition-duration: 225ms;
+        -o-transition-duration: 225ms;
+        transition-duration: 225ms;
+        -webkit-transition-timing-function: ease-in-out;
+        -moz-transition-timing-function: ease-in-out;
+        -o-transition-timing-function: ease-in-out;
+        transition-timing-function: ease-in-out;
+        -webkit-transition-delay: 150ms;
+        -moz-transition-delay: 150ms;
+        -o-transition-delay: 150ms;
+        transition-delay: 150ms;
+    }
+    .navigation.move li:nth-child(1) {
+        margin-left: 0px;
+    }
+    .navigation.move li:nth-child(2) {
+        margin-left: 10px;
+    }
+    .navigation.move li:nth-child(3) {
+        margin-left: 20px;
+    }
+    .navigation.move {
+        left: 0;
+    }
+    .cenas {
+        height: 2000px;
+    }
+    </style>
+</head>
+
+<body>
+    <section class="header">
+        <a class="menu" href="#menu">cenas</a>
+    </section>
+    <section class="navigation">
+        <!--      <section class="header">
+            <a class="menu" href="#menu">close</a>
+        </section> -->
+        <nav>
+            <ul>
+                <li class="1">Menu 1</li>
+                <li class="2">Menu 2</li>
+                <li class="3">Menu 3</li>
+            </ul>
+        </nav>
+    </section>
+    <div class="container">
+        <!--       <section class="header">
+            <a class="menu" href="#menu">open</a>
+        </section> -->
+
+        <section class="content">
+            <div class="cenas">
+                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Explicabo, doloremque dolorum, tenetur atque iste, aliquid iusto perferendis animi neque odit quasi sequi consequuntur modi tempore autem? Distinctio accusamus omnis doloribus necessitatibus vel. Accusantium ab in possimus expedita quo inventore amet, aperiam temporibus nam tenetur odit, voluptates, atque. Facere dolor rerum illum repellat nulla delectus aspernatur quam obcaecati, dolores fugit deserunt sed enim ab quos officia corporis assumenda, dolore veniam. Mollitia suscipit nihil facilis est dolores ipsam nisi eligendi sint natus assumenda odit minus maxime, quidem dignissimos necessitatibus pariatur odio deleniti excepturi tenetur quibusdam deserunt nesciunt? Provident at voluptatibus, similique illo.</p>
+            </div>
+
+        </section>
+
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+    $(".menu").on("click", function(e) {
+        e.preventDefault();
+        $(".navigation").toggleClass("move");
+        $(".container").toggleClass("move");
+    });
+    </script>
+</body>
+
+</html>
