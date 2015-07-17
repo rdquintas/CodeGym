@@ -1,0 +1,27 @@
+name: zrq
+version: 1.0.0
+description: "ZRQ is a theme developed by Ricardo Quintas"
+icon: empire
+author:
+  name: Ricardo Quintas
+  email: rqcenter-web@yahoo.com
+  url: http://www.ricardoquintas.com
+homepage: http://www.ricardoquintas.com
+demo: http://www.ricardoquintas.com
+keywords: ricardo, quintas, theme, core, modern, fast, responsive, html5, css3
+bugs: 
+license: MIT
+
+form:
+  validation: loose
+  fields:
+    dropdown.enabled:
+        type: toggle
+        label: Dropdown in navbar
+        highlight: 1
+        default: 1
+        options:
+          1: Enabled
+          0: Disabled
+        validate:
+          type: bool

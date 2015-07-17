@@ -1,0 +1,81 @@
+/***********************************************************
+ * GLOBALS
+ ***********************************************************/
+
+*,
+*:after,
+*:before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 1em;
+}
+
+body {
+    font-family: @body_font_stack;
+    font-size: @body_font_size;
+    font-weight: @body_font_weight;
+    line-height: @body_font_line_height;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: @header_font_stack;
+    font-weight: @header_font_weight;
+}
+
+.setHeaderFontSize(@body_font_size * @scale * @scale * @scale * @scale);
+
+@media screen and (max-width: 850px) {
+    .setHeaderFontSize(@body_font_size * @scale * @scale * @scale);
+}
+
+a {
+    text-decoration: underline;
+    text-transform: uppercase;
+    color: @primary_color;
+    &:hover {
+        text-decoration: none;
+        color: contrast(@primary_color);
+        background-color: @primary_color;
+    }
+}
+
+hr {
+    border-style: none;
+    border-top-style: solid;
+    color: lighten(@primary_color, 90%);
+}
+
+.browserupdate {
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 100;
+    display: block;
+    margin-bottom: 3em;
+    padding: 2em;
+    color: #fff;
+    text-align: center;
+    background-color: red;
+    a {
+        color: #fff;
+        text-decoration: underline;
+        &:hover {
+            color: #ddd;
+        }
+    }
+}
+
+.container {
+    .clearfix();
+}

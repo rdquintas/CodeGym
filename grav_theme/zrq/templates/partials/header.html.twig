@@ -1,0 +1,15 @@
+<section class="header">
+    <a class="burger-icon" href="#">
+        <img src="{{ theme_url }}/images/burguer.png">
+    </a>        
+    <div class="logo">
+        <h5>{{ config.site.title }}</h5>
+    </div>
+    <nav id="original-menu" class="navigation-menu">
+        {% include 'partials/navigation.html.twig' with {"withSuperFish": "true"} %}
+    </nav>
+</section>
+
+<nav id="mobile-menu" class="">
+    {% include 'partials/navigation.html.twig' with {"withSuperFish": "false"} %}
+</nav>

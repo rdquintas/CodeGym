@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<!-- 
+   Hi, you're looking at a web page built with love by:
+
+   Ricardo
+
+  /$$$$$$            /$$             /$$                        
+ /$$__  $$          |__/            | $$                        
+| $$  \ $$ /$$   /$$ /$$ /$$$$$$$  /$$$$$$    /$$$$$$   /$$$$$$$
+| $$  | $$| $$  | $$| $$| $$__  $$|_  $$_/   |____  $$ /$$_____/
+| $$  | $$| $$  | $$| $$| $$  \ $$  | $$      /$$$$$$$|  $$$$$$ 
+| $$/$$ $$| $$  | $$| $$| $$  | $$  | $$ /$$ /$$__  $$ \____  $$
+|  $$$$$$/|  $$$$$$/| $$| $$  | $$  |  $$$$/|  $$$$$$$ /$$$$$$$/
+ \____ $$$ \______/ |__/|__/  |__/   \___/   \_______/|_______/ 
+      \__/                                                                      
+
+   ricardoquintas.com   
+   June/2015 
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{% if header.title %}{{ header.title }} | {% endif %}{{ site.title }}</title>
+
+    {% for meta in page.metadata %}
+      <meta {% if meta.name %}name="{{ meta.name }}" {% endif %}{% if meta.http_equiv %}http-equiv="{{ meta.http_equiv }}" {% endif %}{% if meta.charset %}charset="{{ meta.charset }}" {% endif %}{% if meta.property %}property="{{ meta.property }}" {% endif %}{% if meta.content %}content="{{ meta.content }}" {% endif %}/>
+    {% endfor %}
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <link rel="icon" type="image/png" href="{{ theme_url }}/images/favicon.png" />
+
+    {% block stylesheets %}
+        {% do assets.addCss('theme://css/app.dist.css',100) %}
+    {% endblock %}
+    {{ assets.css() }}
+.
+    {% do assets.addJs('theme://js/modernizr.custom.31616.js', 100) %}
+    {{ assets.js() }} 
+
+    <script type="text/javascript">
+      // Insert GOOGLE-ANALYTICS script here!!!      
+    </script>
+</head>
+
+<body>
+   <!--[if lte IE 9]>
+    <div class="browserupdate">
+        You are using an obsolete browser which can harm your experience and cause security troubles.
+        <br> Please <a href="http://browsehappy.com/" target="_blank">update your browser!</a>
+    </div>
+  <![endif]-->
+    <noscript>
+        <div class="browserupdate">
+            Oh, no! You don't have JavaScript enabled on your browser!
+            <br> This website only works with JavaScript. Sorry.
+        </div>
+    </noscript>
+
+    {% include 'partials/header.html.twig' %}
+
+    <div class="container">
+      {% block content %}{% endblock %}        
+      {% include 'partials/footer.html.twig' %}
+    </div>
+
+    {% block javascripts %}
+        {% do assets.add('jquery', 101) %}
+        {% do assets.addJs('theme://js/libs.dist.js', 100) %}
+        {% do assets.addJs('theme://js/app.dist.js') %}
+    {% endblock %}
+    {{ assets.js() }}
+</body>
+</html>
