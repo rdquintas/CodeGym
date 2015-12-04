@@ -1,13 +1,47 @@
-/***********************************************************
- * GLOBALS
- ***********************************************************/
-
-*, *:after, *:before {
+*,
+*:after,
+*:before {
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
+
+html {
+    font-size: 62.5%;
+    margin: 3rem;
+}
+
 body {
-    overflow-y: scroll;
-    font-size: @font_size;
+    font-family: @body_font_name;
+    font-size: 1.5em;
+    font-weight: 400;
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: @heading_font_name;
+    margin: 0;
+    font-weight: 700;
+}
+
+h1 {
+    font-size: 3.998em;
+}
+
+h2 {
+    font-size: 2.827em;
+}
+
+h3 {
+    font-size: 1.999em;
+}
+
+h4 {
+    font-size: 1.414em;
+}
+
+img {
+    width: 100%;
 }

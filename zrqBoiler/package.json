@@ -1,11 +1,13 @@
 {
-    "name": "ricardoquintas.com",
-    "version": "1.0.0",
-    "dependencies": {
-        "grunt": "*",
-        "grunt-contrib-jshint": "*",
-        "grunt-contrib-concat": "*",
-        "grunt-contrib-watch": "*",
-        "grunt-contrib-less": "*",
-    }
+  "name": "ricardoquintas.com",
+  "version": "1.0.0",
+  "dependencies": {
+    "grunt": "*",
+    "grunt-browserify": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-less": "*",
+    "grunt-contrib-uglify": "^0.11.0",
+    "grunt-contrib-watch": "*",
+    "jquery": "^2.1.4"
+  }
 }
