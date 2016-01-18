@@ -13,7 +13,4 @@ Version | 1.0
 * dojo - stuff I did with Dojo toolkit
 * Wordpress - stuff I did with Wordpress
 
-# GH-PAGES
-This is my sandbox.
-[http://rdquintas.github.io/CodeGym](http://rdquintas.github.io/CodeGym)
 xxxxxxxxxxx
