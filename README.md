@@ -12,5 +12,3 @@ Version | 1.0
 * semantic - stuff I did with semantic-ui
 * dojo - stuff I did with Dojo toolkit
 * Wordpress - stuff I did with Wordpress
-
-xxxxxxx
